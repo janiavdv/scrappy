@@ -8,24 +8,10 @@ import jwt_decode from "jwt-decode";
 
 
 function App() {
-
   const [fillName, setName] = useState()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>{fillName}</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{fillName}</p>
       <GoogleOAuthProvider clientId="359674566307-dej7oadld3jb6662l9brborqrs19blm4.apps.googleusercontent.com">
         <GoogleLogin
           onSuccess={credentialResponse => {
@@ -40,10 +26,8 @@ function App() {
           onError={() => {
             console.log('Login Failed');
           }}
-        />;
-
-      </GoogleOAuthProvider>;
-
+        />
+      </GoogleOAuthProvider>
     </div>
   );
 }
