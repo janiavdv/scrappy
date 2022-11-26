@@ -1,9 +1,72 @@
 #landing-main-page-box {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   display: flex;
+  justify-content: space-around;
   background-image: url("assets/peopleonboat.png");
+  height: 88vh;
+  background-size: 1500px;
+  overflow: hidden;
+  padding: 5px;
+}
+
+#google-button {
+  scale: 1.75;
+  padding: 5vh;
+}
+
+#main-left {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6vh;
+  margin-left: -10vh;
+}
+
+h1 {
+  font-size: 20vh;
+  line-height: 4vh;
+}
+
+h2 {
+  font-size: 7vh;
 }
 
 #logopic {
-  width: 100px;
+  margin: 3vh;
+  width: 15vh;
   height: inherit;
+}
+
+#footer {
+  text-align: center;
+  align-items: center;
+  color: rgb(60, 60, 60);
+
+}
+
+#footer div {
+  padding: 2vh;
+  margin-left: 15%;
+  margin-right: 15%;
+  line-height: 0;
+  align-items: center;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+#main-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items:flex-end;
+}
+
+#sample-entry {
+  width: 35vh;
+  height: inherit;
+  border-radius: 10px;
+  box-shadow:  0px 0px 10px 2px rgb(213, 213, 213);
 }
