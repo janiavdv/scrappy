@@ -1,17 +1,27 @@
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import './App.css';
-import { authcred } from './private/credentials';
 
 import Landing from './pages/landing';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Profile from './pages/profile';
 
-
+const router = createBrowserRouter([
+  {
+    path: "/profile:id",
+    element: <Profile />,
+  },
+  {
+    path: "/",
+    element: <Landing />
+  }
+]);
 
 function App() {
   return (
     <div className="App">
-      <GoogleOAuthProvider clientId={authcred}>
-        <Landing />
-      </GoogleOAuthProvider>
+      <RouterProvider
+        router={router}
+      />
+
     </div>
   );
 }
