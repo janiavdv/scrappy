@@ -1,5 +1,5 @@
 package database;
 
-public class Photos {
+public class Book {
 
 }
