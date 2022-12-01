@@ -94,3 +94,29 @@ h2 {
   padding: 20px;
   width: 50%; /* Could be more or less, depending on screen size */
 }
+
+.input {
+  padding: 1vh;
+  margin: 1vh;
+  border-radius: 6px;
+  border: 1px solid;
+} 
+
+button {
+  color: black;
+  font-size: 2vh;
+  padding: 2vh;
+  border-radius: 6px;
+  border: none;
+  background-color: rgb(220, 220, 220);
+}
+
+button:hover {
+  color: black;
+  font-size: 2vh;
+  padding: 2vh;
+  border-radius: 6px;
+  border: none;
+  background-color: rgb(179, 179, 179);
+  cursor: pointer;
+}

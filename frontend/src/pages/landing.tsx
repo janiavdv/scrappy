@@ -2,18 +2,15 @@ import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import logo from "../assets/ScrappyLogo.svg"
 import sample from "../assets/sampleentry.png"
-import {
-    useNavigate
-} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { authcred } from '../private/credentials';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { TEXT_text_box_accessible_name } from './profile';
 import Footer from '../gencomponents/footer';
 import ControlledInput from '../gencomponents/controlledinput';
-const list_of_users: Array<string> = [] //["jania_vandevoorde@brown.edu"]
 
+const list_of_users: Array<string> = [] //["jania_vandevoorde@brown.edu"]
 
 // async function addUserToDatabase(email: string, username: string, name: string) {
 //     const response = await fetch(`http://localhost:3232/database?command=POST&type=USER&email=${email}&username=${username}&name=${name}`);
@@ -37,7 +34,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
         return (
             <div id="modal">
                 <div id="log-modal">
-                    <h2>Hey! Looks like it's your first time here. We'd like to get to know you a little better.</h2>
+                    <h3>Hey! Looks like it's your first time here. We'd like to get to know you a little better.</h3>
                     <label>
                         Username (cannot contain spaces):
                         <ControlledInput value={userValue} setValue={setUserValue} ariaLabel={TEXT_text_box_accessible_name} spaces={false} />

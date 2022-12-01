@@ -15,7 +15,7 @@ const router = createBrowserRouter([
   }
 ]);
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <RouterProvider
@@ -25,5 +25,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
