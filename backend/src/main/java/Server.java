@@ -1,4 +1,6 @@
 import static spark.Spark.after;
+
+import handlers.NYTHandler;
 import spark.Spark;
 
 /**
@@ -22,7 +24,7 @@ public class Server {
         });
 
     // Setting up the handler for the GET endpoints.
-    Spark.get("ENDPOINT", null);
+    Spark.get("nyt", new NYTHandler());
 
     // Init/initializing Spark
     Spark.init();
