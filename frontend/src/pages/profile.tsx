@@ -1,10 +1,22 @@
 import { useLocation } from "react-router-dom";
 
-const list_of_users: Array<string> = ["jania_vandevoorde@brown.edu"]
+const list_of_users: Array<string> = [] //["jania_vandevoorde@brown.edu"]
 
 function LogModal() {
     return (
-        <p> {"Popup window"} </p>
+        <form>
+            <label>
+                Username (cannot contain spaces):
+                <input type="text" name="username" />
+            </label>
+            <br />
+            <label>
+                Preferred Name (first and last):
+                <input type="text" name="name" />
+            </label>
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
     )
 }
 
@@ -16,7 +28,12 @@ export default function Profile() {
         )
     } else {
         return (
-            <h1>{st.name + " does not have an account yet."}</h1>
+            <div> 
+                <p>{st.name + " does not have an account yet."}</p> 
+                <div className="App">
+                    <LogModal />      
+                </div>
+            </div>
         )
     }
 }
