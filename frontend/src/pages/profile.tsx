@@ -1,39 +1,30 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const list_of_users: Array<string> = [] //["jania_vandevoorde@brown.edu"]
+export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
-function LogModal() {
-    return (
-        <form>
-            <label>
-                Username (cannot contain spaces):
-                <input type="text" name="username" />
-            </label>
-            <br />
-            <label>
-                Preferred Name (first and last):
-                <input type="text" name="name" />
-            </label>
-            <br />
-            <input type="submit" value="Submit" />
-        </form>
-    )
+interface user {
+    name: string,
+    email: string,
+    username: string,
+    picture: string
 }
 
 export default function Profile() {
-    const st = useLocation().state
-    if (list_of_users.includes(st.email)) {
-        return (
-            <p>{st.name + " has an account."}</p>
-        )
-    } else {
-        return (
-            <div> 
-                <p>{st.name + " does not have an account yet."}</p> 
-                <div className="App">
-                    <LogModal />      
-                </div>
-            </div>
-        )
-    }
+    const st: user = useLocation().state
+    const [user, setUser] = useState<user>({
+        name: st.name,
+        email: st.email,
+        username: st.username,
+        picture: st.picture
+    })
+
+    return (
+        <div>
+            <p>{user.name}</p>
+            <p>{user.email}</p>
+            <p>{user.username}</p>
+            <img src={user.picture} id="logopic" />
+        </div>
+    )
 }

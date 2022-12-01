@@ -70,3 +70,27 @@ h2 {
   border-radius: 10px;
   box-shadow:  0px 0px 10px 2px rgb(213, 213, 213);
 }
+
+/* The Modal (background) */
+#modal {
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+#log-modal {
+  text-align: center;
+  background-color: #fefefe;
+  border-radius: 10px;
+  box-shadow:  0px 0px 5px 1px rgb(233, 245, 249);
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
