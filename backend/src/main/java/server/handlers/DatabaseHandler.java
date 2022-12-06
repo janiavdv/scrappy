@@ -64,11 +64,12 @@ public class DatabaseHandler implements Route {
             try {
               doc = Server.getMyDatabase().getUsersColl().find(new Document("email", request.queryParams("email"))).first();
               System.out.println(doc.toJson());
+              reply.put("result", "success.");
               reply.put("User", doc);
 
               return new ResponseUtil(reply).serialize();
             } catch(Exception e) {
-              return this.databaseFailureResponse("query not found.");
+              return this.databaseFailureResponse("failure.");
             }
 
           case "BOOK":

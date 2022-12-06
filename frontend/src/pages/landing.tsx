@@ -14,7 +14,7 @@ import { User } from "../gencomponents/user";
 const list_of_users: Array<string> = [] //["jania_vandevoorde@brown.edu"]
 
 async function addUserToDatabase(user : User) {
-    const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&picture=${user.picture}`);
+    const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&profilePic=${user.picture}`);
 }
 
 interface ModalProps {
@@ -73,19 +73,19 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
     return (
         <GoogleLogin
             width="250"
-            onSuccess={credentialResponse => {
+            onSuccess={async credentialResponse => {
                 console.log(credentialResponse);
                 if (credentialResponse.credential != null) {
                     let decoded: any = jwt_decode(credentialResponse.credential);
                     
-                    let retrievedQuery = getQuery(decoded.email);
-                    if (list_of_users.includes(decoded.email)) { // EVENTUALLY QUERY FROM DATABSE NOT LOCAL LIST
-                        // GET NAME FROM DATABASE
+                    let retrievedQuery = await getQuery(decoded.email);
+                    console.log(retrievedQuery)
+                    if (retrievedQuery != null) { 
                         const user = {
-                            name: decoded.name,
-                            username: "user",
-                            email: decoded.email,
-                            picture: decoded.picture
+                            name: retrievedQuery.name,
+                            username: retrievedQuery.username,
+                            email: retrievedQuery.email,
+                            picture: retrievedQuery.profilePic
                         }
                         navigate("/profile:" + user.username, { state: user })
                     } else {
@@ -105,8 +105,14 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
 
 async function getQuery(email: string) {
     const response : any = await fetch(`http://localhost:3232/database?command=QUERY&type=EMAIL&email=${email}`);
-    console.log(response.email)
-    return response
+    const json = await response.json();
+    console.log(json.result)
+    if (json.result == "success.") {
+        console.log(json)
+        return json.User;
+    } else {
+        return null;
+    }
 }
 
 export default function Landing() {
