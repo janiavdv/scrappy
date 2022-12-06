@@ -1,9 +1,11 @@
 import User from './user';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 export default function Header({user}: {user: User}) {
 
     const navigate = useNavigate();
+    const [userValue, setUserValue] = useState<string>("") // For controlling the user textbox.
 
     return (
         <div id="header">
@@ -11,21 +13,21 @@ export default function Header({user}: {user: User}) {
                 <button 
                 onClick={async () => {
                     console.log("Friends clicked!")
-                    navigate("/friends")
+                    navigate("/friends" + userValue, { state: user })
                 }}
                 id="headerButton">Friends</button>
                 
                 <button 
                 onClick={async () => {
                     console.log("Gallery clicked!")
-                    navigate("/gallery")
+                    navigate("/gallery" + userValue, { state: user })
                 }}
                 id="headerButton">Gallery</button>
 
                 <button 
                 onClick={async () => {
                     console.log("Profile clicked!")
-                    navigate("/profile")
+                    navigate("/profile:" + userValue, { state: user })
                 }}
                 id="headerButton">Profile</button>
 
