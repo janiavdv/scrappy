@@ -17,7 +17,7 @@ export default function Profile() {
 
     return (
         <div>
-            <Header user={st} /> 
+            <Header user={user} /> 
             <p>{user.name}</p>
             <p>{user.email}</p>
             <p>{user.username}</p>

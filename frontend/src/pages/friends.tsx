@@ -14,7 +14,7 @@ export default function Friends() {
     
     return (
         <div> 
-            <Header user={st} /> 
+            <Header user={user} /> 
             <h1>This is the Friends Page</h1>
         </div>
     )

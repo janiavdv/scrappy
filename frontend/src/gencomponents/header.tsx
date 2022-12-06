@@ -7,7 +7,7 @@ export default function Header({user}: {user: User}) {
                 <span>Friends</span>
                 <span>Gallery</span>
                 <span>Profile</span>
-                <span>{user.picture}</span>
+                <img src={user.picture} id="logopic" />
             </div>
         </div>
     )

@@ -14,7 +14,7 @@ export default function Gallery() {
     
     return (
         <div> 
-            <Header user={st} /> 
+            <Header user={user} /> 
             <h1>This is the Gallery Page</h1>
         </div>
     )
