@@ -120,3 +120,14 @@ button:hover {
   background-color: rgb(179, 179, 179);
   cursor: pointer;
 }
+
+#dropdown {
+  width: 100px;
+  background: purple;
+}
+#item {
+  display: none;
+}
+#dropdown:hover #item{
+  display: block;
+}

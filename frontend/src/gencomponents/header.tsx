@@ -1,6 +1,6 @@
 import User from './user';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function Header({user}: {user: User}) {
 
@@ -32,6 +32,15 @@ export default function Header({user}: {user: User}) {
                 id="headerButton">Profile</button>
 
                 <img src={user.picture} id="logopic" />
+
+                <div id="dropdown">
+                    <button>
+                        Button
+                    </button>
+                    <div id="item">
+                        <p> Log Out </p> {/*THIS IS WHERE LOGOUT FUNCTIONALITY WILL GO*/}
+                    </div>
+                </div>
             </div>
         </div>
     )
