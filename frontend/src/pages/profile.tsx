@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { User } from "../gencomponents/user";
+import User  from "../gencomponents/user";
 import Header from '../gencomponents/header';
 
 
@@ -17,7 +17,7 @@ export default function Profile() {
 
     return (
         <div>
-            <Header /> 
+            <Header user={st} /> 
             <p>{user.name}</p>
             <p>{user.email}</p>
             <p>{user.username}</p>
