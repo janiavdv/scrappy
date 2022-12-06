@@ -1,10 +1,10 @@
 import Header from '../gencomponents/header';
 
-export default function Friends() {
+export default function Gallery() {
     return (
         <div> 
             <Header /> 
-            <h1>This is the Friends Page</h1>
+            <h1>This is the Gallery Page</h1>
         </div>
     )
 }

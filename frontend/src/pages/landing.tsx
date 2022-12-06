@@ -9,12 +9,13 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { TEXT_text_box_accessible_name } from './profile';
 import Footer from '../gencomponents/footer';
 import ControlledInput from '../gencomponents/controlledinput';
+import { User } from "../gencomponents/user";
 
 const list_of_users: Array<string> = [] //["jania_vandevoorde@brown.edu"]
 
-// async function addUserToDatabase(email: string, username: string, name: string) {
-//     const response = await fetch(`http://localhost:3232/database?command=POST&type=USER&email=${email}&username=${username}&name=${name}`);
-// }
+async function addUserToDatabase(user : User) {
+    const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&picture=${user.picture}`);
+}
 
 interface ModalProps {
     userEmail: string,
@@ -46,13 +47,13 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                     </label>
                     <br />
                     <button type="submit" value="Submit" onClick={() => {
-                        const user = {
+                        const user : User = {
                             name: nameValue,
                             username: userValue,
                             email: userEmail,
                             picture: userPicture
                         }
-                        //addUserToDatabase(user);
+                        addUserToDatabase(user);
                         navigate("/profile:" + userValue, { state: user })
                     }} >Submit</button>
                 </div>

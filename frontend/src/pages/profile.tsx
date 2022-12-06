@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { User } from "../gencomponents/user";
+import Header from '../gencomponents/header';
+
 
 export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
-interface user {
-    name: string,
-    email: string,
-    username: string,
-    picture: string
-}
-
 export default function Profile() {
-    const st: user = useLocation().state
-    const [user, setUser] = useState<user>({
+    const st: User = useLocation().state
+    const [user, setUser] = useState<User>({
         name: st.name,
         email: st.email,
         username: st.username,
@@ -21,6 +17,7 @@ export default function Profile() {
 
     return (
         <div>
+            <Header /> 
             <p>{user.name}</p>
             <p>{user.email}</p>
             <p>{user.username}</p>
