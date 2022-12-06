@@ -77,7 +77,8 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                 console.log(credentialResponse);
                 if (credentialResponse.credential != null) {
                     let decoded: any = jwt_decode(credentialResponse.credential);
-
+                    
+                    let retrievedQuery = getQuery(decoded.email);
                     if (list_of_users.includes(decoded.email)) { // EVENTUALLY QUERY FROM DATABSE NOT LOCAL LIST
                         // GET NAME FROM DATABASE
                         const user = {
@@ -100,6 +101,12 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
             }}
         />
     )
+}
+
+async function getQuery(email: string) {
+    const response : any = await fetch(`http://localhost:3232/database?command=QUERY&type=EMAIL&email=${email}`);
+    console.log(response.email)
+    return response
 }
 
 export default function Landing() {
