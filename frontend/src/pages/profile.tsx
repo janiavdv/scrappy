@@ -1,18 +1,12 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { User } from "../gencomponents/user";
 
 export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
-interface user {
-    name: string,
-    email: string,
-    username: string,
-    picture: string
-}
-
 export default function Profile() {
-    const st: user = useLocation().state
-    const [user, setUser] = useState<user>({
+    const st: User = useLocation().state
+    const [user, setUser] = useState<User>({
         name: st.name,
         email: st.email,
         username: st.username,
