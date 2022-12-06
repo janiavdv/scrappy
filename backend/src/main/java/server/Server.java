@@ -1,16 +1,27 @@
+package server;
+
 import static spark.Spark.after;
 
-import handlers.NYTHandler;
+import com.mongodb.client.MongoDatabase;
+import database.MongoDB;
+import server.handlers.DatabaseHandler;
+import server.handlers.NYTHandler;
 import spark.Spark;
 
 /**
- * Top-level class "representing" the Server. Contains the main() method which
- * starts Spark and runs the various handlers.
+ * Top-level class "representing" the server.Server. Contains the main() method which
+ * starts Spark and runs the various server.handlers.
  */
 public class Server {
 
+  private static MongoDB mongoDB;
+
+  public static MongoDB getMyDatabase() {
+    return mongoDB;
+  }
+
   /**
-   * Starts Spark and runs handlers to fetch API data.
+   * Starts Spark and runs server.handlers to fetch API data.
    *
    * @param args of "type" String[]
    */
@@ -23,6 +34,9 @@ public class Server {
           response.header("Access-Control-Allow-Methods", "*");
         });
 
+    mongoDB = new MongoDB();
+
+    Spark.get("database", new DatabaseHandler());
     // Setting up the handler for the GET endpoints.
     Spark.get("nyt", new NYTHandler());
 
@@ -30,7 +44,7 @@ public class Server {
     Spark.init();
     Spark.awaitInitialization();
     // Printing out to the console that the server has been started (helpful to the user)
-    System.out.println("Server started.");
+    System.out.println("server.Server started.");
   }
 
 }
