@@ -1,3 +1,7 @@
+body {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  overflow: hidden;
+}
 #landing-main-page-box {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   display: flex;
@@ -43,7 +47,6 @@ h2 {
   text-align: center;
   align-items: center;
   color: rgb(60, 60, 60);
-
 }
 
 #footer div {
@@ -55,6 +58,8 @@ h2 {
 
   display: flex;
   justify-content: space-around;
+  background-color: rgb(245, 250, 255);
+  height: 6vh;
 }
 
 #main-right {
@@ -103,22 +108,25 @@ h2 {
 } 
 
 button {
-  color: black;
+  color: rgb(108, 108, 108);
   font-size: 2vh;
-  padding: 2vh;
+  padding: 2vh 3vh 2vh;
   border-radius: 6px;
   border: none;
-  background-color: rgb(220, 220, 220);
+  background-color: #d1f3ff;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 button:hover {
   color: black;
   font-size: 2vh;
-  padding: 2vh;
+  padding: 2vh 3vh 2vh;
   border-radius: 6px;
   border: none;
   background-color: rgb(179, 179, 179);
   cursor: pointer;
+  background-color: #b5d4df;
+  box-shadow: 0px 2px 2px 0px rgb(220, 220, 220);
 }
 
 #dropdown {
@@ -130,4 +138,88 @@ button:hover {
 }
 #dropdown:hover #item{
   display: block;
+}
+
+/* #header {
+  
+} */
+
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  background-color: rgb(245, 250, 255);
+  height: 12vh;
+  padding: 5px;
+  box-shadow: 0px 3px 2px 0px rgb(220, 220, 220);
+
+}
+
+#left-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 85vh;
+}
+
+#logo-nav {
+  margin: 3vh;
+  width: 10vh;
+  height: inherit;
+}
+
+#prof-in-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  margin-right: 12vh;
+  width: 13%;
+  height: 8vh;
+}
+
+#profile-pic {
+  border-radius: 50%;
+  margin: 5px;
+  width: 8vh;
+}
+
+/* Profile */
+#profile-page {
+  display: flex;
+  padding: 10px;
+  margin: 20px;
+  height: 67vh;
+}
+
+#prof-info-box {
+  text-align: center;
+  background-color: rgb(245, 250, 255);
+  border-radius: 10px;
+  padding: 7vh;
+  margin: 4vh;
+}
+#big-profile-pic {
+  border-radius: 50%;
+  margin: 5px;
+  width: 20vh;
+}
+#book-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#book-menu {
+  padding: 7vh;
+  width: 100vh;
+}
+#today-book {
+  height: 50vh;
+  overflow: hidden;
+  overflow: scroll;
 }
