@@ -223,3 +223,11 @@ button:hover {
   overflow: hidden;
   overflow: scroll;
 }
+
+#profile-friends-list {
+  background-color: rgb(245, 250, 255);
+  border-radius: 10px;
+  text-align: center;
+  width: 27vh;
+  padding: 2vh;
+}

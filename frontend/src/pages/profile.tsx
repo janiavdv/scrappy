@@ -52,6 +52,10 @@ export default function Profile() {
                     </div>
 
                 </div>
+                <div id="profile-friends-list">
+                    <p>Friends</p>
+                    <hr></hr>
+                </div>
             </div>
 
 
