@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import { uploadFile } from 'react-s3';
+import { uploadFile } from 'react-s3'
 
 
 // https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html
