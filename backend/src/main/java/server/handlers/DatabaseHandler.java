@@ -1,6 +1,8 @@
 package server.handlers;
 
+import database.Book;
 import database.User;
+import database.Entry;
 import java.util.HashMap;
 import java.util.Map;
 import org.bson.Document;
@@ -20,7 +22,6 @@ public class DatabaseHandler implements Route {
 
   @Override
   public Object handle(Request request, Response response) throws Exception {
-    System.out.println("im being called");
 
     if (request.queryParams().size() == 0) {
       return databaseFailureResponse("not enough arguments");
@@ -44,8 +45,25 @@ public class DatabaseHandler implements Route {
 
             return databaseSuccessResponse();
           case "ENTRY":
-            break;
+            Entry entry = new Entry();
+
+            // figure out how to set list of tags + book name
+            entry.setCaption(request.queryParams("caption"));
+            entry.setDate(request.queryParams("date"));
+            entry.setImageLink(request.queryParams("image"));
+
+            Document newEntry = DBDocumentUtil.convert(entry);
+            Server.getMyDatabase().getEntriesColl().insertOne(newEntry);
+
+            return databaseSuccessResponse();
           case "BOOK":
+            Book book = new Book();
+
+            // what info will a book store?
+
+            Document newBook = DBDocumentUtil.convert(book);
+            Server.getMyDatabase().getBooksColl().insertOne(newBook);
+
             break;
         }
         break;
