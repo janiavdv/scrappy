@@ -95,9 +95,36 @@ h2 {
   background-color: #fefefe;
   border-radius: 10px;
   box-shadow:  0px 0px 5px 1px rgb(233, 245, 249);
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 10% auto; /* 15% from the top and centered */
   padding: 20px;
   width: 50%; /* Could be more or less, depending on screen size */
+}
+
+#added-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+  overflow: scroll;
+  background-color: rgb(245, 250, 255);
+  padding: 5%;
+  margin: 1vh;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: rgb(218, 228, 238);
+  border-radius: 10px;
+  margin: 1vh;
+}
+
+.tag-value {
+  margin: 5px;
+  font-size: 3vh;
 }
 
 .input {
@@ -182,6 +209,21 @@ button:hover {
   height: 8vh;
 }
 
+#interests {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile-tag {
+  padding: 0.5vh;
+  margin: 1vh;
+  background-color: #d1f3ff;
+  width: 35%;
+  overflow: hidden;
+  overflow: scroll;
+}
+
 #profile-pic {
   border-radius: 50%;
   margin: 5px;
@@ -202,6 +244,8 @@ button:hover {
   border-radius: 10px;
   padding: 7vh;
   margin: 4vh;
+  overflow: hidden;
+  overflow: scroll;
 }
 #big-profile-pic {
   border-radius: 50%;

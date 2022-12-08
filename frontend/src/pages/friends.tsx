@@ -9,7 +9,8 @@ export default function Friends() {
         name: st.name,
         email: st.email,
         username: st.username,
-        picture: st.picture
+        picture: st.picture,
+        taglist: st.taglist
     })
     
     return (

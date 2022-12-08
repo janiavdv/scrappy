@@ -3,4 +3,5 @@ export default interface User {
     email: string,
     username: string,
     picture: string
+    taglist: string[]
 }

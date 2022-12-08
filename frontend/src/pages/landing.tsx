@@ -13,7 +13,39 @@ import User from "../gencomponents/user";
 
 const list_of_users: Array<string> = [] //["jania_vandevoorde@brown.edu"]
 
-async function addUserToDatabase(user : User) {
+interface TagProps {
+    value: string,
+    tags: string[],
+    setTags: Dispatch<SetStateAction<string[]>>,
+}
+
+function Tag({ value, tags, setTags }: TagProps) {
+    return (
+        <div className="tag">
+            <p className="tag-value">{"#" + value}</p>
+            <button onClick={() => {
+                setTags(tags.filter(t => t !== value))
+            }}>X</button>
+        </div>
+    )
+}
+
+interface AddedTagProps {
+    tags: string[]
+    setTags: Dispatch<SetStateAction<string[]>>,
+}
+
+function AddedTags({ tags, setTags }: AddedTagProps) {
+    return (
+        <div id="added-tags">
+            {tags.map((tagValue) => (
+                <Tag value={tagValue} tags={tags} setTags={setTags} key={tagValue} />
+            ))}
+        </div>
+    );
+}
+
+async function addUserToDatabase(user: User) {
     const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&profilePic=${user.picture}`);
 }
 
@@ -26,7 +58,9 @@ interface ModalProps {
 function LogModal({ userEmail, userPicture, display }: ModalProps) {
     const [userValue, setUserValue] = useState<string>("") // For controlling the user textbox.
     const [nameValue, setNameValue] = useState<string>("") // For controlling the name textbox.
+    const [tagValue, setTagValue] = useState<string>("")
 
+    const [tags, setTags] = useState<string[]>([])
     const navigate = useNavigate();
 
     if (!display) {
@@ -46,15 +80,32 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                         <ControlledInput value={nameValue} setValue={setNameValue} ariaLabel={TEXT_text_box_accessible_name} spaces={true} />
                     </label>
                     <br />
+                    <hr></hr>
+                    <label>
+                        Add up to 5 hashtags that interest you! (You won't be able to change these later):
+                        <ControlledInput value={tagValue} setValue={setTagValue} ariaLabel={TEXT_text_box_accessible_name} spaces={false} />
+                        <button onClick={() => {
+                            setTagValue("");
+                            if (tags.length < 5 && !tags.includes(tagValue)) {
+                                setTags([
+                                    ...tags, tagValue
+                                ])
+                            }
+                        }}>Add Tag</button>
+                    </label>
+                    <AddedTags tags={tags} setTags={setTags} />
                     <button type="submit" value="Submit" onClick={() => {
-                        const user : User = {
-                            name: nameValue,
-                            username: userValue,
-                            email: userEmail,
-                            picture: userPicture
+                        if (userValue != "" && nameValue != "") {
+                            const user: User = {
+                                name: nameValue,
+                                username: userValue,
+                                email: userEmail,
+                                picture: userPicture,
+                                taglist: tags
+                            }
+                            addUserToDatabase(user);
+                            navigate("/profile:" + userValue, { state: user })
                         }
-                        addUserToDatabase(user);
-                        navigate("/profile:" + userValue, { state: user })
                     }} >Submit</button>
                 </div>
             </div>
@@ -77,15 +128,16 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                 console.log(credentialResponse);
                 if (credentialResponse.credential != null) {
                     let decoded: any = jwt_decode(credentialResponse.credential);
-                    
-                    let retrievedQuery = await getQuery(decoded.email);
+
+                    let retrievedQuery = await getQuery("EMAIL", "email", decoded.email);
                     console.log(retrievedQuery)
-                    if (retrievedQuery != null) { 
+                    if (retrievedQuery != null) {
                         const user = {
                             name: retrievedQuery.name,
                             username: retrievedQuery.username,
                             email: retrievedQuery.email,
-                            picture: retrievedQuery.profilePic
+                            picture: retrievedQuery.profilePic,
+                            taglist: null
                         }
                         navigate("/profile:" + user.username, { state: user })
                     } else {
@@ -103,8 +155,8 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
     )
 }
 
-async function getQuery(email: string) {
-    const response : any = await fetch(`http://localhost:3232/database?command=QUERY&type=EMAIL&email=${email}`);
+async function getQuery(type: string, ref: string, value: string) {
+    const response: any = await fetch(`http://localhost:3232/database?command=QUERY&type=${type}&${ref}=${value}`);
     const json = await response.json();
     console.log(json.result)
     if (json.result == "success.") {
