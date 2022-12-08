@@ -52,9 +52,16 @@ export default function Profile() {
                     </div>
 
                 </div>
-                <div id="profile-friends-list">
+                <div>
+                    <div id="profile-friends-list">
                     <p>Friends</p>
                     <hr></hr>
+                    </div>
+                    <div id="newPageButton"> 
+                        <button type="submit" value="Submit" onClick={() => {
+                            console.log("clicked")}}
+                            >New Page</button>
+                    </div>
                 </div>
             </div>
 
