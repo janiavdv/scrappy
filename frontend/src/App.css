@@ -117,7 +117,7 @@ h2 {
   justify-content: center;
   align-items: center;
   padding: 5px;
-  background-color: rgb(226, 232, 238);
+  background-color: rgb(218, 228, 238);
   border-radius: 10px;
   margin: 1vh;
 }
@@ -209,6 +209,21 @@ button:hover {
   height: 8vh;
 }
 
+#interests {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile-tag {
+  padding: 0.5vh;
+  margin: 1vh;
+  background-color: #d1f3ff;
+  width: 35%;
+  overflow: hidden;
+  overflow: scroll;
+}
+
 #profile-pic {
   border-radius: 50%;
   margin: 5px;
@@ -229,6 +244,8 @@ button:hover {
   border-radius: 10px;
   padding: 7vh;
   margin: 4vh;
+  overflow: hidden;
+  overflow: scroll;
 }
 #big-profile-pic {
   border-radius: 50%;

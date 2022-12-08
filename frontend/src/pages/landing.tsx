@@ -19,7 +19,7 @@ interface TagProps {
     setTags: Dispatch<SetStateAction<string[]>>,
 }
 
-function Tag({value, tags, setTags} : TagProps) {
+function Tag({ value, tags, setTags }: TagProps) {
     return (
         <div className="tag">
             <p className="tag-value">{"#" + value}</p>
@@ -35,17 +35,17 @@ interface AddedTagProps {
     setTags: Dispatch<SetStateAction<string[]>>,
 }
 
-function AddedTags({tags, setTags} : AddedTagProps) {
+function AddedTags({ tags, setTags }: AddedTagProps) {
     return (
         <div id="added-tags">
-            {tags.map((tagValue) => ( 
-                <Tag value={tagValue} tags={tags} setTags={setTags}/>
+            {tags.map((tagValue) => (
+                <Tag value={tagValue} tags={tags} setTags={setTags} key={tagValue}/>
             ))}
         </div>
     );
 }
 
-async function addUserToDatabase(user : User) {
+async function addUserToDatabase(user: User) {
     const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&profilePic=${user.picture}`);
 }
 
@@ -90,12 +90,12 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                                 setTags([
                                     ...tags, tagValue
                                 ])
-                            }     
+                            }
                         }}>Add Tag</button>
                     </label>
-                    <AddedTags tags={tags} setTags={setTags}/>
+                    <AddedTags tags={tags} setTags={setTags} />
                     <button type="submit" value="Submit" onClick={() => {
-                        const user : User = {
+                        const user: User = {
                             name: nameValue,
                             username: userValue,
                             email: userEmail,
@@ -126,10 +126,10 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                 console.log(credentialResponse);
                 if (credentialResponse.credential != null) {
                     let decoded: any = jwt_decode(credentialResponse.credential);
-                    
+
                     let retrievedQuery = await getQuery(decoded.email);
                     console.log(retrievedQuery)
-                    if (retrievedQuery != null) { 
+                    if (retrievedQuery != null) {
                         const user = {
                             name: retrievedQuery.name,
                             username: retrievedQuery.username,
@@ -154,7 +154,7 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
 }
 
 async function getQuery(email: string) {
-    const response : any = await fetch(`http://localhost:3232/database?command=QUERY&type=EMAIL&email=${email}`);
+    const response: any = await fetch(`http://localhost:3232/database?command=QUERY&type=EMAIL&email=${email}`);
     const json = await response.json();
     console.log(json.result)
     if (json.result == "success.") {

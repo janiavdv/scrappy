@@ -28,7 +28,15 @@ export default function Profile() {
 
                     <p>{user.email}</p>
                     <img src={user.picture} id="big-profile-pic" />
-                    <blockquote>{st.taglist}</blockquote>
+                    <p>Interests:</p>
+                    <hr></hr>
+                    <div id="interests">
+                        {st.taglist.map((tag) => (
+                            <div className="profile-tag">
+                                <p>{tag}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div id="book-menu">
                     <div id="book-buttons">
