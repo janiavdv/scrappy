@@ -39,7 +39,7 @@ function AddedTags({ tags, setTags }: AddedTagProps) {
     return (
         <div id="added-tags">
             {tags.map((tagValue) => (
-                <Tag value={tagValue} tags={tags} setTags={setTags} key={tagValue}/>
+                <Tag value={tagValue} tags={tags} setTags={setTags} key={tagValue} />
             ))}
         </div>
     );
@@ -83,7 +83,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                     <hr></hr>
                     <label>
                         Add up to 5 hashtags that interest you! (You won't be able to change these later):
-                        <ControlledInput value={tagValue} setValue={setTagValue} ariaLabel={TEXT_text_box_accessible_name} spaces={true} />
+                        <ControlledInput value={tagValue} setValue={setTagValue} ariaLabel={TEXT_text_box_accessible_name} spaces={false} />
                         <button onClick={() => {
                             setTagValue("");
                             if (tags.length < 5 && !tags.includes(tagValue)) {
@@ -95,15 +95,17 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                     </label>
                     <AddedTags tags={tags} setTags={setTags} />
                     <button type="submit" value="Submit" onClick={() => {
-                        const user: User = {
-                            name: nameValue,
-                            username: userValue,
-                            email: userEmail,
-                            picture: userPicture,
-                            taglist: tags
+                        if (userValue != "" && nameValue != "") {
+                            const user: User = {
+                                name: nameValue,
+                                username: userValue,
+                                email: userEmail,
+                                picture: userPicture,
+                                taglist: tags
+                            }
+                            addUserToDatabase(user);
+                            navigate("/profile:" + userValue, { state: user })
                         }
-                        addUserToDatabase(user);
-                        navigate("/profile:" + userValue, { state: user })
                     }} >Submit</button>
                 </div>
             </div>
@@ -127,7 +129,7 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                 if (credentialResponse.credential != null) {
                     let decoded: any = jwt_decode(credentialResponse.credential);
 
-                    let retrievedQuery = await getQuery(decoded.email);
+                    let retrievedQuery = await getQuery("EMAIL", "email", decoded.email);
                     console.log(retrievedQuery)
                     if (retrievedQuery != null) {
                         const user = {
@@ -153,8 +155,8 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
     )
 }
 
-async function getQuery(email: string) {
-    const response: any = await fetch(`http://localhost:3232/database?command=QUERY&type=EMAIL&email=${email}`);
+async function getQuery(type: string, ref: string, value: string) {
+    const response: any = await fetch(`http://localhost:3232/database?command=QUERY&type=${type}&${ref}=${value}`);
     const json = await response.json();
     console.log(json.result)
     if (json.result == "success.") {

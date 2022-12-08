@@ -27,7 +27,7 @@ export default function Profile() {
                     <p>{user.username}</p>
 
                     <p>{user.email}</p>
-                    <img src={user.picture} id="big-profile-pic" />
+                    <img src={user.picture} id="big-profile-pic" referrerPolicy="no-referrer"/>
                     <p>Interests:</p>
                     <hr></hr>
                     <div id="interests">

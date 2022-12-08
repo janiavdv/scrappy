@@ -37,7 +37,7 @@ export default function Header({ user }: { user: User }) {
                 </div>
 
                 <div id="prof-in-nav">
-                    <img src={user.picture} id="profile-pic" />
+                    <img src={user.picture} id="profile-pic" referrerPolicy="no-referrer"/>
                     <button>
                         {user.username}
                     </button>
