@@ -14,7 +14,8 @@ export default function Profile() {
         name: st.name,
         email: st.email,
         username: st.username,
-        picture: st.picture
+        picture: st.picture,
+        taglist: st.taglist
     })
 
     return (
@@ -27,6 +28,7 @@ export default function Profile() {
 
                     <p>{user.email}</p>
                     <img src={user.picture} id="big-profile-pic" />
+                    <blockquote>{st.taglist}</blockquote>
                 </div>
                 <div id="book-menu">
                     <div id="book-buttons">
