@@ -30,78 +30,87 @@ public class DatabaseHandler implements Route {
 
     String command = request.queryParams("command");
     switch (command) {
-      case "ADD":
+      case "ADD" -> {
         String type = request.queryParams("type");
         switch (type) {
-          case "USER":
+          case "USER" -> {
             User user = new User();
-
             user.setEmail(request.queryParams("email"));
             user.setUsername(request.queryParams("username"));
             user.setName(request.queryParams("name"));
             user.setProfilePic(request.queryParams("profilePic"));
-
             List<String> tagsList = List.of(request.queryParams("tags").split(","));
             user.setTags(tagsList);
-
             Document newUser = DBDocumentUtil.convert(user);
             Server.getMyDatabase().getUsersColl().insertOne(newUser);
-
             return databaseSuccessResponse();
-          case "ENTRY":
+          }
+          case "ENTRY" -> {
             Entry entry = new Entry();
 
             // figure out how to set list of tags + book name
             entry.setCaption(request.queryParams("caption"));
             entry.setDate(request.queryParams("date"));
             entry.setImageLink(request.queryParams("image"));
-
             Document newEntry = DBDocumentUtil.convert(entry);
             Server.getMyDatabase().getEntriesColl().insertOne(newEntry);
-
             return databaseSuccessResponse();
-          case "BOOK":
+          }
+          case "BOOK" -> {
             Book book = new Book();
-
-            // what info will a book store?
-
+            book.setTitle(request.queryParams("title"));
             Document newBook = DBDocumentUtil.convert(book);
             Server.getMyDatabase().getBooksColl().insertOne(newBook);
-
-            break;
+          }
         }
-        break;
-      case "QUERY":
+      }
+      case "QUERY" -> {
         String cType = request.queryParams("type");
         Document doc;
         Map<String, Object> reply = new HashMap<>();
-
         switch (cType) {
-          case "USERNAME":
-            doc = Server.getMyDatabase().getUsersColl().find(new Document("username", request.queryParams("username"))).first();
-            System.out.println(doc.toJson());
+          case "USERNAME" -> {
+            doc = Server.getMyDatabase().getUsersColl()
+                .find(new Document("username", request.queryParams("username"))).first();
             reply.put("result", "success");
             reply.put("User", doc);
 
             return new ResponseUtil(reply).serialize();
-          case "EMAIL":
+          }
+          case "EMAIL" -> {
             try {
-              doc = Server.getMyDatabase().getUsersColl().find(new Document("email", request.queryParams("email"))).first();
-              System.out.println(doc.toJson());
+              doc = Server.getMyDatabase().getUsersColl()
+                  .find(new Document("email", request.queryParams("email"))).first();
               reply.put("result", "success.");
               reply.put("User", doc);
 
               return new ResponseUtil(reply).serialize();
-            } catch(Exception e) {
+            } catch (Exception e) {
               return this.databaseFailureResponse("failure.");
             }
+          }
+          case "BOOK" -> {
+            doc = Server.getMyDatabase().getBooksColl()
+                .find(new Document("title", request.queryParams("title"))).first();
 
+            reply.put("result", "success");
+            reply.put("Book", doc);
+
+            return new ResponseUtil(reply).serialize();
+          }
+        }
+      }
+      case "UPDATE" -> {
+        String updateType = request.queryParams("type");
+        switch (updateType) {
           case "BOOK":
             break;
+          case "FRIENDS":
+            break;
+          case "ENTRY":
+            break;
         }
-        break;
-      case "CHANGE":
-        break;
+      }
     }
     return null;
   }

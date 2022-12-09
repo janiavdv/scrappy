@@ -10,6 +10,7 @@ public class User {
   private String profilePic;
   private List<String> tags;
   private List<Entry> entries;
+  private List<String> friendsRequest;
   private List<String> friendsList;
   private List<Book> books;
 
@@ -64,6 +65,13 @@ public class User {
     return this.entries;
   }
 
+  public void setFriendsRequest(List<String> friendsRequest) {
+    this.friendsRequest = friendsRequest;
+  }
+
+  public List<String> getFriendsRequest() {
+    return this.friendsRequest;
+  }
   public void setFriendsList(List<String> friendsList) {
     this.friendsList = friendsList;
   }
