@@ -136,8 +136,8 @@ h2 {
 
 button {
   color: rgb(108, 108, 108);
-  font-size: 2vh;
-  padding: 2vh 3vh 2vh;
+  font-size: 2.3vh;
+  padding: 1.9vh 2.7vh 1.9vh;
   border-radius: 6px;
   border: none;
   background-color: #d1f3ff;
@@ -146,8 +146,8 @@ button {
 
 button:hover {
   color: black;
-  font-size: 2vh;
-  padding: 2vh 3vh 2vh;
+  font-size: 2.3vh;
+  padding: 1.9vh 2.7vh 1.9vh;
   border-radius: 6px;
   border: none;
   background-color: rgb(179, 179, 179);
@@ -222,6 +222,7 @@ button:hover {
   width: 35%;
   overflow: hidden;
   overflow: scroll;
+  border-radius: 10px;
 }
 
 #profile-pic {
@@ -274,4 +275,12 @@ button:hover {
   text-align: center;
   width: 27vh;
   padding: 2vh;
+  margin: 5px;
+}
+
+#right-bar-profile {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

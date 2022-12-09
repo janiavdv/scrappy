@@ -123,7 +123,7 @@ export default function Profile() {
                     </div>
 
                 </div>
-                <div>
+                <div id="right-bar-profile">
                     <div id="profile-friends-list">
                     <p>Friends</p>
                     <hr></hr>
