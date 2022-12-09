@@ -4,6 +4,7 @@ import database.Book;
 import database.User;
 import database.Entry;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.bson.Document;
 import server.Server;
@@ -39,6 +40,9 @@ public class DatabaseHandler implements Route {
             user.setUsername(request.queryParams("username"));
             user.setName(request.queryParams("name"));
             user.setProfilePic(request.queryParams("profilePic"));
+
+            List<String> tagsList = List.of(request.queryParams("tags").split(","));
+            user.setTags(tagsList);
 
             Document newUser = DBDocumentUtil.convert(user);
             Server.getMyDatabase().getUsersColl().insertOne(newUser);
@@ -76,8 +80,10 @@ public class DatabaseHandler implements Route {
           case "USERNAME":
             doc = Server.getMyDatabase().getUsersColl().find(new Document("username", request.queryParams("username"))).first();
             System.out.println(doc.toJson());
+            reply.put("result", "success");
+            reply.put("User", doc);
 
-            return this.databaseSuccessResponse();
+            return new ResponseUtil(reply).serialize();
           case "EMAIL":
             try {
               doc = Server.getMyDatabase().getUsersColl().find(new Document("email", request.queryParams("email"))).first();

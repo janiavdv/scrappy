@@ -8,6 +8,7 @@ public class User {
   private String username;
   private String name;
   private String profilePic;
+  private List<String> tags;
   private List<Entry> entries;
   private List<String> friendsList;
   private List<Book> books;
@@ -46,6 +47,14 @@ public class User {
 
   public String getProfilePic() {
     return this.profilePic;
+  }
+
+  public void setTags(List<String> tags) {
+    this.tags = tags;
+  }
+
+  public List<String> getTags() {
+    return this.tags;
   }
 
   public void setEntries(List<Entry> entries) {
