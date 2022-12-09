@@ -5,6 +5,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Profile from './pages/profile';
 import Gallery from './pages/gallery';
 import Friends from './pages/friends';
+import FAQ from './pages/faq'
+import About from './pages/about'
+import Help from './pages/help'
+import Privacy from './pages/privacy'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +26,22 @@ const router = createBrowserRouter([
   {
     path: "/gallery",
     element: <Gallery />
+  },
+  {
+    path: "/faqs",
+    element: <FAQ />
+  },
+  {
+    path: "/about",
+    element: <About />
+  },
+  {
+    path: "/help",
+    element: <Help />
+  },
+  {
+    path: "/privacy",
+    element: <Privacy />
   }
 ]);
 
