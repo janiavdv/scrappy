@@ -9,8 +9,8 @@ export default function Gallery() {
         name: st.name,
         email: st.email,
         username: st.username,
-        picture: st.picture,
-        taglist: st.taglist
+        profilePic: st.profilePic,
+        tags: st.tags
     })
     
     return (

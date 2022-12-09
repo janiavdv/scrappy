@@ -9,6 +9,7 @@ import { TEXT_text_box_accessible_name } from './profile';
 import Footer from '../gencomponents/footer';
 import ControlledInput from '../gencomponents/controlledinput';
 import User from "../gencomponents/user";
+import { getQuery, addUserToDatabase } from "../utils/dbutils"
 
 interface TagProps {
     value: string,
@@ -40,10 +41,6 @@ function AddedTags({ tags, setTags }: AddedTagProps) {
             ))}
         </div>
     );
-}
-
-async function addUserToDatabase(user: User) {
-    const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&profilePic=${user.picture}&tags=${user.taglist}`);
 }
 
 interface ModalProps {
@@ -97,8 +94,8 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                                 name: nameValue,
                                 username: userValue,
                                 email: userEmail,
-                                picture: userPicture,
-                                taglist: tags
+                                profilePic: userPicture,
+                                tags: tags
                             }
                             addUserToDatabase(user);
                             navigate("/profile:" + userValue, { state: user })
@@ -133,8 +130,8 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                             name: retrievedQuery.name,
                             username: retrievedQuery.username,
                             email: retrievedQuery.email,
-                            picture: retrievedQuery.profilePic,
-                            taglist: null
+                            profilePic: retrievedQuery.profilePic,
+                            taglist: retrievedQuery.tags
                         }
                         navigate("/profile:" + user.username, { state: user })
                     } else {
@@ -150,18 +147,6 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
             }}
         />
     )
-}
-
-async function getQuery(type: string, ref: string, value: string) {
-    const response: any = await fetch(`http://localhost:3232/database?command=QUERY&type=${type}&${ref}=${value}`);
-    const json = await response.json();
-    console.log(json.result)
-    if (json.result == "success.") {
-        console.log(json)
-        return json.User;
-    } else {
-        return null;
-    }
 }
 
 export default function Landing() {
@@ -192,3 +177,4 @@ export default function Landing() {
         </div>
     )
 }
+

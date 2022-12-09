@@ -73,12 +73,24 @@ export default function Profile() {
         name: st.name,
         email: st.email,
         username: st.username,
-        picture: st.picture,
-        taglist: st.taglist
+        profilePic: st.profilePic,
+        tags: st.tags
     })
     const [modalDisplay, setModalDisplay] = useState<boolean>(false) // For controlling the user textbox.
     const [pages, setPages] = useState<PageProps[]>([])
 
+    // at this point, the book is empty and has no pages. oh no.
+
+    // we check if the person has a book for the day yet, if they do great,
+    // we pull all those entries (which should be ID'ed, under that ID'd book)
+    // and we populate the book
+
+    // if the person doesn't have a book, we create the reference in the database, and make the default
+    // intereface for the day we do for everyone, and add it as the header
+
+    // when updating the book and adding more entries, we first save the reference, (which should include a date)
+    // grab the same date book in the databse under the user (which, should be done by date), which should give us
+    // the id to a book object in the database. then we add the entry to that book object!
     return (
         <div>
             <Header user={user} />
@@ -88,11 +100,11 @@ export default function Profile() {
                     <p>{user.username}</p>
 
                     <p>{user.email}</p>
-                    <img src={user.picture} id="big-profile-pic" referrerPolicy="no-referrer" />
+                    <img src={user.profilePic} id="big-profile-pic" referrerPolicy="no-referrer" />
                     <p>Interests:</p>
                     <hr></hr>
                     <div id="interests">
-                        {st.taglist.map((tag) => (
+                        {st.tags.map((tag) => (
                             <div className="profile-tag">
                                 <p>{tag}</p>
                             </div>
