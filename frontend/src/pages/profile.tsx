@@ -3,7 +3,66 @@ import { useLocation } from "react-router-dom";
 import User from "../gencomponents/user";
 import Header from '../gencomponents/header';
 import UploadImageToS3WithReactS3 from "../gencomponents/awsupload";
+import ControlledInput from '../gencomponents/controlledinput';
 import Footer from "../gencomponents/footer";
+import { useNavigate } from "react-router-dom";
+
+
+// interface Book {
+//     title: string,
+//     pages: [Page]
+// }
+
+interface Page {
+    title: string,
+    body: string
+}
+
+interface ModalProps {
+    pageTitle: string,
+    pageBody: string,
+    display: boolean
+}
+
+function LogModal({ pageTitle, pageBody, display }: ModalProps) {
+    const [titleValue, setTitleValue] = useState<string>("") // For controlling the title textbox.
+    const [bodyValue, setBodyValue] = useState<string>("") // For controlling the body textbox.
+
+    const st: User = useLocation().state
+    const navigate = useNavigate();
+
+    if (!display) { return null; } 
+    
+    return (
+        <div id="modal">
+            <div id="log-modal">
+                <h3>Enter the title and body for your page!</h3>
+                <label>
+                    Title
+                    <ControlledInput value={titleValue} setValue={setTitleValue} ariaLabel={TEXT_text_box_accessible_name} spaces={true} />
+                </label>
+                <br />
+                <label>
+                    Body
+                    <ControlledInput value={bodyValue} setValue={setBodyValue} ariaLabel={TEXT_text_box_accessible_name} spaces={true} />
+                </label>
+                <br />
+                <hr></hr>
+                <button type="submit" value="Post" onClick={() => {
+                    if (titleValue != "" && bodyValue != "") {
+                        const pg: Page = {
+                            title: titleValue,
+                            body: bodyValue
+                        }
+                        // addUserToDatabase(user); (TODO: add to history)
+                        // navigate("/profile:" + st.username, { state: st })
+                        navigate("/friends", { state: st }) // TODO: change this
+                    }
+                }} >Post</button>
+            </div>
+        </div>
+        )
+    }
 
 
 export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
@@ -17,6 +76,8 @@ export default function Profile() {
         picture: st.picture,
         taglist: st.taglist
     })
+    const [modalDisplay, setModalDisplay] = useState<boolean>(false) // For controlling the user textbox.
+
 
     return (
         <div>
@@ -62,17 +123,19 @@ export default function Profile() {
                     </div>
 
                 </div>
-                <div>
+                <div id="right-bar-profile">
                     <div id="profile-friends-list">
                     <p>Friends</p>
                     <hr></hr>
                     </div>
                     <div id="newPageButton"> 
-                        <button type="submit" value="Submit" onClick={() => {
-                            console.log("clicked")}}
-                            >New Page</button>
+                        <button type="submit" value="New Page" onClick={() => {
+                            setModalDisplay(true)
+                        }}
+                        >New Page</button>
                     </div>
                 </div>
+                <LogModal pageTitle={""} pageBody={""} display={modalDisplay}></LogModal>
             </div>
 
 
@@ -81,4 +144,4 @@ export default function Profile() {
         </div>
 
     )
-}
+    }
