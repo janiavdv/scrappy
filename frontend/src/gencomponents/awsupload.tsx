@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { uploadFile } from 'react-s3'
 // https://stackoverflow.com/questions/69686231/react-s3-error-referenceerror-buffer-is-not-defined
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -18,7 +18,12 @@ const config = {
     secretAccessKey: SECRET_ACCESS_KEY,
 }
 
-const UploadImageToS3WithReactS3 = () => {
+interface uploadProps {
+    setValue: Dispatch<SetStateAction<string>>,
+    setAllowed: Dispatch<SetStateAction<boolean>>
+}
+
+export default function UploadImageToS3WithReactS3({ setValue, setAllowed}: uploadProps) {
 
     const [selectedFile, setSelectedFile] = useState(null);
 
@@ -28,7 +33,10 @@ const UploadImageToS3WithReactS3 = () => {
 
     const handleUpload = async (file: any) => {
         uploadFile(file, config)
-            .then((data: any) => console.log(data))
+            .then((data: any) => {
+                setAllowed(true);
+                setValue(data.location);
+            })
             .catch((err: any) => console.error(err))
     }
 
@@ -40,5 +48,3 @@ const UploadImageToS3WithReactS3 = () => {
         </div>
     )
 }
-
-export default UploadImageToS3WithReactS3;

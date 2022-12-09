@@ -8,7 +8,7 @@ public class Entry {
   private String imageLink;
   private String caption;
   private String date;
-  private List<String> tags;
+  private String tag;
 
   public Entry() {
 
@@ -47,12 +47,8 @@ public class Entry {
     return this.date;
   }
 
-  public void setTags(List<String> tags) {
-    this.tags = tags;
-  }
-
-  public List<String> getTags() {
-    return this.tags;
+  public void setTag(String tag) {
+    this.tag = tag;
   }
 
 }

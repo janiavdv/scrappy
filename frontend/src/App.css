@@ -243,10 +243,11 @@ button:hover {
   text-align: center;
   background-color: rgb(245, 250, 255);
   border-radius: 10px;
-  padding: 7vh;
+  padding: 2vh;
   margin: 4vh;
   overflow: hidden;
   overflow: scroll;
+  height:60vh
 }
 #big-profile-pic {
   border-radius: 50%;
@@ -263,10 +264,24 @@ button:hover {
   padding: 7vh;
   width: 100vh;
 }
+
 #today-book {
   height: 50vh;
   overflow: hidden;
   overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  background: #f8f8f8b1;
+  padding: 10px;
+}
+
+.page {
+  margin: 5px 5px 5px 5px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2px;
+  margin-bottom: 5px;
 }
 
 #profile-friends-list {
@@ -276,6 +291,16 @@ button:hover {
   width: 27vh;
   padding: 2vh;
   margin: 5px;
+  max-height: 30vh;
+}
+
+#create-page {
+  padding: 5px;
+  height: 15vh;
+  border-radius: 10px;
+  margin: 5px;
+
+  background-color: rgb(245, 250, 255);
 }
 
 #right-bar-profile {
@@ -283,4 +308,51 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.page-divider-top {
+  border: 10px solid #2085a7;
+  border-radius: 2px 2px 0px 0px;
+  margin-bottom: 18px;
+  overflow: visible;
+  position: relative
+}
+
+.page-divider-top:after {
+  position: absolute;
+  border: 10px solid #2292b8;
+  border-radius: 2px 2px 0px 0px;
+  right: -10px;
+  width: 50%;
+  content: '';
+  margin-bottom: 10px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.page-divider-bottom {
+  border: 2px solid #f1f1f1;
+  border-radius: 0px 0px 2px 2px;
+  margin-top: 10px;
+}
+
+.page-img {
+  border-radius: 10px;
+  margin: 2px;
+  width: 30vh;
+}
+
+.book-top {
+  border: 20px solid #0c89a5;
+  border-radius: 2px 2px 0px 0px;
+  margin-bottom: 18px;
+}
+
+.book-start {
+  background: #f8f8f865;
+  padding: 10px;
 }

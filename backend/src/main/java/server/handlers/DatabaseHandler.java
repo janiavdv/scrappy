@@ -39,7 +39,11 @@ public class DatabaseHandler implements Route {
             user.setUsername(request.queryParams("username"));
             user.setName(request.queryParams("name"));
             user.setProfilePic(request.queryParams("profilePic"));
-            List<String> tagsList = List.of(request.queryParams("tags").split(","));
+            String tags = request.queryParams("tags").replace("[", "");
+            tags.replace("]", "");
+            tags.replace("\"", "");
+            System.out.println(tags);
+            List<String> tagsList = List.of(tags.split(","));
             user.setTags(tagsList);
             Document newUser = DBDocumentUtil.convert(user);
             Server.getMyDatabase().getUsersColl().insertOne(newUser);
@@ -51,6 +55,7 @@ public class DatabaseHandler implements Route {
             // figure out how to set list of tags + book name
             entry.setCaption(request.queryParams("caption"));
             entry.setDate(request.queryParams("date"));
+            entry.setTag(request.queryParams("tag"));
             entry.setImageLink(request.queryParams("image"));
             Document newEntry = DBDocumentUtil.convert(entry);
             Server.getMyDatabase().getEntriesColl().insertOne(newEntry);

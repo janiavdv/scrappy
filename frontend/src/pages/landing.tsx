@@ -1,9 +1,8 @@
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import logo from "../assets/ScrappyLogo.svg"
 import sample from "../assets/sampleentry.png"
 import { useNavigate } from "react-router-dom";
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { authcred } from '../private/credentials';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { TEXT_text_box_accessible_name } from './profile';
@@ -44,7 +43,7 @@ function AddedTags({ tags, setTags }: AddedTagProps) {
 }
 
 async function addUserToDatabase(user: User) {
-    const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&profilePic=${user.picture}`);
+    const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&profilePic=${user.picture}&tags=${user.taglist}`);
 }
 
 interface ModalProps {
