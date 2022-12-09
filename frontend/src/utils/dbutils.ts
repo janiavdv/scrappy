@@ -11,3 +11,7 @@ export async function getQuery(type: string, ref: string, value: string) : Promi
         return null;
     }
 }
+
+export async function addUserToDatabase(user: User) {
+    const response = await fetch(`http://localhost:3232/database?command=ADD&type=USER&email=${user.email}&username=${user.username}&name=${user.name}&profilePic=${user.profilePic}&tags=${user.tags}`);
+}
