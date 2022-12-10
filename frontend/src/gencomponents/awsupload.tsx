@@ -23,7 +23,7 @@ interface uploadProps {
     setAllowed: Dispatch<SetStateAction<boolean>>
 }
 
-export default function UploadImageToS3WithReactS3({ setValue, setAllowed}: uploadProps) {
+export default function UploadImageToS3WithReactS3({ setValue, setAllowed }: uploadProps) {
 
     const [selectedFile, setSelectedFile] = useState(null);
 

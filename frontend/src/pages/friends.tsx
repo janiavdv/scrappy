@@ -12,10 +12,10 @@ export default function Friends() {
         profilePic: st.profilePic,
         tags: st.tags
     })
-    
+
     return (
-        <div> 
-            <Header user={user} /> 
+        <div>
+            <Header user={user} />
             <h1>This is the Friends Page</h1>
         </div>
     )
