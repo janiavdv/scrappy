@@ -2,7 +2,6 @@ package server;
 
 import static spark.Spark.after;
 
-import com.mongodb.client.MongoDatabase;
 import database.MongoDB;
 import server.handlers.DatabaseHandler;
 import server.handlers.NYTHandler;

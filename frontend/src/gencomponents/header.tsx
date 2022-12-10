@@ -6,7 +6,6 @@ import logo from "../assets/ScrappyLogo.svg"
 export default function Header({ user }: { user: User }) {
 
     const navigate = useNavigate();
-    const [userValue, setUserValue] = useState<string>("") // For controlling the user textbox.
 
     return (
         <div id="header">
@@ -17,29 +16,33 @@ export default function Header({ user }: { user: User }) {
                     <button
                         onClick={async () => {
                             console.log("Friends clicked!")
-                            navigate("/friends" + userValue, { state: user })
+                            navigate("/friends" + "/" + user.username, { state: user })
                         }}
                         id="headerButton">Friends</button>
 
                     <button
                         onClick={async () => {
                             console.log("Gallery clicked!")
-                            navigate("/gallery" + userValue, { state: user })
+                            navigate("/gallery" + "/" + user.username, { state: user })
                         }}
                         id="headerButton">Gallery</button>
 
                     <button
                         onClick={async () => {
                             console.log("Profile clicked!")
-                            navigate("/profile:" + userValue, { state: user })
+                            navigate("/profile:" + "/" + user.username, { state: user })
                         }}
                         id="headerButton">Profile</button>
                 </div>
 
                 <div id="prof-in-nav">
-                    <img src={user.picture} id="profile-pic" referrerPolicy="no-referrer"/>
-                    <button>
-                        {user.username}
+                    <img src={user.profilePic} id="profile-pic" referrerPolicy="no-referrer" />
+                    <button
+                        onClick={async () => {
+                            console.log("Profile clicked!")
+                            navigate("/")
+                        }}>
+                        {"Logout " + user.username}
                     </button>
                 </div>
             </div>
