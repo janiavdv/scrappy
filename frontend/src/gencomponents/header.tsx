@@ -1,7 +1,8 @@
 import User from './user';
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from 'react';
 import logo from "../assets/ScrappyLogo.svg"
+import { googleLogout } from '@react-oauth/google';
+
 
 export default function Header({ user }: { user: User }) {
 
@@ -16,21 +17,21 @@ export default function Header({ user }: { user: User }) {
                     <button
                         onClick={async () => {
                             console.log("Friends clicked!")
-                            navigate("/friends" + "/" + user.username, { state: user })
+                            navigate("/friends" + ":" + user.username, { state: user })
                         }}
                         id="headerButton">Friends</button>
 
                     <button
                         onClick={async () => {
                             console.log("Gallery clicked!")
-                            navigate("/gallery" + "/" + user.username, { state: user })
+                            navigate("/gallery" + ":" + user.username, { state: user })
                         }}
                         id="headerButton">Gallery</button>
 
                     <button
                         onClick={async () => {
                             console.log("Profile clicked!")
-                            navigate("/profile:" + "/" + user.username, { state: user })
+                            navigate("/profile:" + user.username, { state: user })
                         }}
                         id="headerButton">Profile</button>
                 </div>
@@ -40,6 +41,7 @@ export default function Header({ user }: { user: User }) {
                     <button
                         onClick={async () => {
                             console.log("Profile clicked!")
+                            googleLogout();
                             navigate("/")
                         }}>
                         {"Logout " + user.username}

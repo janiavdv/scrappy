@@ -1,6 +1,6 @@
 import User from './user';
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 export default function Footer() {
 

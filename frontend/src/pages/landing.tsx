@@ -126,12 +126,12 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                     let retrievedQuery = await getQuery("EMAIL", "email", decoded.email);
                     console.log(retrievedQuery)
                     if (retrievedQuery != null) {
-                        const user = {
+                        const user : User = {
                             name: retrievedQuery.name,
                             username: retrievedQuery.username,
                             email: retrievedQuery.email,
                             profilePic: retrievedQuery.profilePic,
-                            taglist: retrievedQuery.tags
+                            tags: retrievedQuery.tags
                         }
                         navigate("/profile:" + user.username, { state: user })
                     } else {

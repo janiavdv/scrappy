@@ -104,8 +104,8 @@ export default function Profile() {
                     <p>Interests:</p>
                     <hr></hr>
                     <div id="interests">
-                        {st.tags.map((tag) => (
-                            <div className="profile-tag">
+                        {user.tags.map((tag) => (
+                            <div className="profile-tag" key={tag}>
                                 <p>{tag}</p>
                             </div>
                         ))}
