@@ -38,6 +38,7 @@ public class Server {
     Spark.get("database", new DatabaseHandler());
     // Setting up the handler for the GET endpoints.
     Spark.get("nyt", new NYTHandler());
+    Spark.get("quote", new QuoteHandler());
 
     // Init/initializing Spark
     Spark.init();
