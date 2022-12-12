@@ -5,6 +5,7 @@ import static spark.Spark.after;
 import database.MongoDB;
 import server.handlers.DatabaseHandler;
 import server.handlers.NYTHandler;
+import server.handlers.QuoteHandler;
 import spark.Spark;
 
 /**
