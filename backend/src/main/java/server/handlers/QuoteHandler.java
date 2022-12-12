@@ -25,12 +25,11 @@ public class QuoteHandler implements Route {
     String json = ServerUtilities.scrapeHTTPRequest(uri);
     Map<String, Object> map = ServerUtilities.deserialize(json);
 
-    //I don't know what to do next
-    List results = (List) map.get("results");
-    Map firstResult = (Map) results.get(0);
-    String firstTitle = (String) firstResult.get("title");
+    String quote = (String) map.get("q");
+    String author = (String) map.get("a");
 
-    output.put("headline", firstTitle);
+    output.put("quote", quote);
+    output.put("author", author);
 
     return ServerUtilities.serialize(output);
   }
