@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../gencomponents/header';
+import Footer from '../gencomponents/footer';
 import User from '../gencomponents/user';
+
+function Posts() {
+    return (
+        <p>these are friends' posts</p>
+    )
+}
 
 export default function Friends() {
     const st: User = useLocation().state
@@ -16,7 +23,15 @@ export default function Friends() {
     return (
         <div>
             <Header user={user} />
-            <h1>This is the Friends Page</h1>
+            <div id="book-buttons">
+                <button>Posts</button>
+                <button>Search</button>
+            </div>
+            <hr></hr>
+            <div id="friend-menu">
+                <Posts/>
+            </div>
+            <Footer user={user} />
         </div>
     )
 }
