@@ -89,7 +89,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                     </label>
                     <AddedTags tags={tags} setTags={setTags} />
                     <button type="submit" value="Submit" onClick={() => {
-                        if (userValue != "" && nameValue != "") {
+                        if (userValue !== "" && nameValue !== "") {
                             const user: User = {
                                 name: nameValue,
                                 username: userValue,
@@ -126,7 +126,7 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                     let retrievedQuery = await getQuery("EMAIL", "email", decoded.email);
                     console.log(retrievedQuery)
                     if (retrievedQuery != null) {
-                        const user : User = {
+                        const user: User = {
                             name: retrievedQuery.name,
                             username: retrievedQuery.username,
                             email: retrievedQuery.email,
@@ -172,7 +172,7 @@ export default function Landing() {
                     <img src={sample} id="sample-entry"></img>
                 </div>
             </div>
-            <Footer />
+            <Footer user={null} />
             <LogModal userEmail={email} display={modalDisplay} userPicture={picture} />
         </div>
     )

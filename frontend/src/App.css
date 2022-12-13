@@ -356,3 +356,15 @@ button:hover {
   background: #f8f8f865;
   padding: 10px;
 }
+
+#unlogged-right-div {
+  margin-right: 32vh;
+}
+
+.extra-page-content {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  width: 65%;
+  margin: 0 auto;
+}

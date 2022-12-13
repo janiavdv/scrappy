@@ -1,25 +1,21 @@
 import User from './user';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
 
-export default function Footer() {
-
+export default function Footer({ user }: { user: User | null }) {
     const navigate = useNavigate();
-    const [userValue, setUserValue] = useState<string>("") // For controlling the user textbox.
-
     return (
         <div id="footer">
             <div>
                 <button
                     onClick={async () => {
                         console.log("About clicked!")
-                        navigate("/about")
+                        navigate("/about", { state: user })
                     }}
                     id="footerButton">About</button>
                 <button
                     onClick={async () => {
                         console.log("Help clicked!")
-                        navigate("/help")
+                        navigate("/help", { state: user })
                     }}
                     id="footerButton">Help</button>
 
@@ -28,14 +24,14 @@ export default function Footer() {
                 <button
                     onClick={async () => {
                         console.log("FAQs clicked!")
-                        navigate("/faqs")
+                        navigate("/faqs", { state: user })
                     }}
                     id="footerButton">FAQs</button>
 
                 <button
                     onClick={async () => {
                         console.log("Privacy clicked!")
-                        navigate("/privacy")
+                        navigate("/privacy", { state: user })
                     }}
                     id="footerButton">Privacy</button>
             </div>

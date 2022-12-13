@@ -48,7 +48,7 @@ function PageModal({ display, setDisplay, pages, setPages }: PageModalProps) {
                 <br />
                 <hr></hr>
                 <button type="submit" value="Post" onClick={() => {
-                    if (titleValue != "" && bodyValue != "" && allowed) {
+                    if (titleValue !== "" && bodyValue !== "" && allowed) {
                         const pg: PageProps = {
                             title: titleValue,
                             body: bodyValue,
@@ -135,7 +135,7 @@ export default function Profile() {
                 </div>
                 <PageModal display={modalDisplay} setDisplay={setModalDisplay} pages={pages} setPages={setPages} />
             </div>
-            <Footer />
+            <Footer user={user}/>
         </div>
 
     )
