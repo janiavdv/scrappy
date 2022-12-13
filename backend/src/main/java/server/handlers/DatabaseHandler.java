@@ -1,5 +1,6 @@
 package server.handlers;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
@@ -59,6 +60,7 @@ public class DatabaseHandler implements Route {
             entry.setTitle(request.queryParams("title"));
             entry.setCaption(request.queryParams("caption"));
             entry.setTime(request.queryParams("time"));
+            entry.setDate(request.queryParams("date"));
             entry.setTag(request.queryParams("tag"));
             entry.setImageLink(request.queryParams("image"));
             entry.setEntryID(request.queryParams("entryID"));
@@ -160,6 +162,12 @@ public class DatabaseHandler implements Route {
               return databaseFailureResponse("No user by this name.");
             }
         }
+      }
+      case "GALLERY" -> {
+//        FindIterable<Document> tags = Server.getMyDatabase().getUsersColl().findOne(Filters.eq(request.queryParams("username"), "tags"));
+//        for (Document tag : tags) {
+//          tag.g
+//        }
       }
     }
     return null;
