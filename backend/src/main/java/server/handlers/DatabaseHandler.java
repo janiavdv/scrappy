@@ -164,10 +164,16 @@ public class DatabaseHandler implements Route {
         }
       }
       case "GALLERY" -> {
-//        FindIterable<Document> tags = Server.getMyDatabase().getUsersColl().findOne(Filters.eq(request.queryParams("username"), "tags"));
-//        for (Document tag : tags) {
-//          tag.g
-//        }
+        try {
+          Document user = Server.getMyDatabase().getUsersColl().find(new Document("username", request.queryParams("username"))).first();
+          if (user != null) {
+            List<String> tags = user.getList("tags", String.class);
+            System.out.println(tags);
+          }
+          return databaseSuccessResponse();
+        } catch (NullPointerException e) {
+          return this.databaseFailureResponse("No user found by this name.");
+        }
       }
     }
     return null;
