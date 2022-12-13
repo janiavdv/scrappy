@@ -12,6 +12,8 @@
     "buffer": "^6.0.3",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
+    "react-async": "^10.0.1",
+    "react-async-usefetch": "^1.0.6",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.5",
     "react-s3": "^1.3.1",
