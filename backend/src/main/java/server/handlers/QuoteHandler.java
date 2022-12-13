@@ -21,12 +21,13 @@ public class QuoteHandler implements Route {
       return ServerUtilities.serialize(output);
     }
 
-    String uri = "https://zenquotes.io/api/random/[your_key]";
+    String uri = "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?";
     String json = ServerUtilities.scrapeHTTPRequest(uri);
+    json = json.substring(2, json.length() - 1); // remove the "?(" and ")" from the string for our deserializer
     Map<String, Object> map = ServerUtilities.deserialize(json);
 
-    String quote = (String) map.get("q");
-    String author = (String) map.get("a");
+    String quote = (String) map.get("quoteText");
+    String author = (String) map.get("quoteAuthor");
 
     output.put("quote", quote);
     output.put("author", author);
