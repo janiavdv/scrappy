@@ -115,7 +115,6 @@ export default function Profile() {
                     <div id="book-buttons">
                         <button>Today's Book</button>
                         <button>Past Books</button>
-                        <button>Shared Books</button>
                     </div>
                     <hr></hr>
                     <div id="today-book">
