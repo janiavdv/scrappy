@@ -1,7 +1,9 @@
 package utils;
 
 import com.google.gson.Gson;
+import com.mongodb.DBCollection;
 import org.bson.Document;
+import server.Server;
 
 
 public class DBDocumentUtil {
@@ -11,4 +13,5 @@ public class DBDocumentUtil {
     Gson gson = new Gson();
     return Document.parse(gson.toJson(obj));
   }
+
 }

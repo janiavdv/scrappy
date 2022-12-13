@@ -6,22 +6,24 @@ import java.util.List;
 public class Book {
 
   private String title;
-  private List<String> images;
+  private List<String> entryIDs;
+  private String bookID;
+  private String date;
 
   public Book() {
-    this.images = Collections.emptyList();
+    this.entryIDs = Collections.emptyList();
   }
 
   public void setTitle(String title) {
     this.title = title;
   }
 
-  public String getTitle() {
-    return this.title;
+  public void setBookID(String bookID) {
+    this.bookID = bookID;
   }
 
-  public void addImage(String image) {
-    this.images.add(image);
+  public void setDate(String date) {
+    this.date = date;
   }
 
 }

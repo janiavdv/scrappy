@@ -1,5 +1,6 @@
 package server.handlers;
 
+import com.mongodb.BasicDBObject;
 import database.Book;
 import database.User;
 import database.Entry;
@@ -51,12 +52,13 @@ public class DatabaseHandler implements Route {
           }
           case "ENTRY" -> {
             Entry entry = new Entry();
-
-            // figure out how to set list of tags + book name
+            entry.setTitle(request.queryParams("title"));
             entry.setCaption(request.queryParams("caption"));
-            entry.setDate(request.queryParams("date"));
+            entry.setTime(request.queryParams("time"));
             entry.setTag(request.queryParams("tag"));
             entry.setImageLink(request.queryParams("image"));
+            entry.setEntryID(request.queryParams("entryID"));
+            entry.setUser(request.queryParams("user"));
             Document newEntry = DBDocumentUtil.convert(entry);
             Server.getMyDatabase().getEntriesColl().insertOne(newEntry);
             return databaseSuccessResponse();
@@ -64,8 +66,11 @@ public class DatabaseHandler implements Route {
           case "BOOK" -> {
             Book book = new Book();
             book.setTitle(request.queryParams("title"));
+            book.setBookID(request.queryParams("bookID"));
+            book.setDate(request.queryParams("date"));
             Document newBook = DBDocumentUtil.convert(book);
             Server.getMyDatabase().getBooksColl().insertOne(newBook);
+            return databaseSuccessResponse();
           }
         }
       }
@@ -86,7 +91,7 @@ public class DatabaseHandler implements Route {
             try {
               doc = Server.getMyDatabase().getUsersColl()
                   .find(new Document("email", request.queryParams("email"))).first();
-              reply.put("result", "success.");
+              reply.put("result", "success");
               reply.put("User", doc);
 
               return new ResponseUtil(reply).serialize();
@@ -109,11 +114,26 @@ public class DatabaseHandler implements Route {
         String updateType = request.queryParams("type");
         switch (updateType) {
           case "BOOK":
-            break;
+            try {
+              Document target = Server.getMyDatabase().getBooksColl().find(new Document("bookID",
+                  request.queryParams("bookID"))).first();
+              if (target != null) {
+                target.append("entryIDs", request.queryParams("entryID"));
+              }
+              return databaseSuccessResponse();
+            } catch (NullPointerException e) {
+              return databaseFailureResponse("No book with this ID.");
+            }
           case "FRIENDS":
-            break;
-          case "ENTRY":
-            break;
+            try {
+              Document target = Server.getMyDatabase().getUsersColl().find(new Document("username", request.queryParams("username"))).first();
+              if (target != null) {
+                target.append("friendsList", request.queryParams("newFriend"));
+              }
+              return databaseSuccessResponse();
+            } catch (NullPointerException e) {
+              return databaseFailureResponse("No user by this name.");
+            }
         }
       }
     }
