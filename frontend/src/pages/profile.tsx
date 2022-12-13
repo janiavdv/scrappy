@@ -47,7 +47,7 @@ function PageModal({ display, setDisplay, pages, setPages }: PageModalProps) {
                 <UploadImageToS3WithReactS3 setValue={setLink} setAllowed={setAllowed} />
                 <br />
                 <hr></hr>
-                <button type="submit" value="Post" onClick={() => {
+                <span><button type="submit" value="Post" onClick={() => {
                     if (titleValue !== "" && bodyValue !== "" && allowed) {
                         const pg: PageProps = {
                             title: titleValue,
@@ -58,7 +58,13 @@ function PageModal({ display, setDisplay, pages, setPages }: PageModalProps) {
                         setPages([...pages, pg])
                         setDisplay(false)
                     }
-                }} >Post</button>
+                }} >Post</button></span>
+                <span>
+                    <button className="close-button" onClick={() => {
+                        setDisplay(false)
+                    }}> Close
+                    </button>
+                </span>
             </div>
         </div>
     )
@@ -134,7 +140,7 @@ export default function Profile() {
                 </div>
                 <PageModal display={modalDisplay} setDisplay={setModalDisplay} pages={pages} setPages={setPages} />
             </div>
-            <Footer user={user}/>
+            <Footer user={user} />
         </div>
 
     )
