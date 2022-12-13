@@ -1,6 +1,9 @@
 package server.handlers;
 
-import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
+import com.mongodb.client.model.ReturnDocument;
+import com.mongodb.client.model.Updates;
 import database.Book;
 import database.User;
 import database.Entry;
@@ -8,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import server.Server;
 import spark.Request;
 import spark.Response;
@@ -68,8 +72,16 @@ public class DatabaseHandler implements Route {
             book.setTitle(request.queryParams("title"));
             book.setBookID(request.queryParams("bookID"));
             book.setDate(request.queryParams("date"));
+            book.setNyt(request.queryParams("nyt"));
+            book.setQuote(request.queryParams("quote"));
             Document newBook = DBDocumentUtil.convert(book);
-            Server.getMyDatabase().getBooksColl().insertOne(newBook);
+
+            Bson filter = Filters.eq("username", request.queryParams("username"));
+            Bson update = Updates.push("books", newBook);
+            FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
+                .returnDocument(ReturnDocument.AFTER);
+            Server.getMyDatabase().getUsersColl().findOneAndUpdate(filter, update, options);
+
             return databaseSuccessResponse();
           }
         }
@@ -96,18 +108,18 @@ public class DatabaseHandler implements Route {
 
               return new ResponseUtil(reply).serialize();
             } catch (Exception e) {
-              return this.databaseFailureResponse("failure.");
+              return this.databaseFailureResponse("failure");
             }
           }
-          case "BOOK" -> {
-            doc = Server.getMyDatabase().getBooksColl()
-                .find(new Document("title", request.queryParams("title"))).first();
-
-            reply.put("result", "success");
-            reply.put("Book", doc);
-
-            return new ResponseUtil(reply).serialize();
-          }
+//          case "BOOK" -> {
+//            doc = Server.getMyDatabase().getUsersColl()
+//                .find(new Document("books", request.queryParams("bookID"))).first();
+//
+//            reply.put("result", "success");
+//            reply.put("Book", doc);
+//
+//            return new ResponseUtil(reply).serialize();
+//          }
         }
       }
       case "UPDATE" -> {
@@ -115,21 +127,34 @@ public class DatabaseHandler implements Route {
         switch (updateType) {
           case "BOOK":
             try {
-              Document target = Server.getMyDatabase().getBooksColl().find(new Document("bookID",
-                  request.queryParams("bookID"))).first();
-              if (target != null) {
-                target.append("entryIDs", request.queryParams("entryID"));
-              }
+              Bson filter = Filters.eq("books", request.queryParams("date"));
+              Bson update = Updates.push("entryIDs", request.queryParams("entryID"));
+              FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
+                  .returnDocument(ReturnDocument.AFTER);
+              Server.getMyDatabase().getUsersColl().findOneAndUpdate(filter, update, options);
               return databaseSuccessResponse();
             } catch (NullPointerException e) {
               return databaseFailureResponse("No book with this ID.");
             }
-          case "FRIENDS":
+          case "FRIEND-REQUEST":
+            Bson filteredUser = Filters.eq("username", request.queryParams("username"));
+            Bson update = Updates.push("friendsRequest", request.queryParams("friendRequest"));
+            FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
+                .returnDocument(ReturnDocument.AFTER);
+            Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser, update, options);
+            return databaseSuccessResponse();
+          case "NEW-FRIEND":
             try {
-              Document target = Server.getMyDatabase().getUsersColl().find(new Document("username", request.queryParams("username"))).first();
-              if (target != null) {
-                target.append("friendsList", request.queryParams("newFriend"));
-              }
+              Bson filteredUser1 = Filters.eq("username", request.queryParams("username"));
+              Bson addFriend = Updates.push("friendsList", request.queryParams("newFriend"));
+              FindOneAndUpdateOptions addedFriend = new FindOneAndUpdateOptions()
+                  .returnDocument(ReturnDocument.AFTER);
+
+              Bson removeRequest = Updates.pull("friendsRequest", request.queryParams("newFriend"));
+              FindOneAndUpdateOptions removedFriend = new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER);
+
+              Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser1, addFriend, addedFriend);
+              Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser1, removeRequest, removedFriend);
               return databaseSuccessResponse();
             } catch (NullPointerException e) {
               return databaseFailureResponse("No user by this name.");
