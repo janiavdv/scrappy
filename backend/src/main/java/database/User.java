@@ -10,13 +10,11 @@ public class User {
   private String name;
   private String profilePic;
   private List<String> tags;
-  private List<Entry> entries;
   private List<String> friendsRequest;
   private List<String> friendsList;
   private List<Book> books;
 
   public User() {
-    this.entries = Collections.emptyList();
     this.friendsRequest = Collections.emptyList();
     this.friendsList = Collections.emptyList();
     this.books = Collections.emptyList();
