@@ -1,19 +1,19 @@
-import './App.css';
+import "./App.css";
 
-import Landing from './pages/landing';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Profile from './pages/profile';
-import Gallery from './pages/gallery';
-import Friends from './pages/friends';
-import FAQ from './pages/faq'
-import About from './pages/about'
-import Help from './pages/help'
-import Privacy from './pages/privacy'
+import Landing from "./pages/landing";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Profile from "./pages/profile";
+import Gallery from "./pages/gallery";
+import Friends from "./pages/friends";
+import FAQ from "./pages/faq";
+import About from "./pages/about";
+import Help from "./pages/help";
+import Privacy from "./pages/privacy";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Landing />
+    element: <Landing />,
   },
   {
     path: "/profile:id",
@@ -21,37 +21,34 @@ const router = createBrowserRouter([
   },
   {
     path: "/friends:id",
-    element: <Friends />
+    element: <Friends />,
   },
   {
     path: "/gallery:id",
-    element: <Gallery />
+    element: <Gallery />,
   },
   {
     path: "/faqs",
-    element: <FAQ />
+    element: <FAQ />,
   },
   {
     path: "/about",
-    element: <About />
+    element: <About />,
   },
   {
     path: "/help",
-    element: <Help />
+    element: <Help />,
   },
   {
     path: "/privacy",
-    element: <Privacy />
-  }
+    element: <Privacy />,
+  },
 ]);
 
 export default function App() {
   return (
     <div className="App">
-      <RouterProvider
-        router={router}
-      />
-
+      <RouterProvider router={router} />
     </div>
   );
 }

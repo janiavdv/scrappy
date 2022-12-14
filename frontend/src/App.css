@@ -1,9 +1,9 @@
 body {
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   overflow: hidden;
 }
 #landing-main-page-box {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   display: flex;
   justify-content: space-around;
   background-image: url("assets/peopleonboat.png");
@@ -66,14 +66,14 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items:flex-end;
+  align-items: flex-end;
 }
 
 #sample-entry {
   width: 35vh;
   height: inherit;
   border-radius: 10px;
-  box-shadow:  0px 0px 10px 2px rgb(213, 213, 213);
+  box-shadow: 0px 0px 10px 2px rgb(213, 213, 213);
 }
 
 /* The Modal (background) */
@@ -85,8 +85,8 @@ h2 {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: hidden;
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
@@ -94,7 +94,7 @@ h2 {
   text-align: center;
   background-color: #fefefe;
   border-radius: 10px;
-  box-shadow:  0px 0px 5px 1px rgb(233, 245, 249);
+  box-shadow: 0px 0px 5px 1px rgb(233, 245, 249);
   margin: 10% auto; /* 15% from the top and centered */
   padding: 20px;
   width: 50%; /* Could be more or less, depending on screen size */
@@ -132,7 +132,7 @@ h2 {
   margin: 1vh;
   border-radius: 6px;
   border: 1px solid;
-} 
+}
 
 button {
   color: rgb(108, 108, 108);
@@ -141,7 +141,7 @@ button {
   border-radius: 6px;
   border: none;
   background-color: #d1f3ff;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 button:hover {
@@ -163,7 +163,7 @@ button:hover {
 #item {
   display: none;
 }
-#dropdown:hover #item{
+#dropdown:hover #item {
   display: block;
 }
 
@@ -180,7 +180,6 @@ button:hover {
   height: 12vh;
   padding: 5px;
   box-shadow: 0px 3px 2px 0px rgb(220, 220, 220);
-
 }
 
 #left-nav {
@@ -247,7 +246,7 @@ button:hover {
   margin: 4vh;
   overflow: hidden;
   overflow: scroll;
-  height:60vh
+  height: 60vh;
 }
 #big-profile-pic {
   border-radius: 50%;
@@ -315,7 +314,7 @@ button:hover {
   border-radius: 2px 2px 0px 0px;
   margin-bottom: 18px;
   overflow: visible;
-  position: relative
+  position: relative;
 }
 
 .page-divider-top:after {
@@ -324,7 +323,7 @@ button:hover {
   border-radius: 2px 2px 0px 0px;
   right: -10px;
   width: 50%;
-  content: '';
+  content: "";
   margin-bottom: 10px;
 }
 

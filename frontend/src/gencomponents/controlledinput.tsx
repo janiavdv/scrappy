@@ -5,31 +5,37 @@ import { Dispatch, SetStateAction } from "react";
  * of our own design.
  */
 export interface ControlledInputProps {
-    value: string,
-    setValue: Dispatch<SetStateAction<string>> // USeful for clearing the textbox.
-    ariaLabel: string,
-    spaces: boolean
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>; // USeful for clearing the textbox.
+  ariaLabel: string;
+  spaces: boolean;
 }
 
 /**
  * Controlled textinput so we can store values and check spacing.
  * @param
- * @returns 
+ * @returns
  */
-export default function ControlledInput({ value, setValue, ariaLabel, spaces }: ControlledInputProps) {
-    return (
-        <input value={value} // We grab this for command outputs.
-            onChange={(ev) => {
-                if (spaces) {
-                    setValue((ev.target.value))
-                } else {
-                    setValue((ev.target.value).replace(" ", ""))
-                }
-            }} // For resetting.
-            aria-label={ariaLabel}
-            type="text"
-            className="input"
-            placeholder="Start typing..."
-        ></input>
-    );
+export default function ControlledInput({
+  value,
+  setValue,
+  ariaLabel,
+  spaces,
+}: ControlledInputProps) {
+  return (
+    <input
+      value={value} // We grab this for command outputs.
+      onChange={(ev) => {
+        if (spaces) {
+          setValue(ev.target.value);
+        } else {
+          setValue(ev.target.value.replace(" ", ""));
+        }
+      }} // For resetting.
+      aria-label={ariaLabel}
+      type="text"
+      className="input"
+      placeholder="Start typing..."
+    ></input>
+  );
 }
