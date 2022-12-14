@@ -10,7 +10,11 @@ export default function Gallery() {
         email: st.email,
         username: st.username,
         profilePic: st.profilePic,
-        tags: st.tags
+        tags: st.tags,
+        books: st.books,
+        entries: st.entries,
+        friendsList: st.friendsList,
+        friendsRequest: st.friendsRequest
     })
 
     return (

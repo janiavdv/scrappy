@@ -10,6 +10,7 @@ import Footer from '../gencomponents/footer';
 import ControlledInput from '../gencomponents/controlledinput';
 import User from "../gencomponents/user";
 import { getQuery, addUserToDatabase } from "../utils/dbutils"
+import Book from '../gencomponents/BookObject';
 
 interface TagProps {
     value: string,
@@ -95,7 +96,11 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                                 username: userValue,
                                 email: userEmail,
                                 profilePic: userPicture,
-                                tags: tags
+                                tags: tags,
+                                books: [],
+                                entries: [],
+                                friendsList: [],
+                                friendsRequest: []
                             }
                             addUserToDatabase(user);
                             navigate("/profile:" + userValue, { state: user })
@@ -131,7 +136,11 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                             username: retrievedQuery.username,
                             email: retrievedQuery.email,
                             profilePic: retrievedQuery.profilePic,
-                            tags: retrievedQuery.tags
+                            tags: retrievedQuery.tags,
+                            books: retrievedQuery.books,
+                            entries: retrievedQuery.entries,
+                            friendsList: retrievedQuery.friendsList,
+                            friendsRequest: retrievedQuery.friendsRequest
                         }
                         navigate("/profile:" + user.username, { state: user })
                     } else {

@@ -4,7 +4,7 @@ export async function getQuery(type: string, ref: string, value: string) : Promi
     const response: any = await fetch(`http://localhost:3232/database?command=QUERY&type=${type}&${ref}=${value}`);
     const json = await response.json();
     console.log(json.result)
-    if (json.result == "success.") {
+    if (json.result == "success") {
         console.log(json)
         return json.User;
     } else {

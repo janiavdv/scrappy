@@ -1,28 +1,27 @@
-import { Dispatch, SetStateAction, useState } from 'react'; import { useLocation } from "react-router-dom";
+import { Dispatch, SetStateAction, useState, useEffect } from 'react'; import { useLocation } from "react-router-dom";
 import User from "../gencomponents/user";
 import Header from '../gencomponents/header';
 import UploadImageToS3WithReactS3 from "../gencomponents/awsupload";
 import ControlledInput from '../gencomponents/controlledinput';
 import Footer from "../gencomponents/footer";
 import { PageProps } from '../gencomponents/pagecomponent';
-import { Book } from '../gencomponents/book';
+import { Book as BookReact } from '../gencomponents/book';
+import BookObject from '../gencomponents/BookObject';
 
 interface PageModalProps {
     display: boolean
     setDisplay: Dispatch<SetStateAction<boolean>>
-    pages: PageProps[],
-    setPages: Dispatch<SetStateAction<PageProps[]>>
+    book: BookObject,
+    setBook: Dispatch<SetStateAction<BookObject>>
 }
 
-function PageModal({ display, setDisplay, pages, setPages }: PageModalProps) {
+function PageModal({ display, setDisplay, book, setBook }: PageModalProps) {
     const [titleValue, setTitleValue] = useState<string>("") // For controlling the title textbox.
     const [bodyValue, setBodyValue] = useState<string>("") // For controlling the body textbox.
     const [imageLink, setLink] = useState<string>("") // For controlling the body textbox.
     const [tagValue, setTagValue] = useState<string>("") // For controlling the body textbox.
 
     const [allowed, setAllowed] = useState<boolean>(false)
-
-    const st: User = useLocation().state
 
     if (!display) { return null; }
 
@@ -55,7 +54,10 @@ function PageModal({ display, setDisplay, pages, setPages }: PageModalProps) {
                             img: imageLink,
                             hashtag: tagValue
                         }
-                        setPages([...pages, pg])
+                        let newBook : BookObject = book;
+                        // add entry to database
+                        newBook.entries.push(pg)
+                        setBook(newBook)
                         setDisplay(false)
                     }
                 }} >Post</button></span>
@@ -75,28 +77,29 @@ export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
 export default function Profile() {
     const st: User = useLocation().state
-    const [user, setUser] = useState<User>({
-        name: st.name,
-        email: st.email,
-        username: st.username,
-        profilePic: st.profilePic,
-        tags: st.tags
+    const user: User = st;
+    const [todayBook, setBook] = useState<BookObject>(() => {
+        if (user.books.length !== 0) {
+            for (let i = 0; i < user.books.length; i++) {
+                if (user.books[i].date == new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })) {
+                    return (user.books[i]);
+                }
+            }
+        }
+        const b: BookObject = {
+            title: "",
+            bookID: "",
+            date: "",
+            quote: "",
+            nyt: "",
+            entries: []
+        };
+        return b;
     })
+
     const [modalDisplay, setModalDisplay] = useState<boolean>(false) // For controlling the user textbox.
     const [pages, setPages] = useState<PageProps[]>([])
 
-    // at this point, the book is empty and has no pages. oh no.
-
-    // we check if the person has a book for the day yet, if they do great,
-    // we pull all those entries (which should be ID'ed, under that ID'd book)
-    // and we populate the book
-
-    // if the person doesn't have a book, we create the reference in the database, and make the default
-    // intereface for the day we do for everyone, and add it as the header
-
-    // when updating the book and adding more entries, we first save the reference, (which should include a date)
-    // grab the same date book in the databse under the user (which, should be done by date), which should give us
-    // the id to a book object in the database. then we add the entry to that book object!
     return (
         <div>
             <Header user={user} />
@@ -124,7 +127,7 @@ export default function Profile() {
                     </div>
                     <hr></hr>
                     <div id="today-book">
-                        <Book pages={pages} setPages={setPages} />
+                        <BookReact bookObject={todayBook} setBook={setBook} />
                     </div>
 
                 </div>
@@ -138,10 +141,9 @@ export default function Profile() {
                         <button type="submit" value="New Page" onClick={() => { setModalDisplay(true) }}>New Page</button>
                     </div>
                 </div>
-                <PageModal display={modalDisplay} setDisplay={setModalDisplay} pages={pages} setPages={setPages} />
+                <PageModal display={modalDisplay} setDisplay={setModalDisplay} book={todayBook} setBook={setBook} />
             </div>
             <Footer user={user} />
         </div>
-
     )
 }

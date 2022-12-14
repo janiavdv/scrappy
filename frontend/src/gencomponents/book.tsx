@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import BookObject from "./BookObject";
 import Page, { PageProps } from "./pagecomponent";
 export interface BookProps {
-    pages: PageProps[],
-    setPages: Dispatch<SetStateAction<PageProps[]>>
+    setBook: Dispatch<SetStateAction<BookObject>>
+    bookObject: BookObject
 }
-
 
 async function fetchAPIData(url: string, datapoint: string) {
     const data = await fetch(url);
@@ -22,9 +22,8 @@ async function fetchAPIData(url: string, datapoint: string) {
     }
 }
 
-
 // The HTML for a Book.
-export function Book({ pages, setPages }: BookProps) {
+export function Book({ bookObject, setBook }: BookProps) {
     const [nytdata, setData] = useState<string | undefined>(undefined)
     useEffect(() => {
         fetchAPIData('http://localhost:3232/nyt', "headline").then(data => setData(data))
@@ -38,16 +37,39 @@ export function Book({ pages, setPages }: BookProps) {
         fetchAPIData('http://localhost:3232/quote', "author").then(data => setData3(data))
     })
 
+    const quote: string = "\"" + quotedata + "\"" + " -" + quoteauthordata;
+
+    if (bookObject.quote == "") {
+        let nyt : string;
+        if (nytdata != null) {
+            nyt = nytdata
+        } else {
+            nyt = "No article found."
+        }
+        const id : number = new Date().getTime();
+        const bookToAdd : BookObject = {
+            title: "Today's Book",
+            bookID: id.toString(),
+            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+            quote: quote,
+            nyt: nyt,
+            entries: []
+        }
+        // addBookToDataBase()
+        http://localhost:3232/database?command=ADD&type=BOOK&title=title&bookID=1&date=12/13&nyt=news!&quote=%22hello%22&username=jvd
+        setBook(bookToAdd)
+    }
+
     return (
         <div className="book">
             <div className="book-start">
                 <hr className="book-top"></hr>
                 <h3>Today's Book</h3>
-                <h4>{new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</h4>
-                <p><b>Today's NYT Headline:</b> {nytdata}</p>
-                <p><b>Today's Quote of the Day:</b> "{quotedata}" -{quoteauthordata}</p>
+                <h4>{bookObject.date}</h4>
+                <p><b>Today's NYT Headline:</b> {bookObject.nyt}</p>
+                <p><b>Today's Quote of the Day:</b> "{bookObject.quote}"</p>
             </div>
-            {pages.map((page) => (
+            {bookObject.entries.map((page) => (
                 <Page title={page.title} body={page.body} img={page.img} key={page.title} hashtag={page.hashtag} />
             ))}
         </div>
