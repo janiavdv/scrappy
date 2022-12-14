@@ -52,23 +52,12 @@ async function setAllData() {
 
 // The HTML for a Book.
 export function Book({ bookObject }: BookProps) {
-    const [rendered, setRendered] = useState<boolean>(false);
-    const [pages, setPages] = useState<Entry[]>([])
     console.log(bookObject)
 
-    useEffect(() => {
-        if (bookObject != null && !rendered) {
-            for (let i = 0; i < bookObject.entries.length; i++) {
-                getEntryOffID(bookObject.entries[i]).then(page => setPages([...pages, page]))
-            }
-            console.log('i should be rendering')
-            setRendered(true)
-        }
-    })
 
-    if (bookObject != null && rendered) {
 
-    return (
+    if (bookObject != null) {
+        return (
             <div className="book">
                 <div className="book-start">
                     <hr className="book-top"></hr>
@@ -77,9 +66,8 @@ export function Book({ bookObject }: BookProps) {
                     <p><b>Today's NYT Headline:</b> {bookObject.nyt}</p>
                     <p><b>Today's Quote of the Day:</b> "{bookObject.quote}"</p>
                 </div>
-                {pages.map((page) => (
-
-                    <Page title={page.title} body={page.caption} img={page.imageLink} key={page.title} hashtag={page.tag} />
+                {bookObject.entries.map((page) => (
+                    <Page id={page} key={page} />
                 ))}
             </div>
         );
