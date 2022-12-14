@@ -146,6 +146,7 @@ export default function Profile() {
   const user: User = useLocation().state;
   const [todayBook, setBook] = useState<BookObject | null>(null);
   const [friendList, setFriends] = useState<FriendComponent[] | null>(null);
+  const [pastAlbum, setAlbumBoolean] = useState<boolean>(false);
 
   useEffect(() => {
     if (todayBook == null) {
@@ -154,7 +155,7 @@ export default function Profile() {
         if (booklist.length !== 0) {
           for (let i = 0; i < booklist.length; i++) {
             if (
-              booklist[i].date ===
+              booklist[i].date ==
               new Date().toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "2-digit",
@@ -205,12 +206,26 @@ export default function Profile() {
         </div>
         <div id="book-menu">
           <div id="book-buttons">
-            <button>Today's Book</button>
-            <button>Past Books</button>
+            <button
+              onClick={() => {
+                setAlbumBoolean(false);
+              }}
+            >
+              Today's Book
+            </button>
+            <button
+              onClick={() => {
+                setAlbumBoolean(true);
+              }}
+            >
+              Past Books
+            </button>
           </div>
           <hr></hr>
           <div id="today-book">
-            {todayBook ? (
+            {pastAlbum ? (
+              <p>I should be all the past ones.</p>
+            ) : todayBook ? (
               <BookReact bookObject={todayBook} user={user} setBook={setBook} />
             ) : (
               <Loading />
