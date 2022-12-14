@@ -5,7 +5,6 @@ import Header from "../gencomponents/header";
 import UploadImageToS3WithReactS3 from "../gencomponents/awsupload";
 import ControlledInput from "../gencomponents/controlledinput";
 import Footer from "../gencomponents/footer";
-import { PageProps } from "../gencomponents/pagecomponent";
 import { Book as BookReact, createDefaultBook } from "../gencomponents/book";
 import BookObject from "../gencomponents/BookObject";
 import Entry from "../gencomponents/EntryObject";
@@ -36,58 +35,49 @@ function PageModal({
   if (!display) {
     return null;
   }
-
   return (
     <div id="modal">
       <div id="log-modal">
-        <h3>Enter the title and body for your page!</h3>
-        <label>
-          Title
+        <h3>Enter the title and caption for your page!</h3>
+        <div id="modal-forms">
+          <label htmlFor="title-input">Title:</label>
           <ControlledInput
             value={titleValue}
             setValue={setTitleValue}
             ariaLabel={TEXT_text_box_accessible_name}
             spaces={true}
+            id="title-input"
           />
-        </label>
-        <br />
-        <label>
-          Caption
+          <label htmlFor="caption-input">Caption:</label>
           <ControlledInput
             value={bodyValue}
             setValue={setBodyValue}
             ariaLabel={TEXT_text_box_accessible_name}
             spaces={true}
+            id="caption-input"
           />
-        </label>
-        <label>
-          Add a hashtag!
+          <label htmlFor=""> Add a hashtag!:</label>
           <ControlledInput
             value={tagValue}
             setValue={setTagValue}
             ariaLabel={TEXT_text_box_accessible_name}
             spaces={false}
+            id="tag-input"
           />
-        </label>
-
+        </div>
+        <br />
         <UploadImageToS3WithReactS3
           setValue={setLink}
           setAllowed={setAllowed}
         />
         <br />
         <hr></hr>
-        <span>
+        <div id="modal-upload-buttons">
           <button
             type="submit"
             value="Post"
             onClick={async () => {
               if (titleValue !== "" && bodyValue !== "" && allowed) {
-                const pg: PageProps = {
-                  title: titleValue,
-                  body: bodyValue,
-                  img: imageLink,
-                  hashtag: tagValue,
-                };
                 if (book != null) {
                   let newBook: BookObject = book;
                   const id: number = new Date().getTime();
@@ -125,20 +115,22 @@ function PageModal({
               }
             }}
           >
-            Post
+            {allowed ? "Post" : "Loading info..."}
           </button>
-        </span>
-        <span>
           <button
             className="close-button"
             onClick={() => {
               setDisplay(false);
+              setTitleValue("");
+              setBodyValue("");
+              setTagValue("");
+              setLink("");
             }}
           >
             {" "}
             Close
           </button>
-        </span>
+        </div>
       </div>
     </div>
   );

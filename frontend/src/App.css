@@ -2,6 +2,7 @@ body {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   overflow: hidden;
 }
+
 #landing-main-page-box {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   display: flex;
@@ -366,4 +367,30 @@ button:hover {
   justify-content: center; */
   width: 65%;
   margin: 0 auto;
+}
+
+#modal-upload-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 4vh;
+}
+
+#modal-forms {
+  font-size: larger;
+  display: grid;
+  width: 60%;
+  grid-template-columns: 0.5fr 1fr;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1vh;
+  margin-inline: auto;
+}
+
+#modal-forms label {
+  grid-column: 1;
+  text-align: left;
+}
+
+#aws-upload {
+  padding: 1vh;
 }

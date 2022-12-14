@@ -28,9 +28,12 @@ export default function UploadImageToS3WithReactS3({
   setAllowed,
 }: uploadProps) {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadStatus, setStatus] = useState("Upload");
 
   const handleFileInput = (e: any) => {
+    setAllowed(false);
     setSelectedFile(e.target.files[0]);
+    setStatus("Upload");
   };
 
   const handleUpload = async (file: any) => {
@@ -43,10 +46,18 @@ export default function UploadImageToS3WithReactS3({
   };
 
   return (
-    <div>
-      <div>React S3 File Upload</div>
+    <div id="aws-upload">
+      <h3>Upload a photo! (Required.)</h3>
       <input type="file" onChange={handleFileInput} />
-      <button onClick={() => handleUpload(selectedFile)}> Upload to S3</button>
+      <button
+        onClick={() => {
+          setStatus("Uploading...");
+          handleUpload(selectedFile).then(() => setStatus("Uploaded."));
+        }}
+      >
+        {" "}
+        {uploadStatus}{" "}
+      </button>
     </div>
   );
 }

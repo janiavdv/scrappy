@@ -1,4 +1,3 @@
-import { title } from "process";
 import { useEffect, useState } from "react";
 import { getEntryOffID } from "../utils/dbutils";
 import Entry from "./EntryObject";
@@ -22,7 +21,7 @@ export default function Page({ id }: PageProps) {
         <hr className="page-divider-top"></hr>
         <div className="page-header">
           <div className="left-page-header">
-            <code>Title: {title}</code>
+            <code>Title: {pageInfo.title}</code>
             <h4>
               {time.toLocaleString("en-US", {
                 hour: "numeric",

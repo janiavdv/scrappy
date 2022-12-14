@@ -9,6 +9,7 @@ export interface ControlledInputProps {
   setValue: Dispatch<SetStateAction<string>>; // USeful for clearing the textbox.
   ariaLabel: string;
   spaces: boolean;
+  id?: string;
 }
 
 /**
@@ -21,9 +22,11 @@ export default function ControlledInput({
   setValue,
   ariaLabel,
   spaces,
+  id,
 }: ControlledInputProps) {
   return (
     <input
+      id={id}
       value={value} // We grab this for command outputs.
       onChange={(ev) => {
         if (spaces) {
