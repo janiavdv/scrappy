@@ -1,21 +1,25 @@
-import { Dispatch, SetStateAction, useState, useEffect } from 'react'; import { useLocation } from "react-router-dom";
+import { Dispatch, SetStateAction, useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 import User from "../gencomponents/user";
 import Header from '../gencomponents/header';
 import UploadImageToS3WithReactS3 from "../gencomponents/awsupload";
 import ControlledInput from '../gencomponents/controlledinput';
 import Footer from "../gencomponents/footer";
 import { PageProps } from '../gencomponents/pagecomponent';
-import { Book as BookReact } from '../gencomponents/book';
+import { Book as BookReact, createDefaultBook } from '../gencomponents/book';
 import BookObject from '../gencomponents/BookObject';
+import Entry from '../gencomponents/EntryObject';
+import { addEntryToDatabase } from '../utils/dbutils';
 
 interface PageModalProps {
     display: boolean
     setDisplay: Dispatch<SetStateAction<boolean>>
-    book: BookObject,
-    setBook: Dispatch<SetStateAction<BookObject>>
+    book: BookObject | null
+    setBook: Dispatch<SetStateAction<BookObject | null>>
+    user: User
 }
 
-function PageModal({ display, setDisplay, book, setBook }: PageModalProps) {
+function PageModal({ display, setDisplay, book, setBook, user }: PageModalProps) {
     const [titleValue, setTitleValue] = useState<string>("") // For controlling the title textbox.
     const [bodyValue, setBodyValue] = useState<string>("") // For controlling the body textbox.
     const [imageLink, setLink] = useState<string>("") // For controlling the body textbox.
@@ -46,7 +50,7 @@ function PageModal({ display, setDisplay, book, setBook }: PageModalProps) {
                 <UploadImageToS3WithReactS3 setValue={setLink} setAllowed={setAllowed} />
                 <br />
                 <hr></hr>
-                <span><button type="submit" value="Post" onClick={() => {
+                <span><button type="submit" value="Post" onClick={async () => {
                     if (titleValue !== "" && bodyValue !== "" && allowed) {
                         const pg: PageProps = {
                             title: titleValue,
@@ -54,11 +58,28 @@ function PageModal({ display, setDisplay, book, setBook }: PageModalProps) {
                             img: imageLink,
                             hashtag: tagValue
                         }
-                        let newBook : BookObject = book;
-                        // add entry to database
-                        newBook.entries.push(pg)
-                        setBook(newBook)
-                        setDisplay(false)
+                        if (book != null) {
+                            let newBook: BookObject = book;
+                            const id: number = new Date().getTime();
+
+                            const newEntry: Entry = {
+                                title: titleValue,
+                                caption: bodyValue,
+                                time: new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
+                                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                                tag: tagValue,
+                                imageLink: imageLink,
+                                entryID: id.toString(),
+                                user: user.username
+                            }
+
+                            await addEntryToDatabase(newEntry, book)
+
+                            newBook.entries.push(pg)
+                            setBook(newBook)
+                            setDisplay(false)
+                        }
+
                     }
                 }} >Post</button></span>
                 <span>
@@ -72,33 +93,45 @@ function PageModal({ display, setDisplay, book, setBook }: PageModalProps) {
     )
 }
 
-
 export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
 export default function Profile() {
     const st: User = useLocation().state
-    const user: User = st;
-    const [todayBook, setBook] = useState<BookObject>(() => {
-        if (user.books.length !== 0) {
-            for (let i = 0; i < user.books.length; i++) {
-                if (user.books[i].date == new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })) {
-                    return (user.books[i]);
-                }
-            }
-        }
-        const b: BookObject = {
-            title: "",
-            bookID: "",
-            date: "",
-            quote: "",
-            nyt: "",
-            entries: []
-        };
-        return b;
+    const [user, setUser] = useState<User>({
+        name: st.name,
+        email: st.email,
+        username: st.username,
+        profilePic: st.profilePic,
+        tags: st.tags,
+        books: st.books,
+        entries: st.entries,
+        friendsList: st.friendsList,
+        friendsRequest: st.friendsRequest
     })
 
+    const [todayBook, setBook] = useState<BookObject | null>(null);
+    console.log(user)
+    useEffect(() => {
+        if (todayBook == null) {
+            console.log('im being called')
+            if (user.books.length !== 0) {
+                for (let i = 0; i < user.books.length; i++) {
+                    if (user.books[i].date == new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })) {
+                        console.log("i match!")
+                        setBook(user.books[i]);
+                    }
+                }
+            }
+            createDefaultBook(user).then((b) => {
+                setBook(b)
+                let u: User = user;
+                u.books.push(b)
+                setUser(u)
+            })
+        }
+    }, [])
+
     const [modalDisplay, setModalDisplay] = useState<boolean>(false) // For controlling the user textbox.
-    const [pages, setPages] = useState<PageProps[]>([])
 
     return (
         <div>
@@ -107,7 +140,6 @@ export default function Profile() {
                 <div id="prof-info-box">
                     <p>{user.name}</p>
                     <p>{user.username}</p>
-
                     <p>{user.email}</p>
                     <img src={user.profilePic} id="big-profile-pic" referrerPolicy="no-referrer" />
                     <p>Interests:</p>
@@ -127,9 +159,8 @@ export default function Profile() {
                     </div>
                     <hr></hr>
                     <div id="today-book">
-                        <BookReact bookObject={todayBook} setBook={setBook} />
+                        {todayBook && <BookReact bookObject={todayBook} user={user} setBook={setBook} />}
                     </div>
-
                 </div>
                 <div id="right-bar-profile">
                     <div id="profile-friends-list">
@@ -141,7 +172,7 @@ export default function Profile() {
                         <button type="submit" value="New Page" onClick={() => { setModalDisplay(true) }}>New Page</button>
                     </div>
                 </div>
-                <PageModal display={modalDisplay} setDisplay={setModalDisplay} book={todayBook} setBook={setBook} />
+                <PageModal display={modalDisplay} setDisplay={setModalDisplay} book={todayBook} setBook={setBook} user={user} />
             </div>
             <Footer user={user} />
         </div>

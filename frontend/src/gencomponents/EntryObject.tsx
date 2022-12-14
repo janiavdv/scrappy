@@ -5,5 +5,6 @@ export default interface Entry {
     imageLink: string,
     time: string,
     user: string,
-    date: string
+    date: string,
+    entryID: string
 }

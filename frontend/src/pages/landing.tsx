@@ -124,12 +124,10 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
         <GoogleLogin
             width="250"
             onSuccess={async credentialResponse => {
-                console.log(credentialResponse);
                 if (credentialResponse.credential != null) {
                     let decoded: any = jwt_decode(credentialResponse.credential);
 
                     let retrievedQuery = await getQuery("EMAIL", "email", decoded.email);
-                    console.log(retrievedQuery)
                     if (retrievedQuery != null) {
                         const user: User = {
                             name: retrievedQuery.name,
@@ -144,7 +142,6 @@ function AuthButton({ setEmail, setDisplay, setPicture }: AuthProps) {
                         }
                         navigate("/profile:" + user.username, { state: user })
                     } else {
-                        console.log("im being called")
                         setEmail(decoded.email)
                         setPicture(decoded.picture)
                         setDisplay(true)

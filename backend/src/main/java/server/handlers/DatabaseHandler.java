@@ -1,6 +1,5 @@
 package server.handlers;
 
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
@@ -125,12 +124,15 @@ public class DatabaseHandler implements Route {
         }
       }
       case "UPDATE" -> {
+        System.out.println("update");
         String updateType = request.queryParams("type");
         switch (updateType) {
           case "BOOK":
             try {
-              Bson filter = Filters.eq("books", request.queryParams("date"));
+              Bson filter = Filters.eq("books", request.queryParams("bookID"));
               Bson update = Updates.push("entryIDs", request.queryParams("entryID"));
+              System.out.println(filter);
+              System.out.println(update);
               FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
                   .returnDocument(ReturnDocument.AFTER);
               Server.getMyDatabase().getUsersColl().findOneAndUpdate(filter, update, options);
@@ -139,7 +141,7 @@ public class DatabaseHandler implements Route {
               return databaseFailureResponse("No book with this ID.");
             }
           case "FRIEND-REQUEST":
-            Bson filteredUser = Filters.eq("username", request.queryParams("username"));
+            Bson filteredUser = Filters.eq( "username", request.queryParams("username"));
             Bson update = Updates.push("friendsRequest", request.queryParams("friendRequest"));
             FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
                 .returnDocument(ReturnDocument.AFTER);
