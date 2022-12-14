@@ -7,6 +7,7 @@ public class Entry {
   private String tag;
   private String imageLink;
   private String time;
+  private String date;
   private String entryID;
   private String user;
 
@@ -33,6 +34,10 @@ public class Entry {
 
   public void setTime(String time) {
     this.time = time;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
   }
 
   public void setEntryID(String entryID) {
