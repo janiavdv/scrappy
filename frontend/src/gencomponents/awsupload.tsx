@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { uploadFile } from "react-s3";
 // https://stackoverflow.com/questions/69686231/react-s3-error-referenceerror-buffer-is-not-defined
 window.Buffer = window.Buffer || require("buffer").Buffer;

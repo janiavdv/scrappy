@@ -8,11 +8,7 @@ import Footer from "../gencomponents/footer";
 import { Book as BookReact, createDefaultBook } from "../gencomponents/book";
 import BookObject from "../gencomponents/BookObject";
 import Entry from "../gencomponents/EntryObject";
-import {
-  addEntryToDatabase,
-  getBookListFromDatabase,
-  getQuery,
-} from "../utils/dbutils";
+import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
 import Loading from "../gencomponents/loading";
 import FriendComponent, {
   grabFriendComponents,
@@ -158,7 +154,7 @@ export default function Profile() {
         if (booklist.length !== 0) {
           for (let i = 0; i < booklist.length; i++) {
             if (
-              booklist[i].date ==
+              booklist[i].date ===
               new Date().toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "2-digit",

@@ -10,7 +10,6 @@ import Footer from "../gencomponents/footer";
 import ControlledInput from "../gencomponents/controlledinput";
 import User from "../gencomponents/user";
 import { getQuery, addUserToDatabase } from "../utils/dbutils";
-import Book from "../gencomponents/BookObject";
 
 interface TagProps {
   value: string;

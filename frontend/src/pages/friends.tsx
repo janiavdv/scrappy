@@ -5,7 +5,7 @@ import Footer from "../gencomponents/footer";
 import User from "../gencomponents/user";
 
 function Posts() {
-  return <p>these are friends' posts</p>;
+  return <p>these are all your friends' posts</p>;
 }
 
 export default function Friends() {

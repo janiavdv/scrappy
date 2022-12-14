@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { addBookToDatabase, getEntryOffID } from "../utils/dbutils";
+import { Dispatch, SetStateAction } from "react";
+import { addBookToDatabase } from "../utils/dbutils";
 import BookObject from "./BookObject";
-import Entry from "./EntryObject";
 import Page from "./pagecomponent";
 import User from "./user";
 
