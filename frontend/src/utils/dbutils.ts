@@ -11,9 +11,7 @@ export async function getQuery(
     `http://localhost:3232/database?command=QUERY&type=${type}&${ref}=${value}`
   );
   const json = await response.json();
-  console.log(json.result);
   if (json.result == "success") {
-    console.log(json);
     return json.User;
   } else {
     return null;

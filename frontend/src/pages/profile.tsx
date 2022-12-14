@@ -8,7 +8,15 @@ import Footer from "../gencomponents/footer";
 import { Book as BookReact, createDefaultBook } from "../gencomponents/book";
 import BookObject from "../gencomponents/BookObject";
 import Entry from "../gencomponents/EntryObject";
-import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
+import {
+  addEntryToDatabase,
+  getBookListFromDatabase,
+  getQuery,
+} from "../utils/dbutils";
+import Loading from "../gencomponents/loading";
+import FriendComponent, {
+  grabFriendComponents,
+} from "../gencomponents/friendcomponent";
 
 interface PageModalProps {
   display: boolean;
@@ -141,6 +149,7 @@ export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 export default function Profile() {
   const user: User = useLocation().state;
   const [todayBook, setBook] = useState<BookObject | null>(null);
+  const [friendList, setFriends] = useState<FriendComponent[] | null>(null);
 
   useEffect(() => {
     if (todayBook == null) {
@@ -166,6 +175,10 @@ export default function Profile() {
           });
         }
       });
+    }
+
+    if (friendList == null) {
+      grabFriendComponents(user).then((fList) => setFriends(fList));
     }
   }, []);
 
@@ -201,15 +214,31 @@ export default function Profile() {
           </div>
           <hr></hr>
           <div id="today-book">
-            {todayBook && (
+            {todayBook ? (
               <BookReact bookObject={todayBook} user={user} setBook={setBook} />
+            ) : (
+              <Loading />
             )}
           </div>
         </div>
         <div id="right-bar-profile">
           <div id="profile-friends-list">
-            <p>Friends</p>
+            <h3>Friends</h3>
             <hr></hr>
+            {friendList ? (
+              friendList.map((friend) => (
+                <div key={friend.username} className="friend-in-list">
+                  <img
+                    src={friend.image}
+                    referrerPolicy="no-referrer"
+                    className="friend-profile-pic"
+                  />
+                  <p>{friend.username}</p>
+                </div>
+              ))
+            ) : (
+              <Loading />
+            )}
           </div>
           <div id="create-page">
             <h3>Add to today's book!</h3>

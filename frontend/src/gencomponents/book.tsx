@@ -14,14 +14,15 @@ export interface BookProps {
 export async function createDefaultBook(user: User): Promise<BookObject> {
   let dataArr = await setAllData();
   const id: number = new Date().getTime();
+  const date: string = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
   const bookToAdd: BookObject = {
-    title: "Today's Book",
+    title: "Today's Book, " + date,
     bookID: id.toString(),
-    date: new Date().toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }),
+    date: date,
     quote: dataArr[1] + " -" + dataArr[2],
     nyt: dataArr[0],
     entries: [],
@@ -69,7 +70,7 @@ export function Book({ bookObject }: BookProps) {
       <div className="book">
         <div className="book-start">
           <hr className="book-top"></hr>
-          <h3>Today's Book</h3>
+          <h3>{"Today's Book, " + bookObject.date}</h3>
           <h4>{bookObject.date}</h4>
           <p>
             <b>Today's NYT Headline:</b> {bookObject.nyt}

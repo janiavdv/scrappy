@@ -13,7 +13,7 @@ export default function Page({ id }: PageProps) {
 
   useEffect(() => {
     getEntryOffID(id).then((page) => setInfo(page));
-  });
+  }, []);
 
   if (pageInfo != null) {
     return (
