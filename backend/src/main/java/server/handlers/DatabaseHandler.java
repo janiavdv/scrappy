@@ -112,6 +112,14 @@ public class DatabaseHandler implements Route {
               return this.databaseFailureResponse("failure");
             }
           }
+          case "ENTRY" -> {
+            doc = Server.getMyDatabase().getEntriesColl()
+                .find(new Document("entryID", request.queryParams("entryID"))).first();
+            reply.put("result", "success");
+            reply.put("Entry", doc);
+
+            return new ResponseUtil(reply).serialize();
+          }
 //          case "BOOK" -> {
 //            doc = Server.getMyDatabase().getUsersColl()
 //                .find(new Document("books", request.queryParams("bookID"))).first();
@@ -129,13 +137,17 @@ public class DatabaseHandler implements Route {
         switch (updateType) {
           case "BOOK":
             try {
-              Bson filter = Filters.eq("books", request.queryParams("bookID"));
-              Bson update = Updates.push("entryIDs", request.queryParams("entryID"));
-              System.out.println(filter);
-              System.out.println(update);
-              FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
-                  .returnDocument(ReturnDocument.AFTER);
-              Server.getMyDatabase().getUsersColl().findOneAndUpdate(filter, update, options);
+              Bson filter = Filters.eq("username", request.queryParams("username"));
+              Bson secondFilter = Filters.eq("books.bookID", request.queryParams("bookID"));
+              Server.getMyDatabase().getUsersColl().findOneAndUpdate((Filters.and(filter, secondFilter)), new Document("$push", new Document("books.$.entries", request.queryParams("entryID"))));
+//
+//              Bson filter = Filters.eq("bookID", request.queryParams("bookID"));
+//              Bson update = Updates.push("entries", request.queryParams("entryID"));
+//              System.out.println(filter);
+//              System.out.println(update);
+//              FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
+//                  .returnDocument(ReturnDocument.AFTER);
+//              Server.getMyDatabase().getUsersColl().findOneAndUpdate(filter, update, options);
               return databaseSuccessResponse();
             } catch (NullPointerException e) {
               return databaseFailureResponse("No book with this ID.");

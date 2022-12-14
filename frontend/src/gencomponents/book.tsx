@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { addBookToDatabase } from "../utils/dbutils";
+import { addBookToDatabase, getEntryOffID } from "../utils/dbutils";
 import BookObject from "./BookObject";
+import Entry from "./EntryObject";
 import Page from "./pagecomponent";
 import User from "./user";
 
@@ -10,7 +11,7 @@ export interface BookProps {
     user: User
 }
 
-export async function createDefaultBook(user: User) : Promise<BookObject> {
+export async function createDefaultBook(user: User): Promise<BookObject> {
     let dataArr = await setAllData();
     const id: number = new Date().getTime();
     const bookToAdd: BookObject = {
@@ -51,9 +52,23 @@ async function setAllData() {
 
 // The HTML for a Book.
 export function Book({ bookObject }: BookProps) {
+    const [rendered, setRendered] = useState<boolean>(false);
+    const [pages, setPages] = useState<Entry[]>([])
     console.log(bookObject)
-    if (bookObject != null) {
-        return (
+
+    useEffect(() => {
+        if (bookObject != null && !rendered) {
+            for (let i = 0; i < bookObject.entries.length; i++) {
+                getEntryOffID(bookObject.entries[i]).then(page => setPages([...pages, page]))
+            }
+            console.log('i should be rendering')
+            setRendered(true)
+        }
+    })
+
+    if (bookObject != null && rendered) {
+
+    return (
             <div className="book">
                 <div className="book-start">
                     <hr className="book-top"></hr>
@@ -62,12 +77,13 @@ export function Book({ bookObject }: BookProps) {
                     <p><b>Today's NYT Headline:</b> {bookObject.nyt}</p>
                     <p><b>Today's Quote of the Day:</b> "{bookObject.quote}"</p>
                 </div>
-                {bookObject.entries.map((page) => (
-                    <Page title={page.title} body={page.body} img={page.img} key={page.title} hashtag={page.hashtag} />
+                {pages.map((page) => (
+
+                    <Page title={page.title} body={page.caption} img={page.imageLink} key={page.title} hashtag={page.tag} />
                 ))}
             </div>
         );
     } else {
-        return(null)
+        return (null)
     }
 }

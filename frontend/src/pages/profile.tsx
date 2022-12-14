@@ -9,7 +9,7 @@ import { PageProps } from '../gencomponents/pagecomponent';
 import { Book as BookReact, createDefaultBook } from '../gencomponents/book';
 import BookObject from '../gencomponents/BookObject';
 import Entry from '../gencomponents/EntryObject';
-import { addEntryToDatabase } from '../utils/dbutils';
+import { addEntryToDatabase, getBookListFromDatabase } from '../utils/dbutils';
 
 interface PageModalProps {
     display: boolean
@@ -73,9 +73,15 @@ function PageModal({ display, setDisplay, book, setBook, user }: PageModalProps)
                                 user: user.username
                             }
 
-                            await addEntryToDatabase(newEntry, book)
+                            setTitleValue("")
+                            setBodyValue("")
+                            setTagValue("")
+                            setLink("")
 
-                            newBook.entries.push(pg)
+
+                            await addEntryToDatabase(newEntry, book, user.username)
+
+                            newBook.entries.push(newEntry.entryID)
                             setBook(newBook)
                             setDisplay(false)
                         }
@@ -96,37 +102,25 @@ function PageModal({ display, setDisplay, book, setBook, user }: PageModalProps)
 export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
 export default function Profile() {
-    const st: User = useLocation().state
-    const [user, setUser] = useState<User>({
-        name: st.name,
-        email: st.email,
-        username: st.username,
-        profilePic: st.profilePic,
-        tags: st.tags,
-        books: st.books,
-        entries: st.entries,
-        friendsList: st.friendsList,
-        friendsRequest: st.friendsRequest
-    })
-
+    const user: User = useLocation().state
     const [todayBook, setBook] = useState<BookObject | null>(null);
-    console.log(user)
+
     useEffect(() => {
         if (todayBook == null) {
             console.log('im being called')
-            if (user.books.length !== 0) {
-                for (let i = 0; i < user.books.length; i++) {
-                    if (user.books[i].date == new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })) {
-                        console.log("i match!")
-                        setBook(user.books[i]);
+            getBookListFromDatabase(user).then((booklist) => {
+                if (booklist.length !== 0) {
+                    for (let i = 0; i < booklist.length; i++) {
+                        if (booklist[i].date == new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })) {
+                            console.log("i match!")
+                            setBook(booklist[i]);
+                        }
                     }
+                } else {
+                    createDefaultBook(user).then((b) => {
+                        setBook(b)
+                    })
                 }
-            }
-            createDefaultBook(user).then((b) => {
-                setBook(b)
-                let u: User = user;
-                u.books.push(b)
-                setUser(u)
             })
         }
     }, [])

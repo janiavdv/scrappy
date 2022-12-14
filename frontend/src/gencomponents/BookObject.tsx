@@ -7,5 +7,5 @@ export default interface BookObject {
     date: string,
     quote: string,
     nyt: string,
-    entries: PageProps[]
+    entries: string[]
 }
