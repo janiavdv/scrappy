@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import java.util.HashMap;
 import okio.Buffer;
 import java.util.Map;
 import java.util.Stack;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.handlers.DatabaseHandler;
 import server.handlers.QuoteHandler;
 import server.handlers.NYTHandler;
 import spark.Spark;
@@ -48,6 +50,7 @@ public class HandlerTest {
       loadedPath.pop();
     }
 
+    Spark.get("database", new DatabaseHandler());
     Spark.get("quote", new QuoteHandler());
     Spark.get("nyt", new NYTHandler());
 
@@ -62,6 +65,7 @@ public class HandlerTest {
   public void teardown() {
     Spark.unmap("/quote");
     Spark.unmap("/nyt");
+    Spark.unmap("/database");
 
     Spark.awaitStop(); // don't continue until server stops
   }
@@ -131,6 +135,25 @@ public class HandlerTest {
     assertTrue(loadMap.size() == 2);
     assertTrue(loadMap.get("quote") instanceof String);
     assertTrue(loadMap.get("author") instanceof String);
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testDatabaseAddUser() throws IOException {
+
+    // call quote
+    HttpURLConnection clientConnection = tryRequest("database?command=ADD&type=USER&email=a&username=b&name=c&profilePic=d&tags=[a,b,c]");
+    assertEquals(200, clientConnection.getResponseCode());
+    clientConnection.connect();
+
+    // deserialize to a map to be able to check the result
+    Map<String, Object> loadMap = getResponse(clientConnection);
+
+    Map<String, Object> successResponse = new HashMap<>();
+    successResponse.put("result", "success");
+    // test that a quote and author were returned
+    assertTrue(loadMap.equals(successResponse));
 
     clientConnection.disconnect();
   }
