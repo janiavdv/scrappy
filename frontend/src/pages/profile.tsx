@@ -239,11 +239,11 @@ export default function Profile() {
             {pastAlbum ? (
               <div>
                 {pastBooks.map((book) => (
-                  <BookReact bookObject={book} user={user} setBook={setBook} />
+                  <BookReact bookObject={book} user={user} setBook={setBook} key={book.date} />
                 ))}
               </div>
             ) : todayBook ? (
-              <BookReact bookObject={todayBook} user={user} setBook={setBook} />
+              <BookReact bookObject={todayBook} user={user} setBook={setBook} key={todayBook.date} />
             ) : (
               <Loading />
             )}

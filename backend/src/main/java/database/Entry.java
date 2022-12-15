@@ -14,7 +14,7 @@ public class Entry {
   private String date;
   private String entryID;
   private String user;
-  private String publicized;
+  private boolean publicized;
 
   /**
    * This is the constructor for the Entry class (we don't actually need to do anything in it, more
@@ -112,7 +112,6 @@ public class Entry {
    * @param publicized a String representing the entry's privacy
    */
   public void setPublicity(String publicized) {
-    this.publicized = publicized;
+    this.publicized = Boolean.parseBoolean(publicized);
   }
-
 }

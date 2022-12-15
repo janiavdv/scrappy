@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEntryOffID } from "../utils/dbutils";
-import Entry from "./EntryObject";
+import Entry from "../interfaces/EntryObject";
 
 export interface PageProps {
   id: string;
@@ -25,6 +25,7 @@ export default function Page({ id }: PageProps) {
         <hr className="page-divider-top"></hr>
         <div className="page-header">
           <div className="left-page-header">
+            <code>{pageInfo.public ? "[Private]" : null}</code>
             <code>Title: {pageInfo.title}</code>
             <h4>
               {time.toLocaleString("en-US", {
