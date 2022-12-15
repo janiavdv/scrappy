@@ -28,7 +28,6 @@ public class MongoDB {
     database = client.getDatabase("myDatabase");
     usersColl = database.getCollection("Users");
     entriesColl = database.getCollection("Entries");
-    booksColl = database.getCollection("Books");
   }
 
   /**

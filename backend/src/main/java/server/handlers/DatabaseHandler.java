@@ -244,6 +244,14 @@ public class DatabaseHandler implements Route {
           return this.databaseFailureResponse("No user found by this name.");
         }
       }
+      case "REMOVE-FRIEND" -> {
+        Bson filteredUser = Filters.eq("username", request.queryParams("username"));
+        Bson removeRequest = Updates.pull("friendsList", request.queryParams("removedFriend"));
+        FindOneAndUpdateOptions removedFriend = new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER);
+
+        Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser, removeRequest, removedFriend);
+        return databaseSuccessResponse();
+      }
     }
     // Return null if it doesn't enter any of these cases.
     return null;
