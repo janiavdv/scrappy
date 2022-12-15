@@ -12,7 +12,7 @@
     - Frontend: AWS - saves images to be displayed on the website
     - Backend: created MongoDB database with multiple collections to store data, created classes for each type of data being stored
 - Tyler Gurth (tgurth):
-    - Frontend: Google Auth, header/footer style
+    - Frontend: Google Authentication, React page Routing, database integration, CSS styling for whole site, account and state management, frontend React custom objects
 - Jania Vandevoorde (jvandevo): 
     - Backend: New York Times and random quote API handlers (`QuoteHandler`, `NYTHandler`)
     - Frontend: header/footer functionality, book history, NYT/quote integration fetching
