@@ -65,10 +65,16 @@ export function Book({ bookObject }: BookProps) {
   console.log(bookObject);
 
   if (bookObject != null) {
+
+    const TEXT_book_description = `This is today's book. Here you can view your 
+    entries from the day and upload new photos. Today's date is ${bookObject.date} 
+    and your headline is ${bookObject.nyt}. Today's quote of the day is 
+    ${bookObject.quote}.`
+
     return (
       <div className="book">
         <div className="book-start">
-          <hr className="book-top"></hr>
+          <hr className="book-top" aria-label={TEXT_book_description}></hr>
           <h3>{"Today's Book, " + bookObject.date}</h3>
           <h4>{bookObject.date}</h4>
           <p>

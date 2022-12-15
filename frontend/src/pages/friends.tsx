@@ -7,6 +7,10 @@ import User from "../gencomponents/user";
 import { getQuery } from '../utils/dbutils';
 import { FriendComponent } from "../gencomponents/friendcomponent";
 
+const TEXT_user_posts = `Here you can view your friends' posts and search.`
+const TEXT_posts_button = `Click here to see posts!`
+const TEXT_search_button = `Click here to search for books!`
+
 function Posts() {
     return <p>these are all your friends' posts</p>;
 }
@@ -80,27 +84,18 @@ export default function Friends() {
     });
     const [modalDisplay, setModalDisplay] = useState<boolean>(false); // For controlling the search bar
 
-    return (
-        <div>
-            <Header user={user} />
-            <div id="book-buttons">
-                <button>Posts</button>
-                <button
-                    type="submit"
-                    value="Search"
-                    onClick={() => {
-                        setModalDisplay(true);
-                    }}
-                >
-                    Search
-                </button>
-            </div>
-            <hr></hr>
-            <div id="friend-menu">
-                <Posts />
-                <SearchModal display={modalDisplay} setDisplay={setModalDisplay} />
-            </div>
-            <Footer user={user} />
-        </div>
-    );
+  return (
+    <div>
+      <Header user={user} />
+      <div id="book-buttons">
+        <button>Posts</button>
+        <button>Search</button>
+      </div>
+      <hr></hr>
+      <div id="friend-menu">
+        <Posts />
+      </div>
+      <Footer user={user} />
+    </div>
+  );
 }
