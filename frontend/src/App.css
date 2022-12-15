@@ -129,9 +129,9 @@ h2 {
 }
 
 .error {
-  background-color: rgba(255, 0, 0, 0.372);
-  width: 20vh;
-  text-align: center;
+  margin: 2vh;
+  color: red;
+  font-size: larger;
 }
 
 .input {
