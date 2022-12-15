@@ -25,7 +25,9 @@ export default function Page({ id }: PageProps) {
         <hr className="page-divider-top"></hr>
         <div className="page-header">
           <div className="left-page-header">
-            <code>{pageInfo.public ? "[Private]" : null}</code>
+            <div className="publicity-info">
+              <p>{pageInfo.publicized ? null : "[Private]"}</p>
+            </div>
             <code>Title: {pageInfo.title}</code>
             <h4>
               {time.toLocaleString("en-US", {

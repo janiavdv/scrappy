@@ -7,5 +7,5 @@ export default interface Entry {
   user: string;
   date: string;
   entryID: string;
-  public: boolean;
+  publicized: boolean;
 }

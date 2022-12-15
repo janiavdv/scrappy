@@ -99,6 +99,7 @@ public class DatabaseHandler implements Route {
             entry.setUser(request.queryParams("user"));
             entry.setPublicity(request.queryParams("public"));
             Document newEntry = DBDocumentUtil.convert(entry);
+            System.out.println(newEntry.toJson());
             Server.getMyDatabase().getEntriesColl().insertOne(newEntry);
             // Return a databaseSuccessResponse in this case.
             return databaseSuccessResponse();
