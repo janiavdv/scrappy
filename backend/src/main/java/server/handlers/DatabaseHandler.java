@@ -19,27 +19,55 @@ import spark.Route;
 import utils.DBDocumentUtil;
 import utils.ResponseUtil;
 import utils.ServerUtilities;
+// Here we have our import statements for the DatabaseHandler class.
 
+/**
+ * This is our DatabaseHandler class, which implements the Route interface.
+ */
 public class DatabaseHandler implements Route {
 
+  /**
+   * This is constructor for our DatabaseHandler class.
+   */
   public DatabaseHandler() {
-
   }
 
+  /**
+   * This method, the handle method, is the main method of our DatabaseHandler class. It takes in
+   * two parameters (a request and a response) and returns an Object. Notice that this method is
+   * overridden from the Route interface.
+   *
+   * @param request of type Request, representing a request
+   * @param response of type Response, representing a response
+   * @return an Object
+   */
   @Override
-  public Object handle(Request request, Response response) throws Exception {
+  public Object handle(Request request, Response response) {
 
+    // If statement for the case where the request's queryParams size is 0 (not enough arguments).
     if (request.queryParams().size() == 0) {
       return databaseFailureResponse("not enough arguments");
     }
 
+    // Creating a local variable representing the command.
     String command = request.queryParams("command");
+
+    // A switch statement which is switching on our command (local variable).
     switch (command) {
+
+      // Case where command is ADD.
       case "ADD" -> {
+        // Creating a local variable representing the type.
         String type = request.queryParams("type");
+
+        // A switch statement which is switching on our type (local variable).
         switch (type) {
+
+          // Case where command is ADD and type is USER.
           case "USER" -> {
+            // Creating a new user.
             User user = new User();
+            // Setting all the Users' respective elements.
             user.setEmail(request.queryParams("email"));
             user.setUsername(request.queryParams("username"));
             user.setName(request.queryParams("name"));
@@ -52,10 +80,15 @@ public class DatabaseHandler implements Route {
             user.setTags(tagsList);
             Document newUser = DBDocumentUtil.convert(user);
             Server.getMyDatabase().getUsersColl().insertOne(newUser);
+            // Return the databaseSuccessResponse.
             return databaseSuccessResponse();
           }
+
+          // Case where command is ADD and type is ENTRY.
           case "ENTRY" -> {
+            // Creating a new entry.
             Entry entry = new Entry();
+            // Setting all of the entry's necessary components
             entry.setTitle(request.queryParams("title"));
             entry.setCaption(request.queryParams("caption"));
             entry.setTime(request.queryParams("time"));
@@ -66,10 +99,15 @@ public class DatabaseHandler implements Route {
             entry.setUser(request.queryParams("user"));
             Document newEntry = DBDocumentUtil.convert(entry);
             Server.getMyDatabase().getEntriesColl().insertOne(newEntry);
+            // Return a databaseSuccessResponse in this case.
             return databaseSuccessResponse();
           }
+
+          // Case where command is ADD and type is BOOK.
           case "BOOK" -> {
+            // Creating a new Book.
             Book book = new Book();
+            // Setting all of the Book's necessary components.
             book.setTitle(request.queryParams("title"));
             book.setBookID(request.queryParams("bookID"));
             book.setDate(request.queryParams("date"));
@@ -82,84 +120,93 @@ public class DatabaseHandler implements Route {
             FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
                 .returnDocument(ReturnDocument.AFTER);
             Server.getMyDatabase().getUsersColl().findOneAndUpdate(filter, update, options);
-
+            // Return a databaseSuccessResponse in this case.
             return databaseSuccessResponse();
           }
         }
       }
+
+      // Case where command is QUERY.
       case "QUERY" -> {
+        // Local variable representing the cType.
         String cType = request.queryParams("type");
         Document doc;
+        // Creating a local reply/HashMap variable.
         Map<String, Object> reply = new HashMap<>();
+
+        // A switch statement on the cType.
         switch (cType) {
+
+          // Case where command is QUERY and cType is USERNAME.
           case "USERNAME" -> {
             doc = Server.getMyDatabase().getUsersColl()
                 .find(new Document("username", request.queryParams("username"))).first();
             reply.put("result", "success");
             reply.put("User", doc);
-
+            // Return statement i this case.
             return new ResponseUtil(reply).serialize();
           }
+
+          // Case where command is QUERY and cType is EMAIl.
           case "EMAIL" -> {
             try {
               doc = Server.getMyDatabase().getUsersColl()
                   .find(new Document("email", request.queryParams("email"))).first();
               reply.put("result", "success");
               reply.put("User", doc);
-
+              // Return statement in this case.
               return new ResponseUtil(reply).serialize();
+              // Catch Exception e
             } catch (Exception e) {
               return this.databaseFailureResponse("failure");
             }
           }
+
+          // Case where command is QUERY and cType is ENTRY.
           case "ENTRY" -> {
             doc = Server.getMyDatabase().getEntriesColl()
                 .find(new Document("entryID", request.queryParams("entryID"))).first();
             reply.put("result", "success");
             reply.put("Entry", doc);
-
+            // Return statement in this case.
             return new ResponseUtil(reply).serialize();
           }
-//          case "BOOK" -> {
-//            doc = Server.getMyDatabase().getUsersColl()
-//                .find(new Document("books", request.queryParams("bookID"))).first();
-//
-//            reply.put("result", "success");
-//            reply.put("Book", doc);
-//
-//            return new ResponseUtil(reply).serialize();
-//          }
         }
       }
+
+      // Case where command is UPDATE.
       case "UPDATE" -> {
         System.out.println("update");
+        // Local variable representing the updateType.
         String updateType = request.queryParams("type");
+
+        // A switch statement on updateType.
         switch (updateType) {
+
+          // Case where the command is UPDATE and the updateType is BOOK.
           case "BOOK":
+            // Notice our use of a try-catch statement here.
             try {
               Bson filter = Filters.eq("username", request.queryParams("username"));
               Bson secondFilter = Filters.eq("books.bookID", request.queryParams("bookID"));
               Server.getMyDatabase().getUsersColl().findOneAndUpdate((Filters.and(filter, secondFilter)), new Document("$push", new Document("books.$.entries", request.queryParams("entryID"))));
-//
-//              Bson filter = Filters.eq("bookID", request.queryParams("bookID"));
-//              Bson update = Updates.push("entries", request.queryParams("entryID"));
-//              System.out.println(filter);
-//              System.out.println(update);
-//              FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
-//                  .returnDocument(ReturnDocument.AFTER);
-//              Server.getMyDatabase().getUsersColl().findOneAndUpdate(filter, update, options);
               return databaseSuccessResponse();
+              // Catch NullPointer Exception e
             } catch (NullPointerException e) {
               return databaseFailureResponse("No book with this ID.");
             }
+            // Case where the command is UPDATE and the updateType is FRIEND-REQUEST.
           case "FRIEND-REQUEST":
             Bson filteredUser = Filters.eq( "username", request.queryParams("username"));
             Bson update = Updates.push("friendsRequest", request.queryParams("friendRequest"));
             FindOneAndUpdateOptions options = new FindOneAndUpdateOptions()
                 .returnDocument(ReturnDocument.AFTER);
             Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser, update, options);
+            // Return statement in this case.
             return databaseSuccessResponse();
+          // Case where the command is UPDATE and the updateType is NEW-FRIEND.
           case "NEW-FRIEND":
+            // Notice our use of a try-catch statement here.
             try {
               Bson filteredUser1 = Filters.eq("username", request.queryParams("username"));
               Bson addFriend = Updates.push("friendsList", request.queryParams("newFriend"));
@@ -172,32 +219,44 @@ public class DatabaseHandler implements Route {
               Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser1, addFriend, addedFriend);
               Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser1, removeRequest, removedFriend);
               return databaseSuccessResponse();
+              // Catch NullPointerException e
             } catch (NullPointerException e) {
               return databaseFailureResponse("No user by this name.");
             }
         }
       }
+
+      // Case where command is GALLERY.
       case "GALLERY" -> {
+        // Notice our user of a try-catch statement here.
         try {
           Document user = Server.getMyDatabase().getUsersColl().find(new Document("username", request.queryParams("username"))).first();
+          // Notice our use of an if-statement here to check that the user is not equal to null.
           if (user != null) {
             List<String> tags = user.getList("tags", String.class);
             System.out.println(tags);
           }
           return databaseSuccessResponse();
+          // Catch NullPointerException e
         } catch (NullPointerException e) {
           return this.databaseFailureResponse("No user found by this name.");
         }
       }
     }
+    // Return null if it doesn't enter any of these cases.
     return null;
   }
 
+  /**
+   * Public method for the databaseSuccessResponse, which returns a String.
+   *
+   * @return a String representing the databaseSuccessResponse
+   */
   public String databaseSuccessResponse() {
-
+    // Local variable (of type HashMap) representing the successResponse
     Map<String, Object> successResponse = new HashMap<>();
     successResponse.put("result", "success");
-
+    // Return statement here.
     return ServerUtilities.serialize(successResponse);
   }
 
@@ -210,8 +269,7 @@ public class DatabaseHandler implements Route {
   public String databaseFailureResponse(String responseType) {
     Map<String, Object> failureResponse = new HashMap<>();
     failureResponse.put("result", responseType);
-
+    // Return statement here.
     return ServerUtilities.serialize(failureResponse);
   }
-
 }

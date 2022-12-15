@@ -3,6 +3,7 @@ package utils;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import java.util.Map;
+// Above are the import statements for this class.
 
 /**
  * This is an Util that all developers can use in order to take an input of Map of String,Object

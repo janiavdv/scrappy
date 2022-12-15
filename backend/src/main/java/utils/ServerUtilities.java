@@ -3,20 +3,21 @@ package utils;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+// Above are our import statements for this class.
 
+/**
+ * This is the ServerUtilities class.
+ */
 public class ServerUtilities {
 
-  // static fields used for serializing and deserializing
+  // Static fields used for serializing and deserializing
   private static final Moshi moshi = new Moshi.Builder().build();
   private static final JsonAdapter<Map<String, Object>> jsonAdapter =
       moshi.adapter(Types.newParameterizedType(Map.class, String.class, Object.class));
@@ -39,6 +40,7 @@ public class ServerUtilities {
    * @return a Map with String keys and Object values corresponding to the JSON str
    */
   public static Map<String, Object> deserialize(String str) throws IOException {
+    // This is the return statement for this method.
     return jsonAdapter.fromJson(str);
   }
 
@@ -51,9 +53,15 @@ public class ServerUtilities {
    * @throws IOException if an I/O exception occurs when sending or receiving
    * @throws InterruptedException if the send operation is interrupted
    */
-  public static String scrapeHTTPRequest(String uri) throws URISyntaxException, IOException, InterruptedException {
+  public static String scrapeHTTPRequest(String uri) throws URISyntaxException, IOException,
+      InterruptedException {
+
+    // Local request and response variables.
     HttpRequest request = HttpRequest.newBuilder().uri(new URI(uri)).GET().build();
-    HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+    HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+        HttpResponse.BodyHandlers.ofString());
+
+    // This is the return statement of this method.
     return response.body();
   }
 }

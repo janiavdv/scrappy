@@ -14,8 +14,14 @@ import spark.Spark;
  */
 public class Server {
 
+  // Here we declare the instance variables for the Server class.
   private static MongoDB mongoDB;
 
+  /**
+   * A static getter method which gets the Database.
+   *
+   * @return MongoDB representing the database
+   */
   public static MongoDB getMyDatabase() {
     return mongoDB;
   }
@@ -37,6 +43,7 @@ public class Server {
     mongoDB = new MongoDB();
 
     Spark.get("database", new DatabaseHandler());
+
     // Setting up the handler for the GET endpoints.
     Spark.get("nyt", new NYTHandler());
     Spark.get("quote", new QuoteHandler());
@@ -44,8 +51,8 @@ public class Server {
     // Init/initializing Spark
     Spark.init();
     Spark.awaitInitialization();
+
     // Printing out to the console that the server has been started (helpful to the user)
     System.out.println("server.Server started.");
   }
-
 }
