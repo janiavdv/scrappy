@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { getQuery } from "../utils/dbutils";
 import Loading from "./loading";
-import User from "./user";
+import User from "../interfaces/user";
 
 export interface FriendComponentProps {
   username: string;

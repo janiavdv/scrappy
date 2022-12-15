@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { TEXT_text_box_accessible_name } from "./profile";
 import Footer from "../gencomponents/footer";
 import ControlledInput from "../gencomponents/controlledinput";
-import User from "../gencomponents/user";
+import User from "../interfaces/user";
 import { getQuery, addUserToDatabase } from "../utils/dbutils";
 
 interface TagProps {

@@ -97,6 +97,7 @@ public class DatabaseHandler implements Route {
             entry.setImageLink(request.queryParams("image"));
             entry.setEntryID(request.queryParams("entryID"));
             entry.setUser(request.queryParams("user"));
+            entry.setPublicity(request.queryParams("public"));
             Document newEntry = DBDocumentUtil.convert(entry);
             Server.getMyDatabase().getEntriesColl().insertOne(newEntry);
             // Return a databaseSuccessResponse in this case.

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import ControlledInput from "../gencomponents/controlledinput";
 import Header from "../gencomponents/header";
 import Footer from "../gencomponents/footer";
-import User from "../gencomponents/user";
+import User from "../interfaces/user";
 import { getQuery } from "../utils/dbutils";
 import FriendComponent, {
   FriendComponentReact,

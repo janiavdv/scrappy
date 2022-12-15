@@ -14,6 +14,7 @@ public class Entry {
   private String date;
   private String entryID;
   private String user;
+  private String publicized;
 
   /**
    * This is the constructor for the Entry class (we don't actually need to do anything in it, more
@@ -100,6 +101,18 @@ public class Entry {
    */
   public void setUser(String username) {
     this.user = username;
+  }
+
+  /**
+   * This is a public setter method which takes in a String representing the privacy, and sets that
+   * equal to the instance variable representing the privacy.
+   *
+   * "True" means that it is a public post, "False", not
+   *
+   * @param publicized a String representing the entry's privacy
+   */
+  public void setPublicity(String publicized) {
+    this.publicized = publicized;
   }
 
 }

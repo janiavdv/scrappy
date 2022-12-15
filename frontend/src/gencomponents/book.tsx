@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { addBookToDatabase } from "../utils/dbutils";
-import BookObject from "./BookObject";
+import BookObject from "../interfaces/BookObject";
 import Page from "./pagecomponent";
-import User from "./user";
+import User from "../interfaces/user";
 
 export interface BookProps {
   setBook: Dispatch<SetStateAction<BookObject | null>>;

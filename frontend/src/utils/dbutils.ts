@@ -1,6 +1,6 @@
-import BookObject from "../gencomponents/BookObject";
-import Entry from "../gencomponents/EntryObject";
-import User from "../gencomponents/user";
+import BookObject from "../interfaces/BookObject";
+import Entry from "../interfaces/EntryObject";
+import User from "../interfaces/user";
 
 export async function getQuery(
   type: string,
@@ -46,12 +46,9 @@ export async function addEntryToDatabase(
   username: string
 ) {
   await fetch(
-    `http://localhost:3232/database?command=ADD&type=ENTRY&title=${entry.title}&user=${entry.user}&caption=${entry.caption}&time=${entry.time}&date=${entry.date}&tag=${entry.tag}&image=${entry.imageLink}&entryID=${entry.entryID}`
+    `http://localhost:3232/database?command=ADD&type=ENTRY&title=${entry.title}&user=${entry.user}&caption=${entry.caption}&time=${entry.time}&date=${entry.date}&tag=${entry.tag}&image=${entry.imageLink}&entryID=${entry.entryID}&public=${entry.public}`
   );
 
-  console.log(
-    `http://localhost:3232/database?command=UPDATE&type=BOOK&bookID=${book.bookID}&entryID=${entry.entryID}`
-  );
   await fetch(
     `http://localhost:3232/database?command=UPDATE&type=BOOK&bookID=${book.bookID}&entryID=${entry.entryID}&username=${username}`
   );

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Footer from "../gencomponents/footer";
 import Header from "../gencomponents/header";
-import User from "../gencomponents/user";
+import User from "../interfaces/user";
 
 export default function Privacy() {
   const st: User = useLocation().state;

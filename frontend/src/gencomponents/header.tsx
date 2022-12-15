@@ -1,4 +1,4 @@
-import User from "./user";
+import User from "../interfaces/user";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/ScrappyLogo.svg";
 import { googleLogout } from "@react-oauth/google";
@@ -6,9 +6,12 @@ import { googleLogout } from "@react-oauth/google";
 const TEXT_header = `This is the header, which contains links to the friends, 
 gallery, and profile pages. It also displays your profile picture and a button
 to log out.`;
+const TEXT_header_unlogged = `This is the header, which contains a link back to the home page.`;
 const TEXT_friends_button = `Click here to view your friends page!`;
 const TEXT_gallery_button = `Click here to view your gallery!`;
 const TEXT_profile_button = `Click here to view your profile!`;
+const TEXT_home_button = `Click here to go back home!`;
+const TEXT_logo_alt = `Image of Scrappy Logo`;
 
 const TEXT_logout = `Click this button to logout of your account.`;
 
@@ -55,7 +58,6 @@ export default function Header({ user }: { user: User }) {
               Profile
             </button>
           </div>
-
           <div id="prof-in-nav">
             <img
               src={user.profilePic}
@@ -78,7 +80,7 @@ export default function Header({ user }: { user: User }) {
     );
   } else {
     return (
-      <div id="header">
+      <div id="header" aria-label={TEXT_header_unlogged}>
         <div id="navbar">
           <div id="left-nav">
             <button
@@ -86,12 +88,13 @@ export default function Header({ user }: { user: User }) {
                 navigate("/");
               }}
               id="headerButton"
+              aria-roledescription={TEXT_home_button}
             >
               Home
             </button>
           </div>
           <div id="unlogged-right-div">
-            <img src={logo} id="logo-nav"></img>
+            <img src={logo} id="logo-nav" alt={TEXT_logo_alt}></img>
           </div>
         </div>
       </div>

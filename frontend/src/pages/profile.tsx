@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import User from "../gencomponents/user";
+import User from "../interfaces/user";
 import Header from "../gencomponents/header";
 import UploadImageToS3WithReactS3 from "../gencomponents/awsupload";
 import ControlledInput from "../gencomponents/controlledinput";
 import Footer from "../gencomponents/footer";
 import { Book as BookReact, createDefaultBook } from "../gencomponents/book";
-import BookObject from "../gencomponents/BookObject";
-import Entry from "../gencomponents/EntryObject";
+import BookObject from "../interfaces/BookObject";
+import Entry from "../interfaces/EntryObject";
 import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
 import Loading from "../gencomponents/loading";
 import FriendComponent, {
@@ -35,6 +35,7 @@ function PageModal({
   const [bodyValue, setBodyValue] = useState<string>(""); // For controlling the body textbox.
   const [imageLink, setLink] = useState<string>(""); // For controlling the body textbox.
   const [tagValue, setTagValue] = useState<string>(""); // For controlling the body textbox.
+  const [privacyValue, setPrivacy] = useState<boolean>(true); // For controlling the body textbox.
 
   const [allowed, setAllowed] = useState<boolean>(false);
 
@@ -77,6 +78,12 @@ function PageModal({
           setAllowed={setAllowed}
         />
         <br />
+        Your post is, by default, public. This means anyone in the world can see
+        it. If you want it just for friends, make it private using the button
+        below.
+        <button onClick={() => setPrivacy(!privacyValue)}>
+          {privacyValue ? "Privatize" : "Publicize"}
+        </button>
         <hr></hr>
         <div id="modal-upload-buttons">
           <button
@@ -105,6 +112,7 @@ function PageModal({
                     imageLink: imageLink,
                     entryID: id.toString(),
                     user: user.username,
+                    public: privacyValue,
                   };
 
                   setTitleValue("");

@@ -1,4 +1,4 @@
-import User from "./user";
+import User from "../interfaces/user";
 import { useNavigate } from "react-router-dom";
 
 const TEXT_footer = `This is the footer, which contains buttons that link to our

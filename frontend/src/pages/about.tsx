@@ -1,6 +1,6 @@
 import Header from "../gencomponents/header";
 import Footer from "../gencomponents/footer";
-import User from "../gencomponents/user";
+import User from "../interfaces/user";
 import { useLocation } from "react-router-dom";
 
 export default function About() {

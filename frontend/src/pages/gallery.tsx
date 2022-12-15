@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../gencomponents/header";
-import User from "../gencomponents/user";
+import User from "../interfaces/user";
 
 export default function Gallery() {
   const st: User = useLocation().state;
