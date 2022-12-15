@@ -107,7 +107,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
             <button
               onClick={() => {
                 setTagValue("");
-                if (tags.length < 5 && !tags.includes(tagValue)) {
+                if (tagValue != "" && tags.length < 5 && !tags.includes(tagValue)) {
                   setTags([...tags, tagValue]);
                 }
               }}
@@ -116,7 +116,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
             </button>
           </label>
           <AddedTags tags={tags} setTags={setTags} />
-          <div id="user-exists-error">
+          <div className="error">
             <p> {tagsEmpty ? "Add at least one tag!" : null} </p>
           </div>
           <button
@@ -150,7 +150,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
               }
             }}> Submit
           </button>
-          <div id="user-exists-error">
+          <div className="error">
             <p> {userExists ? "User already exists!" : null} </p>
           </div>
         </div>
