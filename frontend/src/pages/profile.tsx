@@ -10,7 +10,9 @@ import BookObject from "../gencomponents/BookObject";
 import Entry from "../gencomponents/EntryObject";
 import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
 import Loading from "../gencomponents/loading";
-import FriendComponent, {grabFriendComponents,} from "../gencomponents/friendcomponent";
+import FriendComponent, {
+  grabFriendComponents,
+} from "../gencomponents/friendcomponent";
 
 interface PageModalProps {
   display: boolean;
@@ -140,12 +142,12 @@ function PageModal({
 
 export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
-export default async function Profile() {
+export default function Profile() {
   const user: User = useLocation().state;
   const [todayBook, setBook] = useState<BookObject | null>(null);
   const [friendList, setFriends] = useState<FriendComponent[] | null>(null);
   const [pastAlbum, setAlbumBoolean] = useState<boolean>(false);
-  const [pastBooks, setPastBooks] = useState<BookObject[] | []>([]);
+  const [pastBooks, setPastBooks] = useState<BookObject[]>([]);
 
   useEffect(() => {
     if (todayBook == null) {
@@ -154,7 +156,7 @@ export default async function Profile() {
         if (booklist.length !== 0) {
           for (let i = 0; i < booklist.length; i++) {
             if (
-              booklist[i].date ==
+              booklist[i].date ===
               new Date().toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "2-digit",
@@ -213,9 +215,10 @@ export default async function Profile() {
               Today's Book
             </button>
             <button
-              onClick={() => {
+              onClick={async () => {
                 setAlbumBoolean(true);
-                setPastBooks([]);
+                let bList = await getBookListFromDatabase(user);
+                setPastBooks(bList);
               }}
             >
               Past Books
@@ -224,11 +227,11 @@ export default async function Profile() {
           <hr></hr>
           <div id="today-book">
             {pastAlbum ? (
-                <div>
-                    {pastBooks.map((book) => (
-                        <BookReact bookObject={book} user={user} setBook={setBook}/>
-                    ))} 
-                </div>
+              <div>
+                {pastBooks.map((book) => (
+                  <BookReact bookObject={book} user={user} setBook={setBook} />
+                ))}
+              </div>
             ) : todayBook ? (
               <BookReact bookObject={todayBook} user={user} setBook={setBook} />
             ) : (
