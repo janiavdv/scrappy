@@ -59,6 +59,7 @@ function SearchModal({ display, setDisplay }: SearchModalProps) {
                     onClick={() => {
                         setDisplay(false);
                         setSearchValue("");
+                        setSearchedFriend(null);
                     }}
                 >{" "}Close
                 </button>
