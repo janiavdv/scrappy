@@ -62,6 +62,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
   const navigate = useNavigate();
 
   const [userExists, setUserExists] = useState<boolean>(false);
+  const [tagsEmpty, setTagsEmpty] = useState<boolean>(false);
 
   if (!display) {
     return null;
@@ -133,8 +134,12 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                     friendsList: [],
                     friendsRequest: [],
                   }
-                  addUserToDatabase(user);
-                  navigate("/profile:" + userValue, { state: user });
+                  if (user.tags.length == 0) {
+                    setTagsEmpty(true)
+                  } else {
+                    addUserToDatabase(user);
+                    navigate("/profile:" + userValue, { state: user });
+                  }
                 }
                 else {
                   console.log("user exists!!!")
