@@ -342,6 +342,16 @@ button:hover {
   margin: 10px;
 }
 
+.publicity-info {
+  background-color: rgb(255, 144, 144);
+  border-radius: 10px;
+  border: 1px solid rgb(255, 0, 0);
+  width: 10vh;
+  line-height: 2px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
 .page-divider-bottom {
   border: 2px solid #f1f1f1;
   border-radius: 0px 0px 2px 2px;

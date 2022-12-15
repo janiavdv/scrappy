@@ -112,7 +112,7 @@ function PageModal({
                     imageLink: imageLink,
                     entryID: id.toString(),
                     user: user.username,
-                    public: privacyValue,
+                    publicized: privacyValue,
                   };
 
                   setTitleValue("");
