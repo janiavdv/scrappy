@@ -18,9 +18,7 @@ export async function getQuery(
   }
 }
 
-export async function getBookListFromDatabase(
-  user: User
-): Promise<BookObject[]> {
+export async function getBookListFromDatabase( user: User ): Promise<BookObject[]> {
   const usr: User | null = await getQuery(
     "USERNAME",
     "username",

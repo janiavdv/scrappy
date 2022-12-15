@@ -10,9 +10,7 @@ import BookObject from "../gencomponents/BookObject";
 import Entry from "../gencomponents/EntryObject";
 import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
 import Loading from "../gencomponents/loading";
-import FriendComponent, {
-  grabFriendComponents,
-} from "../gencomponents/friendcomponent";
+import FriendComponent, {grabFriendComponents,} from "../gencomponents/friendcomponent";
 
 interface PageModalProps {
   display: boolean;
@@ -142,11 +140,12 @@ function PageModal({
 
 export const TEXT_text_box_accessible_name = "Text Box for Information Entry.";
 
-export default function Profile() {
+export default async function Profile() {
   const user: User = useLocation().state;
   const [todayBook, setBook] = useState<BookObject | null>(null);
   const [friendList, setFriends] = useState<FriendComponent[] | null>(null);
   const [pastAlbum, setAlbumBoolean] = useState<boolean>(false);
+  const [pastBooks, setPastBooks] = useState<BookObject[] | []>([]);
 
   useEffect(() => {
     if (todayBook == null) {
@@ -216,6 +215,7 @@ export default function Profile() {
             <button
               onClick={() => {
                 setAlbumBoolean(true);
+                setPastBooks([]);
               }}
             >
               Past Books
@@ -224,7 +224,11 @@ export default function Profile() {
           <hr></hr>
           <div id="today-book">
             {pastAlbum ? (
-              <p>I should be all the past ones.</p>
+                <div>
+                    {pastBooks.map((book) => (
+                        <BookReact bookObject={book} user={user} setBook={setBook}/>
+                    ))} 
+                </div>
             ) : todayBook ? (
               <BookReact bookObject={todayBook} user={user} setBook={setBook} />
             ) : (
