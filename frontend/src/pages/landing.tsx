@@ -116,6 +116,9 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
             </button>
           </label>
           <AddedTags tags={tags} setTags={setTags} />
+          <div id="user-exists-error">
+            <p> {tagsEmpty ? "Add at least one tag!" : null} </p>
+          </div>
           <button
             type="submit"
             value="Submit"
@@ -142,9 +145,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                   }
                 }
                 else {
-                  console.log("user exists!!!")
                   setUserExists(true)
-                  // do something when the user already exists!
                 }
               }
             }}> Submit
