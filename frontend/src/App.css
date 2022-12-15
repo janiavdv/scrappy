@@ -128,10 +128,9 @@ h2 {
   font-size: 3vh;
 }
 
-.user-exists-error {
+.error {
   background-color: rgba(255, 0, 0, 0.372);
   width: 20vh;
-  line-height: 2px;
   text-align: center;
 }
 
