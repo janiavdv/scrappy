@@ -116,28 +116,31 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
           <button
             type="submit"
             value="Submit"
-            onClick={() => {
-              if (userValue !== "" && nameValue !== "") {
-                const user: User = {
-                  name: nameValue,
-                  username: userValue,
-                  email: userEmail,
-                  profilePic: userPicture,
-                  tags: tags,
-                  books: [],
-                  entries: [],
-                  friendsList: [],
-                  friendsRequest: [],
-                };
-                addUserToDatabase(user);
-                navigate("/profile:" + userValue, { state: user });
+            onClick={async () => {
+              if (userValue !== "" && nameValue !== "") { // if the parameters aren't empty
+                if (getQuery("USERNAME", "username", userValue) == null) { // if the user doesn't already exist
+                  const user: User = {
+                    name: nameValue,
+                    username: userValue,
+                    email: userEmail,
+                    profilePic: userPicture,
+                    tags: tags,
+                    books: [],
+                    entries: [],
+                    friendsList: [],
+                    friendsRequest: [],
+                  }
+                  addUserToDatabase(user);
+                  navigate("/profile:" + userValue, { state: user });
+                }
+                else {
+                  // do something when the user already exists!
+                }
               }
-            }}
-          >
-            Submit
+            }}> Submit
           </button>
         </div>
-      </div>
+      </div >
     );
   }
 }
