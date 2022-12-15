@@ -241,11 +241,21 @@ export default function Profile() {
             {pastAlbum ? (
               <div>
                 {pastBooks.map((book) => (
-                  <BookReact bookObject={book} user={user} setBook={setBook} key={book.date} />
+                  <BookReact
+                    bookObject={book}
+                    user={user}
+                    setBook={setBook}
+                    key={book.date}
+                  />
                 ))}
               </div>
             ) : todayBook ? (
-              <BookReact bookObject={todayBook} user={user} setBook={setBook} key={todayBook.date} />
+              <BookReact
+                bookObject={todayBook}
+                user={user}
+                setBook={setBook}
+                key={todayBook.date}
+              />
             ) : (
               <Loading />
             )}
@@ -255,6 +265,7 @@ export default function Profile() {
           <FriendListComponent
             friendList={friendList}
             setFriends={setFriends}
+            extended={false}
           />
           <div id="create-page">
             <h3>Add to today's book!</h3>

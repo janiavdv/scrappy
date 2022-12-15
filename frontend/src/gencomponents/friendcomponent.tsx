@@ -67,14 +67,16 @@ export function FriendComponentSearch({ username, image }: FriendComponent) {
 export interface FriendListComponent {
   friendList: FriendComponent[] | null;
   setFriends: Dispatch<SetStateAction<FriendComponent[] | null>>;
+  extended: boolean;
 }
 
 export function FriendListComponent({
   friendList,
   setFriends,
+  extended,
 }: FriendListComponent) {
   return (
-    <div id="profile-friends-list">
+    <div id={extended ? "friends-friends-list" : "profile-friends-list"}>
       <h3>Friends</h3>
       <hr></hr>
       {friendList ? (

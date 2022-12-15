@@ -6,7 +6,6 @@ import Footer from "../gencomponents/footer";
 import User from "../interfaces/user";
 import { getQuery } from "../utils/dbutils";
 import FriendComponent, {
-  FriendComponentReact,
   FriendComponentSearch,
   FriendListComponent,
   grabFriendComponents,
@@ -14,11 +13,14 @@ import FriendComponent, {
 import { useEffect } from "react";
 
 const TEXT_user_posts = `Here you can view your friends' posts and search.`;
-const TEXT_posts_button = `Click here to see posts!`;
 const TEXT_search_button = `Click here to search for books!`;
+const TEXT_search_input = `Textbox for entering a query for a username`;
+const BUTTON_get_friend_query = `Button to query for a username search given.`;
+const BUTTON_friend_status = `Use this button to, `;
+const BUTTON_close = `Button to close the query modal.`;
 
-function Posts() {
-  return <p>these are all your friends' posts</p>;
+function FriendPosts() {
+  return <div id="friend-post-section" aria-label={TEXT_user_posts}></div>;
 }
 
 interface SearchModalProps {
@@ -44,13 +46,14 @@ function SearchModal({ display, setDisplay, searcher }: SearchModalProps) {
         <ControlledInput
           value={searchValue}
           setValue={setSearchValue}
-          ariaLabel={""}
+          ariaLabel={TEXT_search_input}
           spaces={false}
           id="search-input"
         />
         <button
           type="submit"
           value="Post"
+          aria-label={BUTTON_get_friend_query}
           onClick={async () => {
             const user: User | null = await getQuery(
               "USERNAME",
@@ -89,7 +92,9 @@ function SearchModal({ display, setDisplay, searcher }: SearchModalProps) {
                 username={searchedFriend.username}
                 image={searchedFriend.profilePic}
               />
-              <button>{friendStatus}</button>
+              <button aria-label={BUTTON_friend_status + friendStatus}>
+                {friendStatus}
+              </button>
             </div>
           ) : (
             <p>No such friend found.</p>
@@ -98,6 +103,7 @@ function SearchModal({ display, setDisplay, searcher }: SearchModalProps) {
         <hr></hr>
         <button
           className="close-button"
+          aria-label={BUTTON_close}
           onClick={() => {
             setDisplay(false);
             setSearchValue("");
@@ -138,23 +144,31 @@ export default function Friends() {
   return (
     <div>
       <Header user={user} />
-      <div id="book-buttons" aria-label={TEXT_user_posts}>
-        <button aria-roledescription={TEXT_posts_button}>Posts</button>
-        <button
-          aria-roledescription={TEXT_search_button}
-          type="submit"
-          value="Search"
-          onClick={() => {
-            setModalDisplay(true);
-          }}
-        >
-          Search
-        </button>
-      </div>
-      <hr></hr>
       <div id="friend-menu">
-        <Posts />
-        <FriendListComponent friendList={friendList} setFriends={setFriends} />
+        <div id="friends-search-info">
+          <h3>Search for new friends, and manage friendships!</h3>
+          <button
+            aria-roledescription={TEXT_search_button}
+            type="submit"
+            value="Search"
+            onClick={() => {
+              setModalDisplay(true);
+            }}
+          >
+            Search
+          </button>
+          <p>
+            No posts? The friends section only shows posts (new pages to a daily
+            book) from Today. That means your friends need to get to posting!
+          </p>
+          <p>Public AND Private posts are shown in this section.</p>
+        </div>
+        <FriendPosts />
+        <FriendListComponent
+          friendList={friendList}
+          setFriends={setFriends}
+          extended={true}
+        />
         <SearchModal
           display={modalDisplay}
           setDisplay={setModalDisplay}

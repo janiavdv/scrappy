@@ -25,8 +25,12 @@ export default function Page({ id }: PageProps) {
         <hr className="page-divider-top"></hr>
         <div className="page-header">
           <div className="left-page-header">
-            <div className="publicity-info">
-              <p>{pageInfo.publicized ? null : "[Private]"}</p>
+            <div>
+              {pageInfo.publicized ? null : (
+                <div className="publicity-info">
+                  <p>[Private]</p>
+                </div>
+              )}
             </div>
             <code>Title: {pageInfo.title}</code>
             <h4>

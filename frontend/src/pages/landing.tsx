@@ -107,7 +107,11 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
             <button
               onClick={() => {
                 setTagValue("");
-                if (tagValue != "" && tags.length < 5 && !tags.includes(tagValue)) {
+                if (
+                  tagValue != "" &&
+                  tags.length < 5 &&
+                  !tags.includes(tagValue)
+                ) {
                   setTags([...tags, tagValue]);
                 }
               }}
@@ -123,10 +127,16 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
             type="submit"
             value="Submit"
             onClick={async () => {
-              if (userValue !== "" && nameValue !== "") { // if the parameters aren't empty
-                const existingUser: User | null = await getQuery("USERNAME", "username", userValue)
-                if (existingUser == null) { // if the user doesn't already exist
-                  setUserExists(false)
+              if (userValue !== "" && nameValue !== "") {
+                // if the parameters aren't empty
+                const existingUser: User | null = await getQuery(
+                  "USERNAME",
+                  "username",
+                  userValue
+                );
+                if (existingUser == null) {
+                  // if the user doesn't already exist
+                  setUserExists(false);
                   const user: User = {
                     name: nameValue,
                     username: userValue,
@@ -137,25 +147,27 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                     entries: [],
                     friendsList: [],
                     friendsRequest: [],
-                  }
+                  };
                   if (user.tags.length == 0) {
-                    setTagsEmpty(true)
+                    setTagsEmpty(true);
                   } else {
                     addUserToDatabase(user);
                     navigate("/profile:" + userValue, { state: user });
                   }
-                }
-                else {
-                  setUserExists(true)
+                } else {
+                  setUserExists(true);
                 }
               }
-            }}> Submit
+            }}
+          >
+            {" "}
+            Submit
           </button>
           <div className="error">
             <p> {userExists ? "User already exists!" : null} </p>
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }

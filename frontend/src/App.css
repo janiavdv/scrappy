@@ -477,3 +477,50 @@ Loading stuff from loading.css */
   background-color: rgb(164, 76, 76);
   color: black;
 }
+
+#friend-menu {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1vh;
+}
+
+#friend-post-section {
+  width: 100vh;
+  height: 65vh;
+  margin-inline: auto;
+  background-color: rgb(249, 252, 255);
+  margin-right: 0;
+  margin-left: 0;
+}
+
+#friends-friends-list {
+  background-color: rgb(245, 250, 255);
+  border-radius: 10px;
+  text-align: center;
+  width: 27vh;
+  padding: 2vh;
+  margin: 5px;
+  max-height: 65vh;
+  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+#friends-search-info {
+  width: 27vh;
+  margin: 5px;
+  text-align: center;
+  background-color: rgb(245, 250, 255);
+  padding: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+#friend-buttons {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30vh;
+}
