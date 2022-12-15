@@ -12,9 +12,10 @@ const REGION = "us-east-1";
 const PRIVATE_KEY = ACCESS_KEY;
 const SECRET_KEY = SECRET_ACCESS_KEY;
 
-const TEXT_aws_upload = "This is the window pop-up to upload your entry's photo. \
-Click the upload button to select your photo."
-const TEXT_button = "Upload your photo by clicking here."
+const TEXT_aws_upload =
+  "This is the window pop-up to upload your entry's photo. \
+Click the upload button to select your photo.";
+const TEXT_button = "Upload your photo by clicking here.";
 
 const config = {
   bucketName: S3_BUCKET,

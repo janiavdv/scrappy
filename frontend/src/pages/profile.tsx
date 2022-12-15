@@ -11,6 +11,8 @@ import Entry from "../gencomponents/EntryObject";
 import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
 import Loading from "../gencomponents/loading";
 import FriendComponent, {
+  FriendComponentReact,
+  FriendListComponent,
   grabFriendComponents,
 } from "../gencomponents/friendcomponent";
 
@@ -240,24 +242,10 @@ export default function Profile() {
           </div>
         </div>
         <div id="right-bar-profile">
-          <div id="profile-friends-list">
-            <h3>Friends</h3>
-            <hr></hr>
-            {friendList ? (
-              friendList.map((friend) => (
-                <div key={friend.username} className="friend-in-list">
-                  <img
-                    src={friend.image}
-                    referrerPolicy="no-referrer"
-                    className="friend-profile-pic"
-                  />
-                  <p>{friend.username}</p>
-                </div>
-              ))
-            ) : (
-              <Loading />
-            )}
-          </div>
+          <FriendListComponent
+            friendList={friendList}
+            setFriends={setFriends}
+          />
           <div id="create-page">
             <h3>Add to today's book!</h3>
             <button

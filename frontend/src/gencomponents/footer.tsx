@@ -2,11 +2,11 @@ import User from "./user";
 import { useNavigate } from "react-router-dom";
 
 const TEXT_footer = `This is the footer, which contains buttons that link to our
-about, help, FAQ, and privacy page.`
-const TEXT_about_button = `Click here for the about page!`
-const TEXT_help_button = `Click here for the help page!`
-const TEXT_faq_button = `Click here for the FAQs page!`
-const TEXT_privacy_button = `Clicke here for our privacy policy!`
+about, help, FAQ, and privacy page.`;
+const TEXT_about_button = `Click here for the about page!`;
+const TEXT_help_button = `Click here for the help page!`;
+const TEXT_faq_button = `Click here for the FAQs page!`;
+const TEXT_privacy_button = `Clicke here for our privacy policy!`;
 
 export default function Footer({ user }: { user: User | null }) {
   const navigate = useNavigate();

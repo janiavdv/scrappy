@@ -357,6 +357,7 @@ button:hover {
   background-color: rgb(241, 246, 250);
   border-radius: 10px;
   margin: 1vh;
+  padding: 1vh;
 }
 
 .page-img {
@@ -439,4 +440,24 @@ Loading stuff from loading.css */
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Friends page */
+
+.retrieved-friend-query {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  background-color: rgb(58, 136, 160);
+}
+
+.remove-friend-button {
+  background-color: rgb(255, 214, 214);
+  color: black;
+}
+
+.remove-friend-button:hover {
+  background-color: rgb(164, 76, 76);
+  color: black;
 }

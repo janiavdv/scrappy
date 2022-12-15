@@ -1,19 +1,97 @@
+import { Dispatch, SetStateAction, useState } from "react";
 import { getQuery } from "../utils/dbutils";
+import Loading from "./loading";
 import User from "./user";
+
+export interface FriendComponentProps {
+  username: string;
+  friendList: FriendComponent[] | null;
+  image: string;
+  setFriends: Dispatch<SetStateAction<FriendComponent[] | null>>;
+}
 
 export default interface FriendComponent {
   username: string;
   image: string;
 }
 
-export function FriendComponent({username, image}: FriendComponent) {
+export function FriendComponentReact({
+  username,
+  image,
+  friendList,
+  setFriends,
+}: FriendComponentProps) {
+  const [clicked, setClick] = useState<boolean>(false);
+
   return (
-    <div>
-      <img src={image}/>
+    <div className="friend-in-list">
+      <img
+        src={image}
+        className="friend-profile-pic"
+        referrerPolicy="no-referrer"
+      />
+      <p>{username}</p>
+      <button
+        className={"remove-friend-button"}
+        onClick={() => {
+          if (!clicked) {
+            setClick(true);
+          } else {
+            if (friendList) {
+              let newList = friendList.filter((el) => el.username != username);
+              setFriends(newList);
+              // actually take out of the database!
+            }
+          }
+        }}
+      >
+        {clicked ? "Confirm Deletion" : "X"}
+      </button>
+    </div>
+  );
+}
+
+export function FriendComponentSearch({ username, image }: FriendComponent) {
+  return (
+    <div className="friend-in-list">
+      <img
+        src={image}
+        className="friend-profile-pic"
+        referrerPolicy="no-referrer"
+      />
       <p>{username}</p>
     </div>
-  )
+  );
+}
 
+export interface FriendListComponent {
+  friendList: FriendComponent[] | null;
+  setFriends: Dispatch<SetStateAction<FriendComponent[] | null>>;
+}
+
+export function FriendListComponent({
+  friendList,
+  setFriends,
+}: FriendListComponent) {
+  return (
+    <div id="profile-friends-list">
+      <h3>Friends</h3>
+      <hr></hr>
+      {friendList ? (
+        friendList.map((friend) => (
+          <FriendComponentReact
+            image={friend.image}
+            username={friend.username}
+            key={friend.username}
+            setFriends={setFriends}
+            friendList={friendList}
+          />
+        ))
+      ) : (
+        <Loading />
+      )}
+    </div>
+  );
 }
 
 export async function grabFriendComponents(
