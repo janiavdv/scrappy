@@ -11,10 +11,6 @@ const TEXT_user_posts = `Here you can view your friends' posts and search.`
 const TEXT_posts_button = `Click here to see posts!`
 const TEXT_search_button = `Click here to search for books!`
 
-const TEXT_user_posts = `Here you can view your friends' posts and search.`
-const TEXT_posts_button = `Click here to see posts!`
-const TEXT_search_button = `Click here to search for books!`
-
 function Posts() {
     return <p>these are all your friends' posts</p>;
 }
@@ -88,22 +84,28 @@ export default function Friends() {
     });
     const [modalDisplay, setModalDisplay] = useState<boolean>(false); // For controlling the search bar
 
-  return (
-    <div>
-      <Header user={user} />
-      <div id="book-buttons" aria-label={TEXT_user_posts}>
-        <button aria-roledescription={TEXT_posts_button}>
-          Posts
-        </button>
-        <button aria-roledescription={TEXT_search_button}>
-          Search
-        </button>
-      </div>
-      <hr></hr>
-      <div id="friend-menu">
-        <Posts />
-      </div>
-      <Footer user={user} />
-    </div>
-  );
+    return (
+        <div>
+            <Header user={user} />
+            <div id="book-buttons" aria-label={TEXT_user_posts}>
+                <button aria-roledescription={TEXT_posts_button}>
+                    Posts
+                </button>
+                <button aria-roledescription={TEXT_search_button}
+                    type="submit"
+                    value="Search"
+                    onClick={() => {
+                        setModalDisplay(true);
+                    }}
+                >Search
+                </button>
+            </div>
+            <hr></hr>
+            <div id="friend-menu">
+                <Posts />
+                <SearchModal display={modalDisplay} setDisplay={setModalDisplay} />
+            </div>
+            <Footer user={user} />
+        </div>
+    );
 }
