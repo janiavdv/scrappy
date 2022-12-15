@@ -6,6 +6,16 @@ export default interface FriendComponent {
   image: string;
 }
 
+export function FriendComponent({username, image}: FriendComponent) {
+  return (
+    <div>
+      <img src={image}/>
+      <p>{username}</p>
+    </div>
+  )
+
+}
+
 export async function grabFriendComponents(
   user: User
 ): Promise<FriendComponent[]> {

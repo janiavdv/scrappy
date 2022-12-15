@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { uploadFile } from "react-s3";
+import { ACCESS_KEY, SECRET_ACCESS_KEY } from "../private/credentials";
 // https://stackoverflow.com/questions/69686231/react-s3-error-referenceerror-buffer-is-not-defined
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -8,14 +9,18 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const S3_BUCKET = "scrappyuploads";
 const REGION = "us-east-1";
-const ACCESS_KEY = "AKIAVSEGDI5QPF7BRARY";
-const SECRET_ACCESS_KEY = "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";
+const PRIVATE_KEY = ACCESS_KEY;
+const SECRET_KEY = SECRET_ACCESS_KEY;
+
+const TEXT_aws_upload = "This is the window pop-up to upload your entry's photo. \
+Click the upload button to select your photo."
+const TEXT_button = "Upload your photo by clicking here."
 
 const config = {
   bucketName: S3_BUCKET,
   region: REGION,
-  accessKeyId: ACCESS_KEY,
-  secretAccessKey: SECRET_ACCESS_KEY,
+  accessKeyId: PRIVATE_KEY,
+  secretAccessKey: SECRET_KEY,
 };
 
 interface uploadProps {
@@ -46,10 +51,11 @@ export default function UploadImageToS3WithReactS3({
   };
 
   return (
-    <div id="aws-upload">
+    <div id="aws-upload" aria-label={TEXT_aws_upload}>
       <h3>Upload a photo! (Required.)</h3>
       <input type="file" onChange={handleFileInput} />
       <button
+        aria-roledescription={TEXT_button}
         onClick={() => {
           setStatus("Uploading...");
           handleUpload(selectedFile).then(() => setStatus("Uploaded."));

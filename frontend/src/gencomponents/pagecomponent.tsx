@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getEntryOffID } from "../utils/dbutils";
 import Entry from "./EntryObject";
 
+
 export interface PageProps {
   id: string;
 }
@@ -16,6 +17,11 @@ export default function Page({ id }: PageProps) {
   }, []);
 
   if (pageInfo != null) {
+
+    const TEXT_page = `This is a page in your book. Its title is ${pageInfo.title}
+    and it is page number ${pageInfo.tag}. It contains an image and a caption 
+    reading ${pageInfo.caption}.`
+
     return (
       <div className="page">
         <hr className="page-divider-top"></hr>
