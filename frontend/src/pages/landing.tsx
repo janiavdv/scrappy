@@ -61,6 +61,8 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
   const [tags, setTags] = useState<string[]>([]);
   const navigate = useNavigate();
 
+  const [userExists, setUserExists] = useState<boolean>(false);
+
   if (!display) {
     return null;
   } else {
@@ -118,7 +120,8 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
             value="Submit"
             onClick={async () => {
               if (userValue !== "" && nameValue !== "") { // if the parameters aren't empty
-                if (getQuery("USERNAME", "username", userValue) == null) { // if the user doesn't already exist
+                const existingUser: User | null = await getQuery("USERNAME", "username", userValue)
+                if (existingUser == null) { // if the user doesn't already exist
                   const user: User = {
                     name: nameValue,
                     username: userValue,
@@ -134,11 +137,16 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                   navigate("/profile:" + userValue, { state: user });
                 }
                 else {
+                  console.log("user exists!!!")
+                  setUserExists(true)
                   // do something when the user already exists!
                 }
               }
             }}> Submit
           </button>
+          <div id="user-exists-error">
+            <p> {userExists ? "User already exists!" : null} </p>
+          </div>
         </div>
       </div >
     );
