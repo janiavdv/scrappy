@@ -81,6 +81,8 @@ function PageModal({
         Your post is, by default, public. This means anyone in the world can see
         it. If you want it just for friends, make it private using the button
         below.
+        <br />
+        <br />
         <button onClick={() => setPrivacy(!privacyValue)}>
           {privacyValue ? "Privatize" : "Publicize"}
         </button>

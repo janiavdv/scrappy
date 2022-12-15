@@ -126,6 +126,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
               if (userValue !== "" && nameValue !== "") { // if the parameters aren't empty
                 const existingUser: User | null = await getQuery("USERNAME", "username", userValue)
                 if (existingUser == null) { // if the user doesn't already exist
+                  setUserExists(false)
                   const user: User = {
                     name: nameValue,
                     username: userValue,

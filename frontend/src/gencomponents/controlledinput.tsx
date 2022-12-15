@@ -32,7 +32,7 @@ export default function ControlledInput({
         if (spaces) {
           setValue(ev.target.value);
         } else {
-          setValue(ev.target.value.replace(/[^\w\s]/gi, ""));
+          setValue(ev.target.value.replace(/[^\w]/gi, ""));
         }
       }} // For resetting.
       aria-label={ariaLabel}
