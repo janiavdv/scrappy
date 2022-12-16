@@ -75,7 +75,6 @@ public class DatabaseHandler implements Route {
             String tags = request.queryParams("tags").replace("[", "");
             tags.replace("]", "");
             tags.replace("\"", "");
-            System.out.println(tags);
             List<String> tagsList = List.of(tags.split(","));
             user.setTags(tagsList);
             Document newUser = DBDocumentUtil.convert(user);

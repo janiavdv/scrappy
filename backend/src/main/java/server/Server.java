@@ -17,6 +17,12 @@ public class Server {
   // Here we declare the instance variables for the Server class.
   private static MongoDB mongoDB;
 
+  // This method is primarily used for testing, as we needed to set our server's database to be the
+  // mock database
+  public static void setMyDatabase(MongoDB database) {
+    mongoDB = database;
+  }
+
   /**
    * A static getter method which gets the Database.
    *
@@ -41,6 +47,7 @@ public class Server {
         });
 
     mongoDB = new MongoDB();
+    mongoDB.setDatabase("myDatabase");
 
     Spark.get("database", new DatabaseHandler());
 

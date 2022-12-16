@@ -1,21 +1,27 @@
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.squareup.moshi.Moshi;
+import database.MongoDB;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import okio.Buffer;
 import java.util.Map;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.Document;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.Server;
 import server.handlers.DatabaseHandler;
 import server.handlers.QuoteHandler;
 import server.handlers.NYTHandler;
@@ -27,6 +33,8 @@ import spark.Spark;
  */
 public class HandlerTest {
 
+  private static MongoDB testMongoDB;
+
   /**
    * Set the Spark port number. Remove the logging spam during tests.
    */
@@ -34,6 +42,10 @@ public class HandlerTest {
   public static void setupServer() {
     Spark.port(0);
     Logger.getLogger("").setLevel(Level.WARNING); // empty name = root logger
+
+    testMongoDB = new MongoDB();
+    testMongoDB.setDatabase("mockDatabase");
+    Server.setMyDatabase(testMongoDB);
   }
 
   // Shared state for all tests.
@@ -141,8 +153,6 @@ public class HandlerTest {
 
   @Test
   public void testDatabaseAddUser() throws IOException {
-
-    // call quote
     HttpURLConnection clientConnection = tryRequest("database?command=ADD&type=USER&email=a&username=b&name=c&profilePic=d&tags=[a,b,c]");
     assertEquals(200, clientConnection.getResponseCode());
     clientConnection.connect();
@@ -152,8 +162,68 @@ public class HandlerTest {
 
     Map<String, Object> successResponse = new HashMap<>();
     successResponse.put("result", "success");
-    // test that a quote and author were returned
     assertTrue(loadMap.equals(successResponse));
+
+    Document doc = Server.getMyDatabase().getUsersColl().find(new Document("username", "b")).first();
+
+    assertEquals(doc.get("email"), "a");
+    assertEquals(doc.get("username"), "b");
+    assertEquals(doc.get("name"), "c");
+    assertEquals(doc.get("profilePic"), "d");
+    assertEquals(doc.get("tags"), List.of("a", "b", "c]"));
+    assertTrue(doc.containsKey("friendsRequest"));
+    assertTrue(doc.containsKey("friendsList"));
+    assertTrue(doc.containsKey("books"));
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testDatabaseAddEntry() throws IOException {
+    HttpURLConnection clientConnection = tryRequest("database?command=ADD&type=ENTRY&title=a"
+        + "&caption=b&time=3:00pm&date=12/15&tag=e&image=f&entryID=g&user=b&public=no");
+    assertEquals(200, clientConnection.getResponseCode());
+    clientConnection.connect();
+
+    // deserialize to a map to be able to check the result
+    Map<String, Object> loadMap = getResponse(clientConnection);
+
+    Map<String, Object> successResponse = new HashMap<>();
+    successResponse.put("result", "success");
+
+    assertTrue(loadMap.equals(successResponse));
+
+    Document doc = Server.getMyDatabase().getEntriesColl().find(new Document("title", "a")).first();
+    assertEquals(doc.get("title"), "a");
+    assertEquals(doc.get("caption"), "b");
+    assertEquals(doc.get("time"), "3:00pm");
+    assertEquals(doc.get("date"), "12/15");
+    assertEquals(doc.get("tag"), "e");
+    assertEquals(doc.get("imageLink"), "f");
+    assertEquals(doc.get("entryID"), "g");
+    assertEquals(doc.get("user"), "b");
+    assertEquals(doc.get("publicized"), false);
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testDatabaseAddBook() throws IOException {
+    HttpURLConnection clientConnection = tryRequest("database?command=ADD&type=BOOK&title=a"
+        + "&bookID=b&date=12/15&nyt=news!&quote=quote&username=b");
+    assertEquals(200, clientConnection.getResponseCode());
+    clientConnection.connect();
+
+    // deserialize to a map to be able to check the result
+    Map<String, Object> loadMap = getResponse(clientConnection);
+
+    Map<String, Object> successResponse = new HashMap<>();
+    successResponse.put("result", "success");
+
+    assertTrue(loadMap.equals(successResponse));
+
+    Document doc = Server.getMyDatabase().getUsersColl().find(new Document("username", "b")).first();
+    assertNotEquals(Collections.emptyList(), doc.get("books"));
 
     clientConnection.disconnect();
   }

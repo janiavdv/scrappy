@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import privacy.Credentials;
 // Notice our import statements above.
 
 /**
@@ -17,15 +18,22 @@ public class MongoDB {
   private static MongoDatabase database;
   private static MongoCollection<Document> usersColl;
   private static MongoCollection<Document> entriesColl;
-  private static MongoCollection<Document> booksColl;
 
   /**
    * This is the constructor for our MongoDB class. Inside it, we initialize the instance variables
    * declared above.
    */
   public MongoDB() {
-    client = MongoClients.create("mongodb+srv://acho28:scrappy@scrappy.uwn0mgi.mongodb.net/test");
-    database = client.getDatabase("myDatabase");
+    client = MongoClients.create("mongodb+srv://acho28:"+ Credentials.databasePassword + "@scrappy.uwn0mgi.mongodb.net/test");
+  }
+
+  /**
+   * Method for setting up the database (allows developer to choose which database within the Mongo
+   * Client they would like to use)
+   * @param databaseName The String name of the chosen database
+   */
+  public void setDatabase(String databaseName) {
+    database = client.getDatabase(databaseName);
     usersColl = database.getCollection("Users");
     entriesColl = database.getCollection("Entries");
   }
@@ -49,4 +57,11 @@ public class MongoDB {
   public MongoCollection<Document> getEntriesColl() {
     return entriesColl;
   }
+
+  // for testing
+//  public void testingDatabase() {
+//    database = client.getDatabase("mockDatabase");
+//    usersColl = database.getCollection("Users");
+//    entriesColl = database.getCollection("Entries");
+//  }
 }
