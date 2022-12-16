@@ -14,21 +14,13 @@ export default function FAQ() {
         <h4>
           We are 5 friends from CS 32 at Brown University who believe in journaling and creating memories!
         </h4>
-        <h3>How do I log out?</h3>
+        <h3>How long did this current version take us?</h3>
         <h4>
-          Click the "log out" button in the top right corner.
+          75 hours!
         </h4>
-        <h3>How do I post?</h3>
+        <h3>What future updates can we imagine being added?</h3>
         <h4>
-          The post button is on the profile page on the righ panel!
-        </h4>
-        <h3>How do I add a friend?</h3>
-        <h4>
-          Hit the search button on the "Friends" page. Enter your friend's exact user!
-        </h4>
-        <h3>I noticed a bug, how do I contact the creators?</h3>
-        <h4>
-          Email one of us! tyler_gurth@brown.edu, jania_vandevoorde@brown.edu, alana_cho@brown.edu, gianna_aiello@brown.edu, zachary_boston@brown.edu
+          An update that would allow the user to see reccomended mutual friends, and a mobile version!
         </h4>
       </div>
       <Footer user={st} />
