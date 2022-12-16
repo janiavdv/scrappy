@@ -16,7 +16,7 @@ export default function About() {
         </h4>
         <h4>
           date, weather (high/low), horoscope, new york times headlines, stocks
-          etc. The list goes on for each user
+          etc. The list goes on for each user.
         </h4>
         <h4>
           Throughout the day, a user can add images to the book with captions.
