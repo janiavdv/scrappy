@@ -403,6 +403,8 @@ button:hover {
   justify-content: center; */
   width: 65%;
   margin: 0 auto;
+  height: 75vh;
+  overflow-y: scroll;
 }
 
 #modal-upload-buttons {

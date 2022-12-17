@@ -6,9 +6,9 @@ import Footer from "../gencomponents/footer";
 import User from "../interfaces/user";
 import { getQuery } from "../utils/dbutils";
 import FriendComponent, {
-  FriendComponentSearch,
   FriendListComponent,
-  grabFriendComponents,
+  FriendSearchResult,
+  grabFriends,
 } from "../gencomponents/friendcomponent";
 import { useEffect } from "react";
 
@@ -88,7 +88,7 @@ function SearchModal({ display, setDisplay, searcher }: SearchModalProps) {
         <div id="searched-friend">
           {searchedFriend ? (
             <div className="retrieved-friend-query">
-              <FriendComponentSearch
+              <FriendSearchResult
                 username={searchedFriend.username}
                 image={searchedFriend.profilePic}
               />
@@ -138,7 +138,7 @@ export default function Friends() {
 
   useEffect(() => {
     if (friendList == null) {
-      grabFriendComponents(user).then((fList) => setFriends(fList));
+      grabFriends(user).then((fList) => setFriends(fList));
     }
   }, []);
   return (
@@ -168,6 +168,7 @@ export default function Friends() {
           friendList={friendList}
           setFriends={setFriends}
           extended={true}
+          user={user}
         />
         <SearchModal
           display={modalDisplay}

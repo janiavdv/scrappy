@@ -74,3 +74,12 @@ export async function getEntryOffID(entryID: string) {
     return null;
   }
 }
+
+export async function removeFriendFromDatabase(
+  user: User,
+  friendUsername: string
+) {
+  await fetch(
+    `http://localhost:3232/database?command=REMOVE-FRIEND&username=${user.username}&removedFriend=${friendUsername}`
+  );
+}

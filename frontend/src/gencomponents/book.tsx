@@ -11,6 +11,7 @@ export interface BookProps {
 }
 
 export async function createDefaultBook(user: User): Promise<BookObject> {
+  console.log("trying to create a new book");
   let dataArr = await setAllData();
   const id: number = new Date().getTime();
   const date: string = new Date().toLocaleDateString("en-US", {

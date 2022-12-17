@@ -10,7 +10,7 @@ export default function Privacy() {
     <div>
       <Header user={st} />
       <div className="extra-page-content">
-        <h1>PRIVACY</h1>
+        <h2>PRIVACY</h2>
         <h3>
           We at Scrappy want you to feel comfortable with using our application
           and understand what we are doing with the information and data that

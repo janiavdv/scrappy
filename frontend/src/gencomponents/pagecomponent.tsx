@@ -21,7 +21,7 @@ export default function Page({ id }: PageProps) {
     reading ${pageInfo.caption}.`;
 
     return (
-      <div className="page">
+      <div className="page" aria-label={TEXT_page}>
         <hr className="page-divider-top"></hr>
         <div className="page-header">
           <div className="left-page-header">

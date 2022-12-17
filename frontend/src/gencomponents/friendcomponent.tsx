@@ -1,22 +1,24 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { getQuery } from "../utils/dbutils";
+import { getQuery, removeFriendFromDatabase } from "../utils/dbutils";
 import Loading from "./loading";
 import User from "../interfaces/user";
 
 export interface FriendComponentProps {
-  username: string;
-  friendList: FriendComponent[] | null;
+  friendUsername: string;
+  friendList: Friend[] | null;
   image: string;
-  setFriends: Dispatch<SetStateAction<FriendComponent[] | null>>;
+  setFriends: Dispatch<SetStateAction<Friend[] | null>>;
+  user: User;
 }
 
-export default interface FriendComponent {
+export default interface Friend {
   username: string;
   image: string;
 }
 
-export function FriendComponentReact({
-  username,
+export function FriendComponent({
+  user,
+  friendUsername,
   image,
   friendList,
   setFriends,
@@ -30,7 +32,7 @@ export function FriendComponentReact({
         className="friend-profile-pic"
         referrerPolicy="no-referrer"
       />
-      <p>{username}</p>
+      <p>{friendUsername}</p>
       <button
         className={"remove-friend-button"}
         onClick={() => {
@@ -38,8 +40,11 @@ export function FriendComponentReact({
             setClick(true);
           } else {
             if (friendList) {
-              let newList = friendList.filter((el) => el.username != username);
+              let newList = friendList.filter(
+                (el) => el.username != friendUsername
+              );
               setFriends(newList);
+              removeFriendFromDatabase(user, friendUsername);
               // actually take out of the database!
             }
           }
@@ -51,7 +56,7 @@ export function FriendComponentReact({
   );
 }
 
-export function FriendComponentSearch({ username, image }: FriendComponent) {
+export function FriendSearchResult({ username, image }: Friend) {
   return (
     <div className="friend-in-list">
       <img
@@ -65,15 +70,17 @@ export function FriendComponentSearch({ username, image }: FriendComponent) {
 }
 
 export interface FriendListComponent {
-  friendList: FriendComponent[] | null;
-  setFriends: Dispatch<SetStateAction<FriendComponent[] | null>>;
+  friendList: Friend[] | null;
+  setFriends: Dispatch<SetStateAction<Friend[] | null>>;
   extended: boolean;
+  user: User;
 }
 
 export function FriendListComponent({
   friendList,
   setFriends,
   extended,
+  user,
 }: FriendListComponent) {
   return (
     <div id={extended ? "friends-friends-list" : "profile-friends-list"}>
@@ -81,9 +88,10 @@ export function FriendListComponent({
       <hr></hr>
       {friendList ? (
         friendList.map((friend) => (
-          <FriendComponentReact
+          <FriendComponent
             image={friend.image}
-            username={friend.username}
+            friendUsername={friend.username}
+            user={user}
             key={friend.username}
             setFriends={setFriends}
             friendList={friendList}
@@ -96,18 +104,16 @@ export function FriendListComponent({
   );
 }
 
-export async function grabFriendComponents(
-  user: User
-): Promise<FriendComponent[]> {
+export async function grabFriends(user: User): Promise<Friend[]> {
   let userdata = await getQuery("USERNAME", "username", user.username);
 
   if (userdata != null) {
     let fList: string[] = userdata.friendsList;
-    let fComponentList: FriendComponent[] = [];
+    let fComponentList: Friend[] = [];
     for (let i = 0; i < fList.length; i++) {
       let friendInfo = await getQuery("USERNAME", "username", fList[i]);
       if (friendInfo != null) {
-        let fComponent: FriendComponent = {
+        let fComponent: Friend = {
           username: friendInfo.username,
           image: friendInfo.profilePic,
         };

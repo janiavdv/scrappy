@@ -11,9 +11,8 @@ import Entry from "../interfaces/EntryObject";
 import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
 import Loading from "../gencomponents/loading";
 import FriendComponent, {
-  FriendComponentReact,
   FriendListComponent,
-  grabFriendComponents,
+  grabFriends,
 } from "../gencomponents/friendcomponent";
 
 interface PageModalProps {
@@ -163,23 +162,22 @@ export default function Profile() {
 
   useEffect(() => {
     if (todayBook == null) {
-      console.log("im being called");
       getBookListFromDatabase(user).then((booklist) => {
-        if (booklist.length !== 0) {
-          for (let i = 0; i < booklist.length; i++) {
-            if (
-              booklist[i].date ===
-              new Date().toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-              })
-            ) {
-              console.log("i match!");
-              setBook(booklist[i]);
-            }
+        let foundbook: boolean = false;
+        for (let i = 0; i < booklist.length; i++) {
+          if (
+            booklist[i].date ===
+            new Date().toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })
+          ) {
+            foundbook = true;
+            setBook(booklist[i]);
           }
-        } else {
+        }
+        if (foundbook == false) {
           createDefaultBook(user).then((b) => {
             setBook(b);
           });
@@ -188,7 +186,7 @@ export default function Profile() {
     }
 
     if (friendList == null) {
-      grabFriendComponents(user).then((fList) => setFriends(fList));
+      grabFriends(user).then((fList) => setFriends(fList));
     }
   }, []);
 
@@ -266,6 +264,7 @@ export default function Profile() {
             friendList={friendList}
             setFriends={setFriends}
             extended={false}
+            user={user}
           />
           <div id="create-page">
             <h3>Add to today's book!</h3>
