@@ -4,10 +4,18 @@ body {
 }
 
 #landing-main-page-box {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   display: flex;
   justify-content: space-around;
-  background-image: url("assets/peopleonboat.png");
+  background: linear-gradient(
+    203deg,
+    rgba(222, 252, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 39%,
+    rgba(255, 255, 255, 1) 52%,
+    rgba(233, 251, 255, 1) 60%,
+    rgb(185, 243, 255) 100%
+  );
+
+  /* background-image: url("assets/peopleonboat.png"); */
   height: 88vh;
   background-size: 1500px;
   overflow: hidden;
@@ -26,12 +34,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 6vh;
-  margin-left: -10vh;
+  margin-left: -5vh;
 }
 
 h1 {
   font-size: 20vh;
-  line-height: 4vh;
+  line-height: 3vh;
 }
 
 h2 {
@@ -40,7 +48,7 @@ h2 {
 
 #logopic {
   margin: 3vh;
-  width: 15vh;
+  width: 18vh;
   height: inherit;
 }
 
@@ -52,8 +60,6 @@ h2 {
 
 #footer div {
   padding: 2vh;
-  margin-left: 15%;
-  margin-right: 15%;
   line-height: 0;
   align-items: center;
 
@@ -68,10 +74,12 @@ h2 {
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-end;
+  margin: 15px;
+  margin-right: 25px;
 }
 
 #sample-entry {
-  width: 35vh;
+  width: 80vh;
   height: inherit;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 2px rgb(213, 213, 213);
@@ -186,7 +194,7 @@ button:hover {
   background-color: rgb(245, 250, 255);
   height: 12vh;
   padding: 5px;
-  box-shadow: 0px 3px 2px 0px rgb(220, 220, 220);
+  box-shadow: 0px 4px 2px 0px rgb(220, 220, 220);
 }
 
 #left-nav {
@@ -273,12 +281,12 @@ button:hover {
 }
 
 #book-menu {
-  padding: 7vh;
+  padding: 1vh;
   width: 100vh;
 }
 
 #today-book {
-  height: 50vh;
+  height: 55vh;
   overflow: hidden;
   overflow: scroll;
   display: flex;
@@ -294,6 +302,8 @@ button:hover {
   margin-right: auto;
   padding: 2px;
   margin-bottom: 5px;
+  font-size: large;
+  text-align: justify;
 }
 
 #profile-friends-list {
@@ -322,6 +332,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 3vh;
 }
 
 .page-divider-top {
@@ -364,6 +375,10 @@ button:hover {
   margin-top: 10px;
 }
 
+.left-page-header {
+  margin: 1px;
+}
+
 .friend-in-list {
   display: flex;
   justify-content: center;
@@ -378,7 +393,8 @@ button:hover {
 
 .page-img {
   border-radius: 10px;
-  margin: 2px;
+  margin: 5px;
+  margin-left: 20px;
   width: 30vh;
 }
 
@@ -490,6 +506,7 @@ Loading stuff from loading.css */
   display: flex;
   justify-content: space-evenly;
   margin: 1vh;
+  height: 73vh;
 }
 
 #friend-post-section {

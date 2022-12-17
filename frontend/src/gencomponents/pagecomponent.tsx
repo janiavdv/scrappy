@@ -41,6 +41,7 @@ export default function Page({ id }: PageProps) {
               })}
             </h4>
             <p>{"#" + pageInfo.tag}</p>
+            <code>{pageInfo.caption}</code>
           </div>
 
           <img
@@ -50,7 +51,6 @@ export default function Page({ id }: PageProps) {
           />
         </div>
 
-        <code>Caption: {pageInfo.caption}</code>
         <hr className="page-divider-bottom"></hr>
       </div>
     );

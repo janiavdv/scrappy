@@ -225,7 +225,7 @@ export default function Landing() {
       <div id="landing-main-page-box">
         <div id="main-left">
           <h1>Scrappy</h1>
-          <h2>Let's Make Memories</h2>
+          <h2>Let's Make Memories.</h2>
           <div id="google-button">
             <GoogleOAuthProvider clientId={authcred}>
               <AuthButton
@@ -235,15 +235,10 @@ export default function Landing() {
               />
             </GoogleOAuthProvider>
           </div>
-          <blockquote>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </blockquote>
+          <h3>
+            A digital memory bank, Scrappy serves to document and album your
+            life in pictures.
+          </h3>
         </div>
         <div id="main-right">
           <img src={logo} id="logopic"></img>
