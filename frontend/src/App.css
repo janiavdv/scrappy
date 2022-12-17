@@ -401,10 +401,11 @@ button:hover {
   /* display: flex;
   flex-direction: column;
   justify-content: center; */
-  width: 65%;
+  width: 66%;
   margin: 0 auto;
   height: 75vh;
   overflow-y: scroll;
+  font-size: large;
 }
 
 #modal-upload-buttons {
@@ -439,6 +440,7 @@ Loading stuff from loading.css */
   display: inline-block;
   width: 80px;
   height: 80px;
+  margin-inline: auto;
 }
 .lds-dual-ring:after {
   content: " ";
@@ -447,8 +449,8 @@ Loading stuff from loading.css */
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid rgb(223, 255, 254);
-  border-color: #fff transparent #fff transparent;
+  border: 6px solid rgb(0, 0, 0);
+  border-color: rgb(153, 240, 255) transparent #fff transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
@@ -458,6 +460,10 @@ Loading stuff from loading.css */
   100% {
     transform: rotate(360deg);
   }
+}
+
+.loading {
+  margin-inline: auto;
 }
 
 /* Friends page */
