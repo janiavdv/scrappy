@@ -4,22 +4,67 @@ body {
 }
 
 #landing-main-page-box {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: space-around;
-  background: linear-gradient(
+  /* background: linear-gradient(
     203deg,
     rgba(222, 252, 255, 1) 0%,
     rgba(255, 255, 255, 1) 39%,
     rgba(255, 255, 255, 1) 52%,
     rgba(233, 251, 255, 1) 60%,
     rgb(185, 243, 255) 100%
-  );
+  ); */
 
-  /* background-image: url("assets/peopleonboat.png"); */
-  height: 88vh;
+  height: 88.5vh;
   background-size: 1500px;
   overflow: hidden;
   padding: 5px;
+}
+
+#landing-backgrounds {
+  filter: blur(10px);
+}
+
+#landing-background {
+  z-index: 0;
+  width: 2000px;
+  height: 2000px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #d3faff;
+  animation: landing-background 30s linear infinite;
+}
+
+#landing-background-2 {
+  z-index: 1;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: rgb(230, 251, 255);
+  animation: landing-background 25s linear infinite;
+}
+
+@keyframes landing-background {
+  0% {
+    transform: rotate(0deg);
+    scale: 100%;
+    margin-left: 500px;
+    border-radius: 50%;
+  }
+  50% {
+    scale: 20%;
+    margin-left: -500px;
+    border-radius: 0%;
+  }
+  100% {
+    transform: rotate(360deg);
+    scale: 100%;
+    margin-left: 500px;
+    border-radius: 50%;
+  }
 }
 
 #google-button {
@@ -59,6 +104,8 @@ h2 {
 }
 
 #footer div {
+  position: relative;
+  z-index: 3;
   padding: 2vh;
   line-height: 0;
   align-items: center;
@@ -66,7 +113,7 @@ h2 {
   display: flex;
   justify-content: space-around;
   background-color: rgb(245, 250, 255);
-  height: 6vh;
+  height: 6.3vh;
 }
 
 #main-right {

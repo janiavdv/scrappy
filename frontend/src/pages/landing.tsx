@@ -222,27 +222,34 @@ export default function Landing() {
 
   return (
     <div>
-      <div id="landing-main-page-box">
-        <div id="main-left">
-          <h1>Scrappy</h1>
-          <h2>Let's Make Memories.</h2>
-          <div id="google-button">
-            <GoogleOAuthProvider clientId={authcred}>
-              <AuthButton
-                setDisplay={setModalDisplay}
-                setEmail={setEmail}
-                setPicture={setPicture}
-              />
-            </GoogleOAuthProvider>
-          </div>
-          <h3>
-            A digital memory bank, Scrappy serves to document and album your
-            life in pictures.
-          </h3>
+      <div id="landing-page">
+        <div id="landing-backgrounds">
+          <div id="landing-background-2"></div>
+          <div id="landing-background"></div>
         </div>
-        <div id="main-right">
-          <img src={logo} id="logopic"></img>
-          <img src={sample} id="sample-entry"></img>
+
+        <div id="landing-main-page-box">
+          <div id="main-left">
+            <h1>Scrappy</h1>
+            <h2>Let's Make Memories.</h2>
+            <div id="google-button">
+              <GoogleOAuthProvider clientId={authcred}>
+                <AuthButton
+                  setDisplay={setModalDisplay}
+                  setEmail={setEmail}
+                  setPicture={setPicture}
+                />
+              </GoogleOAuthProvider>
+            </div>
+            <h3>
+              A digital memory bank, Scrappy serves to document and album your
+              life in pictures.
+            </h3>
+          </div>
+          <div id="main-right">
+            <img src={logo} id="logopic"></img>
+            <img src={sample} id="sample-entry"></img>
+          </div>
         </div>
       </div>
       <Footer user={null} />
