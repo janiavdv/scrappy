@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../gencomponents/header";
+import Footer from '../gencomponents/footer'
 import User from "../interfaces/user";
+import { GalleryPosts } from "../gencomponents/posts";
 
 export default function Gallery() {
   const st: User = useLocation().state;
@@ -20,7 +22,8 @@ export default function Gallery() {
   return (
     <div>
       <Header user={user} />
-      <h1>This is the Gallery Page</h1>
+      <GalleryPosts />
+      <Footer user={user} />
     </div>
   );
 }
