@@ -256,13 +256,17 @@ public class DatabaseHandler implements Route {
       case "REMOVE-FRIEND" -> {
         Bson filteredUser = Filters.eq("username", request.queryParams("username"));
         Bson removeRequest;
+        FindOneAndUpdateOptions removedFriend = new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER);
+
         if (Boolean.parseBoolean(request.queryParams("isRequest"))) {
           removeRequest = Updates.pull("friendsRequest", request.queryParams("removedFriend"));
         } else {
           removeRequest = Updates.pull("friendsList", request.queryParams("removedFriend"));
-        }
+          Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser, removeRequest, removedFriend);
 
-        FindOneAndUpdateOptions removedFriend = new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER);
+          filteredUser = Filters.eq("username", request.queryParams("removedFriend"));
+          removeRequest = Updates.pull("friendsList", request.queryParams("username"));
+        }
 
         Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser, removeRequest, removedFriend);
         return databaseSuccessResponse();
