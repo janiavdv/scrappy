@@ -8,11 +8,14 @@ import Footer from "../gencomponents/footer";
 import { Book as BookReact, createDefaultBook } from "../gencomponents/book";
 import BookObject from "../interfaces/BookObject";
 import Entry from "../interfaces/EntryObject";
-import { addEntryToDatabase, getBookListFromDatabase } from "../utils/dbutils";
+import {
+  addEntryToDatabase,
+  getBookListFromDatabase,
+  grabFriends,
+} from "../utils/dbutils";
 import Loading from "../gencomponents/loading";
 import FriendComponent, {
   FriendListComponent,
-  grabFriends,
 } from "../gencomponents/friendcomponent";
 
 interface PageModalProps {
@@ -186,7 +189,7 @@ export default function Profile() {
     }
 
     if (friendList == null) {
-      grabFriends(user).then((fList) => setFriends(fList));
+      grabFriends(user, false).then((fList) => setFriends(fList));
     }
   }, []);
 
@@ -263,8 +266,8 @@ export default function Profile() {
           <FriendListComponent
             friendList={friendList}
             setFriends={setFriends}
-            extended={false}
             user={user}
+            requests={false}
           />
           <div id="create-page">
             <h3>Add to today's book!</h3>

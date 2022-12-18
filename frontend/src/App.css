@@ -300,12 +300,6 @@ button:hover {
   height: 67vh;
 }
 
-.friend-profile-pic {
-  border-radius: 50%;
-  margin: 5px;
-  width: 5vh;
-}
-
 #prof-info-box {
   text-align: center;
   background-color: rgb(245, 250, 255);
@@ -351,18 +345,6 @@ button:hover {
   margin-bottom: 5px;
   font-size: large;
   text-align: justify;
-}
-
-#profile-friends-list {
-  background-color: rgb(245, 250, 255);
-  border-radius: 10px;
-  text-align: center;
-  width: 27vh;
-  padding: 2vh;
-  margin: 5px;
-  max-height: 30vh;
-  overflow-y: hidden;
-  overflow-y: scroll;
 }
 
 #create-page {
@@ -424,18 +406,6 @@ button:hover {
 
 .left-page-header {
   margin: 1px;
-}
-
-.friend-in-list {
-  display: flex;
-  justify-content: center;
-  gap: 0.8vh;
-  align-items: center;
-  font-size: larger;
-  background-color: rgb(241, 246, 250);
-  border-radius: 10px;
-  margin: 1vh;
-  padding: 1vh;
 }
 
 .page-img {
@@ -539,9 +509,16 @@ Loading stuff from loading.css */
   background-color: rgb(58, 136, 160);
 }
 
+.friend-profile-pic {
+  border-radius: 50%;
+  margin: 5px;
+  width: 5vh;
+}
+
 .remove-friend-button {
   background-color: rgb(255, 214, 214);
   color: black;
+  padding: 1vh 2vh 1vh 2vh;
 }
 
 .remove-friend-button:hover {
@@ -565,18 +542,6 @@ Loading stuff from loading.css */
   margin-left: 0;
 }
 
-#friends-friends-list {
-  background-color: rgb(245, 250, 255);
-  border-radius: 10px;
-  text-align: center;
-  width: 27vh;
-  padding: 2vh;
-  margin: 5px;
-  max-height: 65vh;
-  overflow-y: hidden;
-  overflow-y: scroll;
-}
-
 #friends-search-info {
   width: 27vh;
   margin: 5px;
@@ -596,3 +561,81 @@ Loading stuff from loading.css */
   justify-content: center;
   gap: 30vh;
 }
+
+#friends-list {
+  background-color: rgb(245, 250, 255);
+  border-radius: 10px;
+  text-align: center;
+  width: 27vh;
+  padding: 2vh;
+  margin: 5px;
+  max-height: 33vh;
+  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+.friend-in-list {
+  display: flex;
+  justify-content: center;
+  gap: 0.8vh;
+  align-items: center;
+  font-size: larger;
+  background-color: rgb(229, 234, 238);
+  border-radius: 10px;
+  margin: 1vh;
+  padding: 1vh;
+}
+
+/* Requests section */
+.request-in-list {
+  font-size: larger;
+  background-color: rgb(222, 227, 231);
+  border-radius: 10px;
+  margin: 1vh;
+  padding: 0.8vh;
+}
+
+.request-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1vh;
+}
+
+.request-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1vh;
+}
+
+.request-profile-pic {
+  border-radius: 50%;
+  margin: 5px;
+  width: 5vh;
+}
+
+.deny-request-button {
+  background-color: rgb(255, 214, 214);
+  color: black;
+  padding: 1vh;
+}
+
+.deny-request-button:hover {
+  background-color: rgb(164, 76, 76);
+  color: black;
+  padding: 1vh;
+}
+
+.accept-request-button {
+  background-color: rgb(135, 219, 123);
+  color: black;
+  padding: 1vh;
+}
+
+.accept-request-button:hover {
+  background-color: rgb(100, 163, 92);
+  color: black;
+  padding: 1vh;
+}
+
+/* End of requests section */

@@ -1,13 +1,20 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { getQuery, removeFriendFromDatabase } from "../utils/dbutils";
+import {
+  addNewFriend,
+  getQuery,
+  removeFriendFromDatabase,
+} from "../utils/dbutils";
 import Loading from "./loading";
 import User from "../interfaces/user";
+import { request } from "express";
 
 export interface FriendComponentProps {
   friendUsername: string;
+  requestList?: Friend[] | null;
   friendList: Friend[] | null;
   image: string;
   setFriends: Dispatch<SetStateAction<Friend[] | null>>;
+  setRequests?: Dispatch<SetStateAction<Friend[] | null>>;
   user: User;
 }
 
@@ -44,7 +51,7 @@ export function FriendComponent({
                 (el) => el.username != friendUsername
               );
               setFriends(newList);
-              removeFriendFromDatabase(user, friendUsername);
+              removeFriendFromDatabase(user, friendUsername, false);
               // actually take out of the database!
             }
           }
@@ -52,6 +59,82 @@ export function FriendComponent({
       >
         {clicked ? "Confirm Deletion" : "X"}
       </button>
+    </div>
+  );
+}
+
+function RequestComponent({
+  user,
+  friendUsername,
+  image,
+  friendList,
+  requestList,
+  setFriends,
+  setRequests,
+}: FriendComponentProps) {
+  const [clicked, setClick] = useState<boolean>(false);
+  const [rClicked, setRClick] = useState<boolean>(false);
+
+  return (
+    <div className="request-in-list">
+      <div className="request-info">
+        <img
+          src={image}
+          className="request-profile-pic"
+          referrerPolicy="no-referrer"
+        />
+        <p>{friendUsername}</p>
+      </div>
+
+      <div className="request-buttons">
+        <button
+          className={"deny-request-button"}
+          onClick={() => {
+            if (!clicked) {
+              setClick(true);
+            } else {
+              if (requestList) {
+                let newList = requestList.filter(
+                  (el) => el.username != friendUsername
+                );
+                if (setRequests) {
+                  setRequests(newList);
+                }
+                removeFriendFromDatabase(user, friendUsername, true);
+              }
+            }
+          }}
+        >
+          {clicked ? "Confirm Denial" : "Deny"}
+        </button>
+        <button
+          className={"accept-request-button"}
+          onClick={() => {
+            if (!rClicked) {
+              setRClick(true);
+            } else {
+              if (requestList) {
+                let newList = requestList.filter(
+                  (el) => el.username != friendUsername
+                );
+                if (setRequests) {
+                  setRequests(newList);
+                }
+                if (friendList) {
+                  let newFriend = requestList.filter(
+                    (el) => el.username == friendUsername
+                  )[0];
+                  let newFriendsList = [...friendList, newFriend];
+                  setFriends(newFriendsList);
+                }
+                addNewFriend(user, friendUsername);
+              }
+            }
+          }}
+        >
+          {rClicked ? "Confirm Acceptance" : "Accept"}
+        </button>
+      </div>
     </div>
   );
 }
@@ -70,23 +153,44 @@ export function FriendSearchResult({ username, image }: Friend) {
 }
 
 export interface FriendListComponent {
+  requestList?: Friend[] | null;
   friendList: Friend[] | null;
   setFriends: Dispatch<SetStateAction<Friend[] | null>>;
-  extended: boolean;
+  setRequests?: Dispatch<SetStateAction<Friend[] | null>>;
   user: User;
+  requests: boolean;
 }
 
 export function FriendListComponent({
   friendList,
+  requestList,
   setFriends,
-  extended,
+  setRequests,
   user,
+  requests,
 }: FriendListComponent) {
   return (
-    <div id={extended ? "friends-friends-list" : "profile-friends-list"}>
-      <h3>Friends</h3>
+    <div id={"friends-list"}>
+      <h3>{requests ? "Friend Requests" : "Friends"}</h3>
       <hr></hr>
-      {friendList ? (
+      {requests ? (
+        requestList ? (
+          requestList.map((request) => (
+            <RequestComponent
+              image={request.image}
+              friendUsername={request.username}
+              user={user}
+              key={request.username}
+              setFriends={setFriends}
+              setRequests={setRequests}
+              requestList={requestList}
+              friendList={friendList}
+            />
+          ))
+        ) : (
+          <Loading />
+        )
+      ) : friendList ? (
         friendList.map((friend) => (
           <FriendComponent
             image={friend.image}
@@ -102,27 +206,4 @@ export function FriendListComponent({
       )}
     </div>
   );
-}
-
-export async function grabFriends(user: User): Promise<Friend[]> {
-  let userdata = await getQuery("USERNAME", "username", user.username);
-
-  if (userdata != null) {
-    let fList: string[] = userdata.friendsList;
-    let fComponentList: Friend[] = [];
-    for (let i = 0; i < fList.length; i++) {
-      let friendInfo = await getQuery("USERNAME", "username", fList[i]);
-      if (friendInfo != null) {
-        let fComponent: Friend = {
-          username: friendInfo.username,
-          image: friendInfo.profilePic,
-        };
-        fComponentList.push(fComponent);
-      }
-    }
-    console.log(fComponentList);
-    return fComponentList;
-  } else {
-    return [];
-  }
 }

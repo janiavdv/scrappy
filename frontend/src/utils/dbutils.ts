@@ -1,3 +1,4 @@
+import Friend from "../gencomponents/friendcomponent";
 import BookObject from "../interfaces/BookObject";
 import Entry from "../interfaces/EntryObject";
 import User from "../interfaces/user";
@@ -77,9 +78,54 @@ export async function getEntryOffID(entryID: string) {
 
 export async function removeFriendFromDatabase(
   user: User,
-  friendUsername: string
+  friendUsername: string,
+  request: boolean
 ) {
   await fetch(
-    `http://localhost:3232/database?command=REMOVE-FRIEND&username=${user.username}&removedFriend=${friendUsername}`
+    `http://localhost:3232/database?command=REMOVE-FRIEND&username=${user.username}&removedFriend=${friendUsername}&isRequest=${request}`
   );
+}
+
+export async function addNewFriend(user: User, friendUsername: string) {
+  await fetch(
+    `http://localhost:3232/database?command=UPDATE&type=NEW-FRIEND&username=${user.username}&newFriend=${friendUsername}`
+  );
+}
+
+export async function addNewFriendRequest(user: User, friendUsername: string) {
+  await fetch(
+    `http://localhost:3232/database?command=UPDATE&type=FRIEND-REQUEST&username=${user.username}&friendRequest=${friendUsername}`
+  );
+}
+
+export async function grabFriends(
+  user: User,
+  requests: boolean
+): Promise<Friend[]> {
+  let userdata = await getQuery("USERNAME", "username", user.username);
+
+  if (userdata != null) {
+    let lst: string[] = [];
+    if (requests) {
+      lst = userdata.friendsRequest;
+    } else {
+      lst = userdata.friendsList;
+    }
+
+    let fComponentList: Friend[] = [];
+    for (let i = 0; i < lst.length; i++) {
+      let friendInfo = await getQuery("USERNAME", "username", lst[i]);
+      if (friendInfo != null) {
+        let fComponent: Friend = {
+          username: friendInfo.username,
+          image: friendInfo.profilePic,
+        };
+        fComponentList.push(fComponent);
+      }
+    }
+    console.log(fComponentList);
+    return fComponentList;
+  } else {
+    return [];
+  }
 }

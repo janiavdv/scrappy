@@ -1,8 +1,8 @@
 {
-    "editor.formatOnSave": true,
-    "prettier.configPath": "frontend/.prettierrc.json",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    }
+  "prettier.configPath": "frontend/.prettierrc.json",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.formatOnSave": true
 }

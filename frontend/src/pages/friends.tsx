@@ -4,13 +4,19 @@ import ControlledInput from "../gencomponents/controlledinput";
 import Header from "../gencomponents/header";
 import Footer from "../gencomponents/footer";
 import User from "../interfaces/user";
-import { getQuery } from "../utils/dbutils";
+import {
+  addNewFriendRequest,
+  getQuery,
+  grabFriends,
+  removeFriendFromDatabase,
+} from "../utils/dbutils";
 import FriendComponent, {
   FriendListComponent,
   FriendSearchResult,
-  grabFriends,
 } from "../gencomponents/friendcomponent";
 import { useEffect } from "react";
+import Friend from "../gencomponents/friendcomponent";
+import { request } from "express";
 
 const TEXT_user_posts = `Here you can view your friends' posts and search.`;
 const TEXT_search_button = `Click here to search for books!`;
@@ -27,9 +33,21 @@ interface SearchModalProps {
   display: boolean;
   setDisplay: Dispatch<SetStateAction<boolean>>;
   searcher: User;
+  friendsList: Friend[] | null;
+  requestsList: Friend[] | null;
+  setFriends: Dispatch<SetStateAction<Friend[] | null>>;
+  setRequests: Dispatch<SetStateAction<Friend[] | null>>;
 }
 
-function SearchModal({ display, setDisplay, searcher }: SearchModalProps) {
+function SearchModal({
+  display,
+  setDisplay,
+  searcher,
+  setFriends,
+  setRequests,
+  requestsList,
+  friendsList,
+}: SearchModalProps) {
   const [searchValue, setSearchValue] = useState<string>(""); // For controlling the body textbox.
   const [searchedFriend, setSearchedFriend] = useState<User | null>(null);
   const [friendStatus, setFriendStatus] = useState<string>();
@@ -92,7 +110,53 @@ function SearchModal({ display, setDisplay, searcher }: SearchModalProps) {
                 username={searchedFriend.username}
                 image={searchedFriend.profilePic}
               />
-              <button aria-label={BUTTON_friend_status + friendStatus}>
+              <button
+                aria-label={BUTTON_friend_status + friendStatus}
+                onClick={async () => {
+                  if (friendStatus == "Request Friend") {
+                    await addNewFriendRequest(
+                      searchedFriend,
+                      searcher.username
+                    );
+                    setFriendStatus("Remove Friend Request");
+                    if (requestsList) {
+                      setRequests([
+                        ...requestsList,
+                        {
+                          username: searchedFriend.username,
+                          image: searchedFriend.profilePic,
+                        },
+                      ]);
+                    }
+                  } else if (friendStatus == "Remove Friend Request") {
+                    await removeFriendFromDatabase(
+                      searcher,
+                      searchedFriend.username,
+                      true
+                    );
+                    setFriendStatus("Request Friend");
+                    if (requestsList) {
+                      let newList = requestsList.filter(
+                        (el) => el.username != searchedFriend.username
+                      );
+                      setRequests(newList);
+                    }
+                  } else {
+                    await removeFriendFromDatabase(
+                      searcher,
+                      searchedFriend.username,
+                      false
+                    );
+                    setFriendStatus("Request Friend");
+                    if (friendsList) {
+                      let newList = friendsList.filter(
+                        (el) => el.username != searchedFriend.username
+                      );
+                      setFriends(newList);
+                    }
+                  }
+                }}
+              >
                 {friendStatus}
               </button>
             </div>
@@ -121,6 +185,7 @@ function SearchModal({ display, setDisplay, searcher }: SearchModalProps) {
 export default function Friends() {
   const st: User = useLocation().state;
   const [friendList, setFriends] = useState<FriendComponent[] | null>(null);
+  const [requestList, setRequests] = useState<FriendComponent[] | null>(null);
 
   const [user, setUser] = useState<User>({
     name: st.name,
@@ -138,7 +203,10 @@ export default function Friends() {
 
   useEffect(() => {
     if (friendList == null) {
-      grabFriends(user).then((fList) => setFriends(fList));
+      grabFriends(user, false).then((fList) => setFriends(fList));
+    }
+    if (requestList == null) {
+      grabFriends(user, true).then((rList) => setRequests(rList));
     }
   }, []);
   return (
@@ -164,16 +232,30 @@ export default function Friends() {
           <p>Public AND Private posts are shown in this section.</p>
         </div>
         <FriendPosts />
-        <FriendListComponent
-          friendList={friendList}
-          setFriends={setFriends}
-          extended={true}
-          user={user}
-        />
+        <div>
+          <FriendListComponent
+            friendList={friendList}
+            setFriends={setFriends}
+            user={user}
+            requests={false}
+          />
+          <FriendListComponent
+            friendList={friendList}
+            setFriends={setFriends}
+            requestList={requestList}
+            setRequests={setRequests}
+            user={user}
+            requests={true}
+          />
+        </div>
         <SearchModal
           display={modalDisplay}
           setDisplay={setModalDisplay}
           searcher={user}
+          setFriends={setFriends}
+          setRequests={setRequests}
+          friendsList={friendList}
+          requestsList={requestList}
         />
       </div>
       <Footer user={user} />
