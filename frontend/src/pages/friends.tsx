@@ -17,6 +17,7 @@ import FriendComponent, {
 import { useEffect } from "react";
 import Friend from "../gencomponents/friendcomponent";
 import FriendPosts from "../gencomponents/friendposts";
+import Loading from "../gencomponents/loading";
 
 const TEXT_user_posts = `Here you can view your friends' posts and search.`;
 const TEXT_search_button = `Click here to search for books!`;
@@ -212,7 +213,7 @@ export default function Friends() {
           </p>
           <p>Public AND Private posts are shown in this section.</p>
         </div>
-        <FriendPosts friendList={friendList} />
+        {friendList ? <FriendPosts friendList={friendList} /> : <Loading />}
         <div>
           <FriendListComponent
             friendList={friendList}
