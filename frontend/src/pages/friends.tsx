@@ -119,28 +119,13 @@ function SearchModal({
                       searcher.username
                     );
                     setFriendStatus("Remove Friend Request");
-                    if (requestsList) {
-                      setRequests([
-                        ...requestsList,
-                        {
-                          username: searchedFriend.username,
-                          image: searchedFriend.profilePic,
-                        },
-                      ]);
-                    }
                   } else if (friendStatus == "Remove Friend Request") {
                     await removeFriendFromDatabase(
-                      searcher,
-                      searchedFriend.username,
+                      searchedFriend,
+                      searcher.username,
                       true
                     );
                     setFriendStatus("Request Friend");
-                    if (requestsList) {
-                      let newList = requestsList.filter(
-                        (el) => el.username != searchedFriend.username
-                      );
-                      setRequests(newList);
-                    }
                   } else {
                     await removeFriendFromDatabase(
                       searcher,

@@ -219,6 +219,16 @@ public class DatabaseHandler implements Route {
 
               Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser1, addFriend, addedFriend);
               Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser1, removeRequest, removedFriend);
+
+
+              // Now we also give the friend to the other person!
+              filteredUser1 = Filters.eq("username", request.queryParams("newFriend"));
+              addFriend = Updates.push("friendsList", request.queryParams("username"));
+              addedFriend = new FindOneAndUpdateOptions()
+                  .returnDocument(ReturnDocument.AFTER);
+              Server.getMyDatabase().getUsersColl().findOneAndUpdate(filteredUser1, addFriend, addedFriend);
+
+
               return databaseSuccessResponse();
               // Catch NullPointerException e
             } catch (NullPointerException e) {
