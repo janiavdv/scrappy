@@ -57,11 +57,4 @@ public class MongoDB {
   public MongoCollection<Document> getEntriesColl() {
     return entriesColl;
   }
-
-  // for testing
-//  public void testingDatabase() {
-//    database = client.getDatabase("mockDatabase");
-//    usersColl = database.getCollection("Users");
-//    entriesColl = database.getCollection("Entries");
-//  }
 }

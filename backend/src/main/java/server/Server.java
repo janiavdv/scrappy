@@ -4,6 +4,7 @@ import static spark.Spark.after;
 
 import database.MongoDB;
 import server.handlers.DatabaseHandler;
+import server.handlers.GalleryHandler;
 import server.handlers.NYTHandler;
 import server.handlers.QuoteHandler;
 import spark.Spark;
@@ -50,6 +51,7 @@ public class Server {
     mongoDB.setDatabase("myDatabase");
 
     Spark.get("database", new DatabaseHandler());
+    Spark.get("gallery", new GalleryHandler());
 
     // Setting up the handler for the GET endpoints.
     Spark.get("nyt", new NYTHandler());
