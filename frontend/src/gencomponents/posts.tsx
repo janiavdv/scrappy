@@ -82,3 +82,31 @@ export default function FriendPosts({ friendList }: FriendPostProps) {
     </div>
   );
 }
+
+export function GalleryPosts() {
+  const [galleryOrder, setGalleryOrder] = useState<Entry[] | null>(null); // this is the object we feed the ordered list of posts into
+  
+  return (
+    <div id="friend-post-section">
+      {galleryOrder ? (
+        galleryOrder.map((post) => (
+          <Post
+            friend={
+              post.user
+                ? { username: "found", image: ""} // need fetching here to show the user's info
+                : { username: "not found", image: "" }
+            }
+            caption={post.caption}
+            title={post.title}
+            time={post.time}
+            key={post.caption}
+            image={post.imageLink}
+            tag={post.tag}
+          />
+        ))
+      ) : (
+        <Loading />
+      )}
+    </div>
+  );
+}

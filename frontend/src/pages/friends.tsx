@@ -16,7 +16,7 @@ import FriendComponent, {
 } from "../gencomponents/friendcomponent";
 import { useEffect } from "react";
 import Friend from "../gencomponents/friendcomponent";
-import FriendPosts from "../gencomponents/friendposts";
+import FriendPosts from "../gencomponents/posts";
 import Loading from "../gencomponents/loading";
 
 const TEXT_user_posts = `Here you can view your friends' posts and search.`;
