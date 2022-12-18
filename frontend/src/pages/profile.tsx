@@ -165,7 +165,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (todayBook == null) {
-      getBookListFromDatabase(user).then((booklist) => {
+      getBookListFromDatabase(user.username).then((booklist) => {
         let foundbook: boolean = false;
         for (let i = 0; i < booklist.length; i++) {
           if (
@@ -230,7 +230,7 @@ export default function Profile() {
             <button
               onClick={async () => {
                 setAlbumBoolean(true);
-                let bList = await getBookListFromDatabase(user);
+                let bList = await getBookListFromDatabase(user.username);
                 setPastBooks(bList);
               }}
             >

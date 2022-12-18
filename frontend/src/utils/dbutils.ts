@@ -20,13 +20,9 @@ export async function getQuery(
 }
 
 export async function getBookListFromDatabase(
-  user: User
+  username: string
 ): Promise<BookObject[]> {
-  const usr: User | null = await getQuery(
-    "USERNAME",
-    "username",
-    user.username
-  );
+  const usr: User | null = await getQuery("USERNAME", "username", username);
 
   if (usr != null) {
     return usr.books;
@@ -128,4 +124,37 @@ export async function grabFriends(
   } else {
     return [];
   }
+}
+
+export async function grabOrderedFriendPosts(
+  lst: Friend[]
+): Promise<Entry[] | null> {
+  let unorderedList: Entry[] = [];
+
+  for (let i = 0; i < lst.length; i++) {
+    let friendBookList = await getBookListFromDatabase(lst[i].username);
+    for (let j = 0; j < friendBookList.length; j++) {
+      if (
+        friendBookList[j].date ===
+        new Date().toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        })
+      ) {
+        let todayEntries: string[] = friendBookList[i].entries;
+        for (let k = 0; k < todayEntries.length; k++) {
+          let entry: Entry = await getEntryOffID(todayEntries[k]);
+          unorderedList.push(entry);
+        }
+        break;
+      }
+    }
+  }
+
+  let orderedList: Entry[] = unorderedList.sort(function (a, b) {
+    return a.time.localeCompare(b.time);
+  });
+
+  return orderedList;
 }

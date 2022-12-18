@@ -16,7 +16,7 @@ import FriendComponent, {
 } from "../gencomponents/friendcomponent";
 import { useEffect } from "react";
 import Friend from "../gencomponents/friendcomponent";
-import { request } from "express";
+import FriendPosts from "../gencomponents/friendposts";
 
 const TEXT_user_posts = `Here you can view your friends' posts and search.`;
 const TEXT_search_button = `Click here to search for books!`;
@@ -24,10 +24,6 @@ const TEXT_search_input = `Textbox for entering a query for a username`;
 const BUTTON_get_friend_query = `Button to query for a username search given.`;
 const BUTTON_friend_status = `Use this button to, `;
 const BUTTON_close = `Button to close the query modal.`;
-
-function FriendPosts() {
-  return <div id="friend-post-section" aria-label={TEXT_user_posts}></div>;
-}
 
 interface SearchModalProps {
   display: boolean;
@@ -216,7 +212,7 @@ export default function Friends() {
           </p>
           <p>Public AND Private posts are shown in this section.</p>
         </div>
-        <FriendPosts />
+        <FriendPosts friendList={friendList} />
         <div>
           <FriendListComponent
             friendList={friendList}
