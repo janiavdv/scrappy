@@ -31,13 +31,13 @@ scrapbooks and add to the daily book.
 - Zachary Boston (zboston2): 
     - Backend: created MongoDB database with multiple collections to store data
     and created classes for each type of data being stored, along with a handler
-    to add, update, and query the database
+    to add, update, and query the database (tested this handler)
     - Frontend: AWS - saves images to be displayed on the website
     - Documentation and README
 - Alana Cho (acho28):
     - Backend: created MongoDB database with multiple collections to store data
     and created classes for each type of data being stored, along with a handler
-    to add, update, and query the database
+    to add, update, and query the database (tested this handler)
     - Frontend: AWS - saves images to be displayed on the website
     - Documentation and README
 - Tyler Gurth (tgurth):
@@ -46,8 +46,10 @@ scrapbooks and add to the daily book.
     - Frontend: Google Authentication, React page Routing, database integration, 
     CSS styling for whole site, account and state management, frontend React custom objects
 - Jania Vandevoorde (jvandevo): 
-    - Backend: New York Times and random quote API handlers (`QuoteHandler`, `NYTHandler`) + testing for the handlers
-    - Frontend: header/footer functionality, book history, NYT/quote integration fetching, modals (login, friend search, add post)
+    - Backend: New York Times and random quote API handlers (`QuoteHandler`, 
+    `NYTHandler`) + testing for the handlers
+    - Frontend: header/footer functionality, book history, NYT/quote integration 
+    fetching, modals (login, friend search, add post)
 
 ## Design Choices
   - **CLASSES/INTERFACES**: 
@@ -70,9 +72,44 @@ scrapbooks and add to the daily book.
         the program, such as JSON serialization/deserialization and Object to 
         Document conversion (for the database).
     - Frontend - 
-      1. 
+      1. `assets`: Directory containing relevant display photos (i.e. logo, about
+      page photo).
+      2. `gencomponenets`: This folder contains classes that render components on
+      our HTML. Classes include: 
+        - awsupload: generates the button to allow users to upload an image
+        - book: displays a book with a title, headline, quote, caption, hashtag,
+        and image
+        - controlledinput: interface that represents the properties we store 
+        with an input element of our own design
+        - footer: renders the footer with about, FAQs, privacy, and help buttons
+        - friendcomponent: DOM elements for searching for and accepting/denying 
+        friends, in addition to viewing a complete list of friends and friend
+        requests
+        - header: contains links to the friends, gallery, and profile pages, and
+        displays your profile picture and a button to log out
+        - loading: generates a loading circle and message when components are 
+        being loaded
+        - pagecomponent: displays a new page in a user's book (title, tag, caption,
+        image)
+        - posts: renders a page displaying friends posts and a gallery page displaying
+        relevant public posts
+      3. `interfaces`: A folder with the objects and their fields as stored in the
+      database (users, books, entries)
+      4. `pages`: This directory contains the primary display logic for important 
+      pages in the webapp. These include the about, faq, friends, gallery, help,
+      landing, privacy, and profile pages.
+      4. `private`: Contains private data we do not want pushed to GitHub (i.e. AWS
+      access keys, authorization credentials)
+      5. `utils`: The classes in this folder contain common utilities used throughout
+      the program, primarily the fetch calls made to the backend server.
+  
   - **DATA STRUCTURES**: 
-    - 
+    - Database: The primary way we chose to store data in this program was through
+    external dependencies, including MongoDB and AWS. We selected these softwares
+    due to prior familiarity among some group members and with the help/recommendation
+    of some TAs. Images were stored in AWS, and users, entries, and books were stored
+    in MongoDB.
+
   - **JUSTIFICATIONS**:
     - Accessibility: To make our webapp more accessible, we have added aria-labels
     and aria-roledescriptions to go along with our React components. This allows 
@@ -87,10 +124,14 @@ We have no known bugs or errors in this program.
 
 ## Tests:
 For this project, we primarily chose to focus on testing the backend. Thus, the 
-bulk of our tests were written in IntelliJ using JUnit in the HandlerTest file.
-1. 
-2. 
-3. 
+bulk of our tests were written in IntelliJ using JUnit in the HandlerTest, 
+AlgorithmHandlerTest, and VectorTest file.
+1. HandlerTest:  we used an @BeforeEach to set up a new NYTHandler, QuoteHandler,
+and DatabaseHandler before each test. Then, we tested that the handler was 
+successfully fetching from the external APIs. Next, we tested that data was 
+successfully being added to a mock database.
+2. AlgorithmHandlerTest: tests that the gallery algorithm and its components work
+3. VectorTest: unit testing the vectorization and cosine scores between words
 
 - NOTE: We also have very basic frontend tests to ensure all components render 
 properly on the webapp (in App.test.tsx). However, we mostly determined frontend
