@@ -15,33 +15,37 @@ interface PostProps {
 }
 
 function Post({ caption, title, tag, image, time, friend }: PostProps) {
-  return (
-    <div className="post">
-      <div className="friend-post-top-bar">
-        <div className="friend-post-info">
-          <img
-            src={friend.image}
-            className="friend-profile-pic"
-            referrerPolicy="no-referrer"
-          />
-          <p>{friend.username}</p>
+  if (friend) {
+    return (
+      <div className="post">
+        <div className="friend-post-top-bar">
+          <div className="friend-post-info">
+            <img
+              src={friend.image}
+              className="friend-profile-pic"
+              referrerPolicy="no-referrer"
+            />
+            <p>{friend.username}</p>
+          </div>
+          <p>{time}</p>
         </div>
-        <p>{time}</p>
-      </div>
-      <hr></hr>
-      <div>
-        <img className="post-image" src={image} />
-      </div>
-      <hr></hr>
-      <div className="friend-post-bottom-bar">
-        <div className="post-content-info">
-          <p>{title}</p>
-          <p className="hashtag">{"#" + tag}</p>
+        <hr></hr>
+        <div>
+          <img className="post-image" src={image} />
         </div>
-        <blockquote className="post-caption">{caption}</blockquote>
+        <hr></hr>
+        <div className="friend-post-bottom-bar">
+          <div className="post-content-info">
+            <p>{title}</p>
+            <p className="hashtag">{"#" + tag}</p>
+          </div>
+          <blockquote className="post-caption">{caption}</blockquote>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null
+  }
 }
 
 interface FriendPostProps {
@@ -130,7 +134,7 @@ export function GalleryPosts({ user }: GalleryProps) {
       </div>
       <div id="gallery-section">
         {galleryOrder ? (
-          galleryOrder.map((postArr) =>
+          galleryOrder.length > 0 ? (galleryOrder.map((postArr) =>
             postArr.map((post) => (
               <GalleryPost
                 username={post.user}
@@ -142,6 +146,7 @@ export function GalleryPosts({ user }: GalleryProps) {
               />
             ))
           )
+          ) : ("There are no posts to show today.")
         ) : (
           <Loading />
         )}

@@ -109,6 +109,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
               spaces={false}
             />
             <button
+              aria-label={TEXT_add_tag}
               onClick={() => {
                 setTagValue("");
                 if (
@@ -120,7 +121,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                 }
               }}
             >
-              Add Tag ariaLabel= {TEXT_add_tag}
+              Add Tag
             </button>
           </label>
           <AddedTags tags={tags} setTags={setTags} />
@@ -163,9 +164,10 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
                 }
               }
             }}
+            aria-label={TEXT_to_submit}
           >
             {" "}
-            Submit ariaLabel={TEXT_to_submit}
+            Submit
           </button>
           <div className="error">
             <p> {userExists ? "User already exists!" : null} </p>

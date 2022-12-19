@@ -93,13 +93,15 @@ function PageModal({
         below.
         <br />
         <br />
-        <button onClick={() => setPrivacy(!privacyValue)}>
+        <button aria-label={TEXT_set_privacy}
+          onClick={() => setPrivacy(!privacyValue)}>
           {privacyValue ? "Privatize" : "Publicize"}
-          ariaLabel={TEXT_set_privacy}
         </button>
         <hr></hr>
         <div id="modal-upload-buttons">
           <button
+            aria-label={TEXT_submit_button}
+
             type="submit"
             value="Post"
             onClick={async () => {
@@ -143,9 +145,9 @@ function PageModal({
             }}
           >
             {allowed ? "Post" : "Loading info..."}
-            ariaLabel={TEXT_submit_button}
           </button>
           <button
+            aria-label={TEXT_close_button}
             className="close-button"
             onClick={() => {
               setDisplay(false);
@@ -155,7 +157,7 @@ function PageModal({
               setLink("");
             }}
           >
-            ariaLabel={TEXT_close_button} Close
+            Close
           </button>
         </div>
       </div>
