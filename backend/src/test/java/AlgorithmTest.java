@@ -9,14 +9,14 @@ public class AlgorithmTest {
   /**
    * Set the Spark port number. Remove the logging spam during tests.
    */
-  @BeforeAll
-  public static void setupServer() {
-    Server.main();
-    Spark.port(0);
-    Logger.getLogger("").setLevel(Level.WARNING); // empty name = root logger
-
-    testMongoDB = new MongoDB();
-    testMongoDB.setDatabase("mockDatabase");
-    Server.setMyDatabase(testMongoDB);
-  }
+//  @BeforeAll
+//  public static void setupServer() {
+//    Server.main();
+//    Spark.port(0);
+//    Logger.getLogger("").setLevel(Level.WARNING); // empty name = root logger
+//
+//    testMongoDB = new MongoDB();
+//    testMongoDB.setDatabase("mockDatabase");
+//    Server.setMyDatabase(testMongoDB);
+//  }
 }
