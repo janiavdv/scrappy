@@ -31,10 +31,15 @@ public class GalleryHandler implements Route {
   public Object handle(Request request, Response response) throws Exception {
     Map<String, Object> reply = new HashMap<>();
 
+    if (request.queryParams("username") == null || request.queryParams("date") == null) {
+      reply.put("result", "failure");
+      return new ResponseUtil(reply).serialize();
+    }
     try {
       // We grab the tags of a user, as well as all the available public posts we *could* display.
       ArrayList<String> userTags = (ArrayList<String>) this.getUserTags(request.queryParams("username"));
       HashMap<String, ArrayList<Object>> tagToEntries = this.getComparableTags(request.queryParams("date"), request.queryParams("username"));
+
 
       // We use the algorithmic method generatePostList to create a list of Entries in order that
       // we want to fill the gallery with.

@@ -142,7 +142,7 @@ export async function grabOrderedFriendPosts(
           day: "2-digit",
         })
       ) {
-        let todayEntries: string[] = friendBookList[i].entries;
+        let todayEntries: string[] = friendBookList[j].entries;
         for (let k = 0; k < todayEntries.length; k++) {
           let entry: Entry = await getEntryOffID(todayEntries[k]);
           unorderedList.push(entry);
