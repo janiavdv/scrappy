@@ -30,12 +30,14 @@ scrapbooks and add to the daily book.
     `faq`, and `help` pages
 - Zachary Boston (zboston2): 
     - Backend: created MongoDB database with multiple collections to store data
-    and created classes for each type of data being stored
+    and created classes for each type of data being stored, along with a handler
+    to add, update, and query the database
     - Frontend: AWS - saves images to be displayed on the website
     - Documentation and README
 - Alana Cho (acho28):
-    - Backend: created MongoDB database with multiple collections to store data, 
-    created classes for each type of data being stored
+    - Backend: created MongoDB database with multiple collections to store data
+    and created classes for each type of data being stored, along with a handler
+    to add, update, and query the database
     - Frontend: AWS - saves images to be displayed on the website
     - Documentation and README
 - Tyler Gurth (tgurth):
@@ -117,3 +119,32 @@ functionality by actually using the webapp as prospective users.
       a call to an external API
     - Frontend - Next, we cd into the frontend directory in VSCode and run npm start. 
     This displays our full webapp via localhost:3000.
+
+## User Stories & Acceptance Criteria
+1. “As a user of our webapp, I can access "today's book" and upload photos that 
+I have taken that day. I can also access a list of past books and view old entries.”
+2. “As a user of our webapp, I can enter a title, caption, and hashtag into a daily 
+prompt, which will then be displayed alongside the day’s photo(s).”
+3. “As a user of our webapp, I can see daily information included in the day’s recap,
+specifically daily news and an inspirational quote. This data will be 
+displayed alongside my photo(s) and caption(s).”
+4. “As a web developer using our program, I am able to register new daily 
+information by providing an external web API to be accessed whenever that 
+information is required.”
+5. “As a user of our webapp, I must login to the website using my Google account 
+in order to access past scrapbook entries.”
+6. “As a user of our webapp, I can learn how to use the webapp by looking at the 
+how to/ FAQ tab.”
+7. “As a user of our webapp, I can learn how the webapp is using my personal 
+information by looking at the privacy policy tab.”
+8. "As a developer, I can access a database containing all the data from our webapp
+(users, entries, books) via a connection URL (MongoClient) and a private password."
+9. “As a user of our webapp, I can follow friends and view their public 
+scrapbooks and share my scrapbooks (or privatize them if I would like). 
+Friends can be found via username.”
+10. “As a user of our webapp, I can view other users’ public posts in a gallery,
+sorted via relevance to my interests (using an algorithm).”
+11. "As a developer reading the comments in our code and our README, I am able to 
+understand how to build and run your program (including tests), high level design 
+decisions, and what each class/method is doing."
+
