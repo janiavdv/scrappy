@@ -18,6 +18,13 @@ import FriendComponent, {
   FriendListComponent,
 } from "../gencomponents/friendcomponent";
 
+const TEXT_set_privacy = `Click here to set the privacy of the post!`;
+const TEXT_submit_button = `Click here to submit the post!`;
+const TEXT_close_button = `Click here to close editing the post!`;
+const TEXT_todays_button = `Click here to choose today's book!`;
+const TEXT_past_button = `Click here to choose a past book!`;
+const TEXT_create_page = `This is the create page where you can add to today's post!`;
+
 interface PageModalProps {
   display: boolean;
   setDisplay: Dispatch<SetStateAction<boolean>>;
@@ -87,6 +94,7 @@ function PageModal({
         <br />
         <button onClick={() => setPrivacy(!privacyValue)}>
           {privacyValue ? "Privatize" : "Publicize"}
+          ariaLabel={TEXT_set_privacy}
         </button>
         <hr></hr>
         <div id="modal-upload-buttons">
@@ -134,6 +142,7 @@ function PageModal({
             }}
           >
             {allowed ? "Post" : "Loading info..."}
+            ariaLabel={TEXT_submit_button}
           </button>
           <button
             className="close-button"
@@ -145,6 +154,7 @@ function PageModal({
               setLink("");
             }}
           >
+            ariaLabel={TEXT_close_button}
             {" "}
             Close
           </button>
@@ -226,6 +236,7 @@ export default function Profile() {
               }}
             >
               Today's Book
+              ariaLabel={TEXT_todays_button}
             </button>
             <button
               onClick={async () => {
@@ -235,6 +246,7 @@ export default function Profile() {
               }}
             >
               Past Books
+              ariaLabel={TEXT_past_button}
             </button>
           </div>
           <hr></hr>
@@ -270,6 +282,7 @@ export default function Profile() {
             requests={false}
           />
           <div id="create-page">
+          ariaLabel={TEXT_create_page}
             <h3>Add to today's book!</h3>
             <button
               type="submit"

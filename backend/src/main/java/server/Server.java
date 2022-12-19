@@ -3,11 +3,16 @@ package server;
 import static spark.Spark.after;
 
 import database.MongoDB;
+import it.unimi.dsi.fastutil.Hash;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import server.handlers.DatabaseHandler;
 import server.handlers.GalleryHandler;
 import server.handlers.NYTHandler;
 import server.handlers.QuoteHandler;
 import spark.Spark;
+import utils.VectorUtil;
 
 /**
  * Top-level class "representing" the server.Server. Contains the main() method which
@@ -17,6 +22,7 @@ public class Server {
 
   // Here we declare the instance variables for the Server class.
   private static MongoDB mongoDB;
+
 
   // This method is primarily used for testing, as we needed to set our server's database to be the
   // mock database
@@ -38,7 +44,7 @@ public class Server {
    *
    * @param args of "type" String[]
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     // Spark.port statement
     Spark.port(3232);
     after(
@@ -56,6 +62,9 @@ public class Server {
     // Setting up the handler for the GET endpoints.
     Spark.get("nyt", new NYTHandler());
     Spark.get("quote", new QuoteHandler());
+
+    // start the model
+    VectorUtil.generateEmbeddings();
 
     // Init/initializing Spark
     Spark.init();

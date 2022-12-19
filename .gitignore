@@ -6,3 +6,4 @@ target
 node_modules
 .DS_Store
 .vscode
+glove.6B.50d.txt

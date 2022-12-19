@@ -29,17 +29,14 @@ export default function About() {
         </blockquote>
         <h3>Features:</h3>
         <blockquote>
-          Users can have friends who can see each other’s books, and even create
-          shared books together. Shared books can be a great way to remember
-          events like a wedding, fun night out, etc. Users can look at past
-          books, and combine them. Users can see regional posts. Each “entry” to
-          a scrapbook can be thought of as a post object. Entries marked as
-          public will go to a regional array view of different posts, where the
-          public (in the same region) can browse them. A post designated as
-          private can be in a seperate chronological timeline only seen by
-          friends. Friends are maintained through an authentication and login
-          system. Users have a profile where they can view their scrapbooks, add
-          to the daily book, and shared books.
+          Users can have friends who can see each other’s books, and even see
+          relevant posts based on their provided interests ("tags"). Each “entry” to a 
+          scrapbook can be thought of as a post object. Entries marked as public will go 
+          to a gallery view of different posts, where an algorithm presents the most 
+          interesting/relevant posts. A post designated as private can be in a seperate 
+          chronological timeline only seen by friends. Friends are maintained through an 
+          authentication and login system. Users have a profile where they can view their 
+          scrapbooks and add to the daily book.
         </blockquote>
       </div>
       <Footer user={st} />

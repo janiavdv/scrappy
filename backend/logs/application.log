@@ -1,0 +1,299 @@
+2022-12-18 15:11:59,790 - [INFO] - from org.deeplearning4j.bagofwords.vectorizer.BaseTextVectorizer in qtp159578078-22
+				
+Done working
+
+2022-12-18 15:11:59,791 - [INFO] - from org.deeplearning4j.bagofwords.vectorizer.BaseTextVectorizer in qtp159578078-22
+				
+Invoking finish on index
+
+2022-12-18 15:12:00,559 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp159578078-22
+				
+Building binary tree
+
+2022-12-18 15:12:00,559 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp159578078-22
+				
+Constructing priority queue
+
+2022-12-18 15:12:00,566 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp159578078-22
+				
+Built tree
+
+2022-12-18 15:12:00,566 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp159578078-22
+				
+Resetting weights
+
+2022-12-18 15:13:01,598 - [INFO] - from org.deeplearning4j.bagofwords.vectorizer.BaseTextVectorizer in qtp1971375704-22
+				
+Done working
+
+2022-12-18 15:13:01,599 - [INFO] - from org.deeplearning4j.bagofwords.vectorizer.BaseTextVectorizer in qtp1971375704-22
+				
+Invoking finish on index
+
+2022-12-18 15:13:02,373 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp1971375704-22
+				
+Building binary tree
+
+2022-12-18 15:13:02,373 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp1971375704-22
+				
+Constructing priority queue
+
+2022-12-18 15:13:02,375 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp1971375704-22
+				
+Built tree
+
+2022-12-18 15:13:02,375 - [INFO] - from org.deeplearning4j.models.word2vec.Word2Vec in qtp1971375704-22
+				
+Resetting weights
+
+2022-12-18 16:08:18,941 - [ERROR] - from spark.http.matching.GeneralError in qtp1971375704-21
+				
+
+java.lang.NullPointerException: Cannot invoke "String.split(String)" because "line" is null
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:33) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 16:08:58,409 - [ERROR] - from spark.http.matching.GeneralError in qtp1971375704-23
+				
+
+java.lang.NullPointerException: Cannot invoke "String.split(String)" because "line" is null
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:33) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:336) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:313) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:171) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.produce(EatWhatYouKill.java:135) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 16:09:11,676 - [ERROR] - from spark.http.matching.GeneralError in qtp1971375704-21
+				
+
+java.lang.NullPointerException: Cannot invoke "String.split(String)" because "line" is null
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:36) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 17:31:44,841 - [ERROR] - from spark.http.matching.GeneralError in qtp1420874580-22
+				
+
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because the return value of "org.bson.Document.get(Object)" is null
+	at server.handlers.GalleryHandler.getComparableTags(GalleryHandler.java:51) ~[classes/:na]
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:24) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 17:31:44,841 - [ERROR] - from spark.http.matching.GeneralError in qtp1420874580-32
+				
+
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because the return value of "org.bson.Document.get(Object)" is null
+	at server.handlers.GalleryHandler.getComparableTags(GalleryHandler.java:51) ~[classes/:na]
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:24) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 17:33:38,478 - [ERROR] - from spark.http.matching.GeneralError in qtp2016206316-21
+				
+
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because the return value of "org.bson.Document.get(Object)" is null
+	at server.handlers.GalleryHandler.getComparableTags(GalleryHandler.java:51) ~[classes/:na]
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:24) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 17:35:17,411 - [ERROR] - from spark.http.matching.GeneralError in qtp1420874580-21
+				
+
+java.lang.ClassCastException: class [Ljava.lang.Object; cannot be cast to class [Ljava.lang.Double; ([Ljava.lang.Object; and [Ljava.lang.Double; are in module java.base of loader 'bootstrap')
+	at utils.VectorUtil.getVector(VectorUtil.java:48) ~[classes/:na]
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:28) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 18:30:42,913 - [ERROR] - from spark.http.matching.GeneralError in qtp1420874580-21
+				
+
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because the return value of "org.bson.Document.get(Object)" is null
+	at server.handlers.GalleryHandler.getComparableTags(GalleryHandler.java:51) ~[classes/:na]
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:20) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 18:33:12,680 - [ERROR] - from spark.http.matching.GeneralError in qtp1420874580-22
+				
+
+java.lang.NullPointerException: Cannot invoke "java.lang.Boolean.equals(Object)" because the return value of "org.bson.Document.get(Object, java.lang.Class)" is null
+	at server.handlers.GalleryHandler.getComparableTags(GalleryHandler.java:53) ~[classes/:na]
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:20) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-18 18:33:54,445 - [ERROR] - from spark.http.matching.GeneralError in qtp1420874580-23
+				
+
+java.lang.NullPointerException: Cannot invoke "java.lang.Boolean.equals(Object)" because the return value of "org.bson.Document.get(Object, java.lang.Class)" is null
+	at server.handlers.GalleryHandler.getComparableTags(GalleryHandler.java:53) ~[classes/:na]
+	at server.handlers.GalleryHandler.handle(GalleryHandler.java:20) ~[classes/:na]
+	at spark.RouteImpl$1.handle(RouteImpl.java:72) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.Routes.execute(Routes.java:61) ~[spark-core-2.9.3.jar:na]
+	at spark.http.matching.MatcherFilter.doFilter(MatcherFilter.java:134) ~[spark-core-2.9.3.jar:na]
+	at spark.embeddedserver.jetty.JettyHandler.doHandle(JettyHandler.java:50) ~[spark-core-2.9.3.jar:na]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1584) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.Server.handle(Server.java:501) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273) ~[jetty-server-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104) ~[jetty-io-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938) ~[jetty-util-9.4.31.v20200723.jar:9.4.31.v20200723]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+

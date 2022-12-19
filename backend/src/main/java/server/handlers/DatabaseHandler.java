@@ -236,23 +236,6 @@ public class DatabaseHandler implements Route {
             }
         }
       }
-
-      // Case where command is GALLERY.
-      case "GALLERY" -> {
-        // Notice our user of a try-catch statement here.
-        try {
-          Document user = Server.getMyDatabase().getUsersColl().find(new Document("username", request.queryParams("username"))).first();
-          // Notice our use of an if-statement here to check that the user is not equal to null.
-          if (user != null) {
-            List<String> tags = user.getList("tags", String.class);
-            System.out.println(tags);
-          }
-          return databaseSuccessResponse();
-          // Catch NullPointerException e
-        } catch (NullPointerException e) {
-          return this.databaseFailureResponse("No user found by this name.");
-        }
-      }
       case "REMOVE-FRIEND" -> {
         Bson filteredUser = Filters.eq("username", request.queryParams("username"));
         Bson removeRequest;

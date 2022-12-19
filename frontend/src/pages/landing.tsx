@@ -11,6 +11,10 @@ import ControlledInput from "../gencomponents/controlledinput";
 import User from "../interfaces/user";
 import { getQuery, addUserToDatabase } from "../utils/dbutils";
 
+const TEXT_add_tag = `Click here to add a tag!`;
+const TEXT_to_submit = `Click here to submit!`;
+const TEXT_about_Google = `This is the button related to Google Authentication, click to login to your Google account!`;
+
 interface TagProps {
   value: string;
   tags: string[];
@@ -117,6 +121,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
               }}
             >
               Add Tag
+              ariaLabel= {TEXT_add_tag}
             </button>
           </label>
           <AddedTags tags={tags} setTags={setTags} />
@@ -162,6 +167,7 @@ function LogModal({ userEmail, userPicture, display }: ModalProps) {
           >
             {" "}
             Submit
+            ariaLabel={TEXT_to_submit}
           </button>
           <div className="error">
             <p> {userExists ? "User already exists!" : null} </p>
@@ -233,6 +239,7 @@ export default function Landing() {
             <h1>Scrappy</h1>
             <h2>Let's Make Memories.</h2>
             <div id="google-button">
+            ariaLabel={TEXT_about_Google}
               <GoogleOAuthProvider clientId={authcred}>
                 <AuthButton
                   setDisplay={setModalDisplay}
