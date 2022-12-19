@@ -158,3 +158,22 @@ export async function grabOrderedFriendPosts(
 
   return orderedList;
 }
+
+export async function getOrderedGallery(user: User) {
+  let date: string = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
+  let response = await fetch(
+    `http://localhost:3232/gallery?username=${user.username}&date=${date}`
+  );
+
+  const json = await response.json();
+  if (json.result === "success") {
+    return json.posts;
+  } else {
+    return null;
+  }
+}

@@ -33,13 +33,7 @@ export default function Page({ id }: PageProps) {
               )}
             </div>
             <code>Title: {pageInfo.title}</code>
-            <h4>
-              {time.toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true,
-              })}
-            </h4>
+            <h4>{pageInfo.time}</h4>
             <p>{"#" + pageInfo.tag}</p>
             <code>{pageInfo.caption}</code>
           </div>

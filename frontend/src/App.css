@@ -708,3 +708,53 @@ Loading stuff from loading.css */
 .hashtag {
   color: rgb(108, 108, 108);
 }
+
+/* gallery */
+
+#gallery-page {
+  margin: 5px;
+  width: 190vh;
+  height: 72.5vh;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  margin-right: 0;
+  margin-left: 0;
+  margin-inline: auto;
+  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+#gallery-info-box {
+  text-align: center;
+}
+
+#gallery-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.gallery-post {
+  border-radius: 10px;
+  width: 45vh;
+  margin: 2vh;
+  background-color: rgb(214, 251, 255);
+}
+
+.gallery-image {
+  width: inherit;
+  margin: 0px;
+}
+
+.gallery-post-bottom-bar {
+  margin: 0px;
+  line-height: 0px;
+  padding: 10px;
+}
+
+.gallery-content-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

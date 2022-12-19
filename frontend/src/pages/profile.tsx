@@ -154,9 +154,7 @@ function PageModal({
               setLink("");
             }}
           >
-            ariaLabel={TEXT_close_button}
-            {" "}
-            Close
+            ariaLabel={TEXT_close_button} Close
           </button>
         </div>
       </div>
@@ -231,14 +229,15 @@ export default function Profile() {
         <div id="book-menu">
           <div id="book-buttons">
             <button
+              aria-label={TEXT_todays_button}
               onClick={() => {
                 setAlbumBoolean(false);
               }}
             >
               Today's Book
-              ariaLabel={TEXT_todays_button}
             </button>
             <button
+              aria-label={TEXT_past_button}
               onClick={async () => {
                 setAlbumBoolean(true);
                 let bList = await getBookListFromDatabase(user.username);
@@ -246,7 +245,6 @@ export default function Profile() {
               }}
             >
               Past Books
-              ariaLabel={TEXT_past_button}
             </button>
           </div>
           <hr></hr>
@@ -281,8 +279,7 @@ export default function Profile() {
             user={user}
             requests={false}
           />
-          <div id="create-page">
-          ariaLabel={TEXT_create_page}
+          <div id="create-page" aria-label={TEXT_create_page}>
             <h3>Add to today's book!</h3>
             <button
               type="submit"

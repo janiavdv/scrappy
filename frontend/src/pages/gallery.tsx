@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useResolvedPath } from "react-router-dom";
 import Header from "../gencomponents/header";
-import Footer from '../gencomponents/footer'
+import Footer from "../gencomponents/footer";
 import User from "../interfaces/user";
 import { GalleryPosts } from "../gencomponents/posts";
 
@@ -22,7 +22,7 @@ export default function Gallery() {
   return (
     <div>
       <Header user={user} />
-      <GalleryPosts />
+      <GalleryPosts user={user} />
       <Footer user={user} />
     </div>
   );
