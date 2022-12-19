@@ -58,6 +58,15 @@ scrapbooks and add to the daily book.
         It also initializes the desired collections for the database.
         2. privacy: A folder to contain private data we do not want pushed to 
         GitHub (i.e. password to view the database)
+        3. server: This directory contains all the handlers to our backend server
+        and the main Server class itself. The four handlers are for the database
+        (updating, adding, and querying), the gallery (vectorizing tags and sorting
+        them based on relevance), the New York Times API (returning the news headline
+        of the day), and an inspirational quote API. In the Server, we instantiate
+        our database and the paths to run our handlers.
+        4. utils: The classes in this folder contain common utilities used throughout
+        the program, such as JSON serialization/deserialization and Object to 
+        Document conversion (for the database).
     - Frontend - 
       1. 
   - **DATA STRUCTURES**: 
