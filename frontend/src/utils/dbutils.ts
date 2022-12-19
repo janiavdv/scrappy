@@ -156,7 +156,7 @@ export async function grabOrderedFriendPosts(
     return a.time.localeCompare(b.time);
   });
 
-  return orderedList;
+  return orderedList.reverse();
 }
 
 export async function getOrderedGallery(user: User) {

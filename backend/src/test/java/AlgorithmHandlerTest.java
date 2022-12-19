@@ -30,8 +30,6 @@ public class AlgorithmHandlerTest {
   public static void setupServer() {
     Spark.port(0);
     Logger.getLogger("").setLevel(Level.WARNING); // empty name = root logger
-
-
   }
 
   // Shared state for all tests.
