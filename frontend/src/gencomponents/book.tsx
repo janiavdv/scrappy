@@ -3,6 +3,7 @@ import { addBookToDatabase } from "../utils/dbutils";
 import BookObject from "../interfaces/BookObject";
 import Page from "./pagecomponent";
 import User from "../interfaces/user";
+import NYTLOGO from "../assets/poweredby_nytimes_30a.png";
 
 export interface BookProps {
   setBook: Dispatch<SetStateAction<BookObject | null>>;
@@ -77,9 +78,13 @@ export function Book({ bookObject }: BookProps) {
           <hr className="book-top" aria-label={TEXT_book_description}></hr>
           <h3>{"Today's Book, " + bookObject.date}</h3>
           <h4>{bookObject.date}</h4>
-          <p>
-            <b>Today's NYT Headline:</b> {bookObject.nyt}
-          </p>
+          <div className="NYT-API">
+            <img src={NYTLOGO} />
+            <p>
+              <b>Today's NYT Headline:</b> {bookObject.nyt}
+            </p>
+          </div>
+
           <p>
             <b>Today's Quote of the Day:</b> "{bookObject.quote}"
           </p>

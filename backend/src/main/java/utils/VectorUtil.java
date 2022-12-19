@@ -32,7 +32,6 @@ public class VectorUtil {
       embeddings.put(word, vectors);
       count++;
       System.out.println(count / 400000);
-      System.out.println(word);
       line = modelInput.readLine();
     }
     System.out.println(System.currentTimeMillis() - time);

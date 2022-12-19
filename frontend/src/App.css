@@ -336,6 +336,13 @@ button:hover {
   padding: 10px;
 }
 
+.NYT-API {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh;
+}
+
 .page {
   margin: 5px 5px 5px 5px;
   width: 90%;

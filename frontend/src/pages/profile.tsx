@@ -8,6 +8,7 @@ import Footer from "../gencomponents/footer";
 import { Book as BookReact, createDefaultBook } from "../gencomponents/book";
 import BookObject from "../interfaces/BookObject";
 import Entry from "../interfaces/EntryObject";
+
 import {
   addEntryToDatabase,
   getBookListFromDatabase,
@@ -241,6 +242,7 @@ export default function Profile() {
               onClick={async () => {
                 setAlbumBoolean(true);
                 let bList = await getBookListFromDatabase(user.username);
+                bList.reverse();
                 setPastBooks(bList);
               }}
             >
