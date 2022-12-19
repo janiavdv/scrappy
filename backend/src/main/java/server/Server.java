@@ -3,10 +3,7 @@ package server;
 import static spark.Spark.after;
 
 import database.MongoDB;
-import it.unimi.dsi.fastutil.Hash;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import server.handlers.DatabaseHandler;
 import server.handlers.GalleryHandler;
 import server.handlers.NYTHandler;
