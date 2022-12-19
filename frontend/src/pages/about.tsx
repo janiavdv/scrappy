@@ -2,6 +2,7 @@ import Header from "../gencomponents/header";
 import Footer from "../gencomponents/footer";
 import User from "../interfaces/user";
 import { useLocation } from "react-router-dom";
+import GROUPPIC from "../assets/us.png";
 
 export default function About() {
   const st: User = useLocation().state;
@@ -39,6 +40,11 @@ export default function About() {
           login system. Users have a profile where they can view their
           scrapbooks and add to the daily book.
         </blockquote>
+        <h3>The Gang (Scrappy Creators):</h3>
+        <div id="group-pic-div">
+          <img src={GROUPPIC} id="group-picture" />
+          <p>Zach, Tyler, Jania, Gianna, and Alana</p>
+        </div>
       </div>
       <Footer user={st} />
     </div>

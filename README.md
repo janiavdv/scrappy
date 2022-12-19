@@ -46,27 +46,27 @@ scrapbooks and add to the daily book.
     - Frontend: Google Authentication, React page Routing, database integration, 
     CSS styling for whole site, account and state management, frontend React custom objects
 - Jania Vandevoorde (jvandevo): 
-    - Backend: New York Times and random quote API handlers (`QuoteHandler`, `NYTHandler`)
-    - Frontend: header/footer functionality, book history, NYT/quote integration fetching
+    - Backend: New York Times and random quote API handlers (`QuoteHandler`, `NYTHandler`) + testing for the handlers
+    - Frontend: header/footer functionality, book history, NYT/quote integration fetching, modals (login, friend search, add post)
 
 ## Design Choices
   - **CLASSES/INTERFACES**: 
     - Backend: 
-        1. database: This folder contains the objects that will be stored in the
+        1. `database`: This folder contains the objects that will be stored in the
         database: User, Entry, and Book. Each of these contains setters for the 
         necessary fields (i.e. username, email, etc. for User). Additionally, the
         class MongoDB located in this directory allows us to create a MongoDB object
         that connects to a MongoClient, allowing all developers to view the database.
         It also initializes the desired collections for the database.
-        2. privacy: A folder to contain private data we do not want pushed to 
+        2. `privacy`: A folder to contain private data we do not want pushed to 
         GitHub (i.e. password to view the database)
-        3. server: This directory contains all the handlers to our backend server
+        3. `server`: This directory contains all the handlers to our backend server
         and the main Server class itself. The four handlers are for the database
         (updating, adding, and querying), the gallery (vectorizing tags and sorting
         them based on relevance), the New York Times API (returning the news headline
         of the day), and an inspirational quote API. In the Server, we instantiate
         our database and the paths to run our handlers.
-        4. utils: The classes in this folder contain common utilities used throughout
+        4. `utils`: The classes in this folder contain common utilities used throughout
         the program, such as JSON serialization/deserialization and Object to 
         Document conversion (for the database).
     - Frontend - 

@@ -437,17 +437,6 @@ button:hover {
   margin-right: 32vh;
 }
 
-.extra-page-content {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
-  width: 66%;
-  margin: 0 auto;
-  height: 75vh;
-  overflow-y: scroll;
-  font-size: large;
-}
-
 #modal-upload-buttons {
   display: flex;
   justify-content: center;
@@ -764,4 +753,27 @@ Loading stuff from loading.css */
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* Extra pages */
+
+.extra-page-content {
+  width: 66%;
+  margin: 0 auto;
+  height: 75vh;
+  overflow-y: scroll;
+  font-size: large;
+}
+
+#group-pic-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+#group-picture {
+  width: 60vh;
+  border: solid rgb(232, 253, 255) 10px;
 }
