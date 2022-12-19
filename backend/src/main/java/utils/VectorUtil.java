@@ -22,7 +22,7 @@ public class VectorUtil {
    */
   public static void generateEmbeddings()
       throws IOException {
-    String filePath = "src/data/glove.6b.50d.txt";
+    String filePath = "src/data/glove.6B.50d.txt";
     HashMap<String, ArrayList<Double>> embeddings = new HashMap<>();
 
     BufferedReader modelInput = new BufferedReader(new FileReader(filePath));
